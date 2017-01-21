@@ -71,15 +71,3 @@ class DummyDataCLR implements CommandLineRunner {
 
 }
 
-@RepositoryRestResource
-interface PlayerRepository extends JpaRepository<Player, Long> {
-
-    Collection<Player> findByName(String name);
-}
-
-@RepositoryRestResource
-interface MatchRepository extends JpaRepository<Match, Long> {
-
-    Collection<Match> findByMatchPlayers_PlayerName(@Param("q") String name);
-
-}
