@@ -1,4 +1,4 @@
-package pl.sixpinetrees;
+package pl.sixpinetrees.tournament.domain;
 
 import javax.persistence.*;
 import java.util.List;
@@ -7,7 +7,7 @@ import java.util.List;
  * Created by maciej on 25.12.16.
  */
 @Entity
-class Match {
+public class Match {
 
     @Id
     @GeneratedValue

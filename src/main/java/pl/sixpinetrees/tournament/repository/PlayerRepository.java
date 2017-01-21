@@ -1,8 +1,9 @@
-package pl.sixpinetrees;
+package pl.sixpinetrees.tournament.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import pl.sixpinetrees.tournament.domain.Player;
 
 import java.util.Collection;
 
@@ -10,7 +11,7 @@ import java.util.Collection;
  * Created by maciej on 21.01.17.
  */
 @RepositoryRestResource
-interface MatchRepository extends JpaRepository<Match, Long> {
+public interface PlayerRepository extends JpaRepository<Player, Long> {
 
-    Collection<Match> findByMatchPlayersPlayerName(@Param("q") String name);
+    Collection<Player> findByName(@Param("q") String name);
 }

@@ -1,17 +1,18 @@
-package pl.sixpinetrees;
+package pl.sixpinetrees.tournament;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.query.Param;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Component;
+import pl.sixpinetrees.tournament.domain.Match;
+import pl.sixpinetrees.tournament.domain.MatchPlayer;
+import pl.sixpinetrees.tournament.domain.MatchPlayerRound;
+import pl.sixpinetrees.tournament.domain.Player;
+import pl.sixpinetrees.tournament.repository.MatchRepository;
+import pl.sixpinetrees.tournament.repository.PlayerRepository;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Stream;
 

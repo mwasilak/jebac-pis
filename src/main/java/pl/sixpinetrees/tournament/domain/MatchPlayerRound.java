@@ -1,4 +1,4 @@
-package pl.sixpinetrees;
+package pl.sixpinetrees.tournament.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
