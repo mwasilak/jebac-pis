@@ -1,17 +1,14 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Players</title>
+    <title th:text="${player.firstName}">Player firstName</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h2>Players</h2>
 <table>
     <tr th:each="player : ${players}">
-        <td th:text="${player.firstName}">Bravo</td>
-        <td th:text="${player.lastName}">Bravo</td>
+        <td th:text="${player.firstName}">Johnny Bravo</td>
     </tr>
 </table>
-<a th:href="@{/players/register}">Register</a>
 </body>
 </html>

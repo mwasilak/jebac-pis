@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Players</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<form method="POST" th:object="${player}">
+    <div class="errors" th:if="${#fields.hasErrors('*')}">
+        <ul>
+            <li th:each="err : ${#fields.errors('*')}"
+                th:text="${err}">Input is incorrect</li>
+        </ul>
+    </div>
+    <label th:class="${#fields.hasErrors('firstName')}? 'error'">
+        First Name</label>:
+    <input type="text" th:field="*{firstName}"
+           th:class="${#fields.hasErrors('firstName')}? 'error'" /><br/>
+
+    <label th:class="${#fields.hasErrors('lastName')}? 'error'">
+        Last Name</label>:
+    <input type="text" th:field="*{lastName}"
+           th:class="${#fields.hasErrors('lastName')}? 'error'" /><br/>
+    <input type="submit" value="Register" />
+</form>
+</body>
+</html>

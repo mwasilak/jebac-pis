@@ -9,6 +9,7 @@ import pl.sixpinetrees.tournament.repository.PlayerRepository;
 import java.util.Collection;
 
 /**
+ * Project: tournament
  * Created by maciej on 21.01.17.
  */
 @Service
@@ -20,12 +21,21 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     @Transactional
-    public void registerPlayer(Player player) {
-        playerRepository.save(player);
+    public Long registerPlayer(Player player) {
+
+        System.out.println(player);
+        Player savedPlayer = playerRepository.save(player);
+        System.out.println(savedPlayer);
+        return savedPlayer.getId();
     }
 
     @Override
     public Collection<Player> getPlayers() {
         return playerRepository.findAll();
+    }
+
+    @Override
+    public Player getPlayer(Long id) {
+        return playerRepository.findOne(id);
     }
 }

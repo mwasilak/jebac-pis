@@ -32,8 +32,10 @@ class DummyDataCLR implements CommandLineRunner {
 
         List<Match> matches = new ArrayList<>();
 
-        Stream.of("Maciek", "Seba", "Tomek", "Kacper")
-                .forEach(name -> playerRepository.save(new Player(name)));
+        playerRepository.save(new Player("Johnny", "Bravo"));
+        playerRepository.save(new Player("Marty", "McFly"));
+        playerRepository.save(new Player("Barney", "Stinson"));
+        playerRepository.save(new Player("Sonny", "Crockett"));
 
         Stream.of("Semifinal 1", "Semifinal 2", "Final")
                 .forEach(name -> matches.add(new Match(name)));
@@ -51,9 +53,9 @@ class DummyDataCLR implements CommandLineRunner {
                     matchPlayerRounds2.add(new MatchPlayerRound(2, 11));
                     matchPlayerRounds2.add(new MatchPlayerRound(3, 11));
                     ArrayList<MatchPlayer> matchPlayers = new ArrayList<>();
-                    MatchPlayer matchPlayer1 = new MatchPlayer(match, playerRepository.findByName("Maciek").iterator().next());
+                    MatchPlayer matchPlayer1 = new MatchPlayer(match, playerRepository.findByFirstNameAndLastName("Johnny", "Bravo").iterator().next());
                     matchPlayer1.setMatchPlayerRounds(matchPlayerRounds1);
-                    MatchPlayer matchPlayer2 = new MatchPlayer(match, playerRepository.findByName("Seba").iterator().next());
+                    MatchPlayer matchPlayer2 = new MatchPlayer(match, playerRepository.findByFirstNameAndLastName("Marty", "McFly").iterator().next());
                     matchPlayer2.setMatchPlayerRounds(matchPlayerRounds2);
                     matchPlayers.add(matchPlayer1);
                     matchPlayers.add(matchPlayer2);

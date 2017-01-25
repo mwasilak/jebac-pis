@@ -7,9 +7,10 @@ import pl.sixpinetrees.tournament.domain.Player;
 import java.util.Collection;
 
 /**
+ * Project: tournament
  * Created by maciej on 21.01.17.
  */
 public interface PlayerRepository extends JpaRepository<Player, Long> {
 
-    Collection<Player> findByName(@Param("q") String name);
+    Collection<Player> findByFirstNameAndLastName(@Param("fn") String firstName, @Param("ln") String lastName);
 }
