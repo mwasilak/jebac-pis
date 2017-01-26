@@ -1,4 +1,4 @@
-package pl.sixpinetrees;
+package pl.sixpinetrees.tournament;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +11,7 @@ public class TournamentApplicationTests {
 
 	@Test
 	public void contextLoads() {
+
 	}
 
 }
