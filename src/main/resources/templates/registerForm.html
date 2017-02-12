@@ -3,25 +3,29 @@
 <head>
     <title>Players</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!--/*/ <th:block th:include="fragments :: head"></th:block> /*/-->
 </head>
 <body>
-<form method="POST" th:object="${player}">
-    <div class="errors" th:if="${#fields.hasErrors('*')}">
-        <ul>
-            <li th:each="err : ${#fields.errors('*')}"
-                th:text="${err}">Input is incorrect</li>
-        </ul>
-    </div>
-    <label th:class="${#fields.hasErrors('firstName')}? 'error'">
-        First Name</label>:
-    <input type="text" th:field="*{firstName}"
-           th:class="${#fields.hasErrors('firstName')}? 'error'" /><br/>
+    <!--/*/ <th:block th:include="fragments :: header"></th:block> /*/-->
+    <div class="container content-padding">
+        <form method="POST" th:object="${player}">
+            <div class="errors" th:if="${#fields.hasErrors('*')}">
+                <ul>
+                    <li th:each="err : ${#fields.errors('*')}"
+                        th:text="${err}">Input is incorrect</li>
+                </ul>
+            </div>
+            <label th:class="${#fields.hasErrors('firstName')}? 'error'">
+                First Name</label>:
+            <input type="text" th:field="*{firstName}"
+                   th:class="${#fields.hasErrors('firstName')}? 'error'" /><br/>
 
-    <label th:class="${#fields.hasErrors('lastName')}? 'error'">
-        Last Name</label>:
-    <input type="text" th:field="*{lastName}"
-           th:class="${#fields.hasErrors('lastName')}? 'error'" /><br/>
-    <input type="submit" value="Register" />
-</form>
+            <label th:class="${#fields.hasErrors('lastName')}? 'error'">
+                Last Name</label>:
+            <input type="text" th:field="*{lastName}"
+                   th:class="${#fields.hasErrors('lastName')}? 'error'" /><br/>
+            <input type="submit" value="Register" />
+        </form>
+    </div>
 </body>
 </html>

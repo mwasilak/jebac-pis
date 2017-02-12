@@ -3,12 +3,16 @@
 <head>
     <title th:text="${player.firstName}">Player firstName</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!--/*/ <th:block th:include="fragments :: head"></th:block> /*/-->
 </head>
 <body>
-<table>
-    <tr th:each="player : ${players}">
-        <td th:text="${player.firstName}">Johnny Bravo</td>
-    </tr>
-</table>
+    <!--/*/ <th:block th:include="fragments :: header"></th:block> /*/-->
+    <div class="container content-padding">
+        <table>
+            <tr th:each="player : ${players}">
+                <td th:text="${player.firstName}">Johnny Bravo</td>
+            </tr>
+        </table>
+    </div>
 </body>
 </html>
