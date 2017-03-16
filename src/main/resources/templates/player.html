@@ -1,18 +1,29 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="${player.firstName}">Player firstName</title>
+    <title th:text="${player.firstName + ' ' + player.lastName}">Johnny Bravo</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <!--/*/ <th:block th:include="fragments :: head"></th:block> /*/-->
 </head>
 <body>
     <!--/*/ <th:block th:include="fragments :: header"></th:block> /*/-->
     <div class="container content-padding">
-        <table>
-            <tr th:each="player : ${players}">
-                <td th:text="${player.firstName}">Johnny Bravo</td>
+        <h3 th:text="${player.firstName + ' ' + player.lastName}">Johnny Bravo</h3>
+        <table class="table">
+            <thead>
+            <tr>
+                <td>#</td>
+                <td>Match</td>
             </tr>
+            </thead>
+            <tbody>
+            <tr th:each="match,iter : ${player.matchPlayers}">
+                <td th:text="${iter.count}"></td>
+                <td th:text="${match.id}"></td>
+            </tr>
+            </tbody>
         </table>
+        <a th:href="@{/players}">Back to list</a>
     </div>
 </body>
 </html>

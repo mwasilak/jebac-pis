@@ -6,8 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Component;
 import pl.sixpinetrees.tournament.domain.Match;
-import pl.sixpinetrees.tournament.domain.MatchPlayer;
-import pl.sixpinetrees.tournament.domain.MatchPlayerRound;
+import pl.sixpinetrees.tournament.domain.Round;
 import pl.sixpinetrees.tournament.domain.Player;
 import pl.sixpinetrees.tournament.repository.MatchRepository;
 import pl.sixpinetrees.tournament.repository.PlayerRepository;
@@ -40,30 +39,42 @@ class DummyDataCLR implements CommandLineRunner {
         Stream.of("Semifinal 1", "Semifinal 2", "Final")
                 .forEach(name -> matches.add(new Match(name)));
 
-        playerRepository.findAll().forEach(System.out::println);
-
         matches.stream().filter(match -> match.getName().equals("Semifinal 1"))
                 .findFirst().ifPresent(match -> {
-                    ArrayList<MatchPlayerRound> matchPlayerRounds1 = new ArrayList<>();
-                    matchPlayerRounds1.add(new MatchPlayerRound(1, 5));
-                    matchPlayerRounds1.add(new MatchPlayerRound(2, 6));
-                    matchPlayerRounds1.add(new MatchPlayerRound(3, 7));
-                    ArrayList<MatchPlayerRound> matchPlayerRounds2 = new ArrayList<>();
-                    matchPlayerRounds2.add(new MatchPlayerRound(1, 11));
-                    matchPlayerRounds2.add(new MatchPlayerRound(2, 11));
-                    matchPlayerRounds2.add(new MatchPlayerRound(3, 11));
-                    ArrayList<MatchPlayer> matchPlayers = new ArrayList<>();
-                    MatchPlayer matchPlayer1 = new MatchPlayer(match, playerRepository.findByFirstNameAndLastName("Johnny", "Bravo").iterator().next());
-                    matchPlayer1.setMatchPlayerRounds(matchPlayerRounds1);
-                    MatchPlayer matchPlayer2 = new MatchPlayer(match, playerRepository.findByFirstNameAndLastName("Marty", "McFly").iterator().next());
-                    matchPlayer2.setMatchPlayerRounds(matchPlayerRounds2);
-                    matchPlayers.add(matchPlayer1);
-                    matchPlayers.add(matchPlayer2);
-                    match.setMatchPlayers(matchPlayers);
+            ArrayList<Round> roundsList = new ArrayList<>();
+            roundsList.add(new Round(1, 5, 11));
+            roundsList.add(new Round(2, 11, 9));
+            roundsList.add(new Round(3, 7, 11));
+            match.setPlayer1(playerRepository.findByFirstNameAndLastName("Johnny", "Bravo").iterator().next());
+            match.setPlayer2(playerRepository.findByFirstNameAndLastName("Marty", "McFly").iterator().next());
+            match.setRounds(roundsList);
                 });
+
+        matches.stream().filter(match -> match.getName().equals("Semifinal 2"))
+                .findFirst().ifPresent(match -> {
+            ArrayList<Round> roundsList = new ArrayList<>();
+            roundsList.add(new Round(1, 12, 10));
+            roundsList.add(new Round(2, 4, 11));
+            roundsList.add(new Round(3, 11, 7));
+            match.setPlayer1(playerRepository.findByFirstNameAndLastName("Barney", "Stinson").iterator().next());
+            match.setPlayer2(playerRepository.findByFirstNameAndLastName("Sonny", "Crockett").iterator().next());
+            match.setRounds(roundsList);
+        });
+
+        matches.stream().filter(match -> match.getName().equals("Final"))
+                .findFirst().ifPresent(match -> {
+            ArrayList<Round> roundsList = new ArrayList<>();
+            roundsList.add(new Round(1, 9, 11));
+            roundsList.add(new Round(2, 11, 8));
+            roundsList.add(new Round(3, 11, 2));
+            match.setPlayer1(playerRepository.findByFirstNameAndLastName("Marty", "McFly").iterator().next());
+            match.setPlayer2(playerRepository.findByFirstNameAndLastName("Barney", "Stinson").iterator().next());
+            match.setRounds(roundsList);
+        });
 
         matchRepository.save(matches);
 
+        playerRepository.findAll().forEach(System.out::println);
     }
 
     @Autowired

@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Matches</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!--/*/ <th:block th:include="fragments :: head"></th:block> /*/-->
+</head>
+<body>
+<!--/*/ <th:block th:include="fragments :: header"></th:block> /*/-->
+<div class="container content-padding">
+    <h3>Matches</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <td>#</td>
+            <td>Name</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="match,iter : ${matches}">
+            <td th:text="${iter.count}"></td>
+            <td><a th:text="${match.name}" th:href="|/matches/${match.id}|">Semifinal 1</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/matches/record}">Record match</a>
+</div>
+</body>
+</html>

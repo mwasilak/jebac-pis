@@ -1,7 +1,5 @@
 package pl.sixpinetrees.tournament.domain;
 
-import lombok.*;
-
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -9,10 +7,6 @@ import java.util.Collection;
  * Project: tournament
  * Created by maciej on 25.12.16.
  */
-@Getter
-@Setter
-@NoArgsConstructor
-@RequiredArgsConstructor
 @Entity
 public class Player {
 
@@ -20,20 +14,44 @@ public class Player {
     @GeneratedValue
     private Long id;
 
-    @NonNull
     private String firstName;
 
-    @NonNull
     private String lastName;
 
-    @OneToMany
-    private Collection<MatchPlayer> matchPlayers;
+    public Player() {
+    }
+
+    public Player(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
     @Override
     public String toString() {
         return "Player{" +
                 "id=" + id +
-                ", firstName='" + firstName + '\'' +
+                ", firstName='" + firstName +
+                "', lastName='" + lastName + "'" +
                 '}';
     }
 }
