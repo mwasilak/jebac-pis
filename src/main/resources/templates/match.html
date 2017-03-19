@@ -8,7 +8,32 @@
 <body>
 <!--/*/ <th:block th:include="fragments :: header"></th:block> /*/-->
 <div class="container content-padding">
-    <h1 th:text="${match.name}">Group B - Match 1</h1>
+    <h3 th:text="${match.name}">Group B - Match 1</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <td>Round</td>
+            <td class="text-right" th:unless="${match.player1} == null"><a
+                    th:text="${match.player1.firstName + ' ' + match.player1.lastName}"
+                    th:href="|/players/${match.player1.id}|"></a></td>
+            <td th:if="${match.player1} == null"></td>
+            <td class="text-center">:</td>
+            <td th:unless="${match.player2} == null"><a
+                    th:text="${match.player2.firstName + ' ' + match.player2.lastName}"
+                    th:href="|/players/${match.player2.id}|"></a></td>
+            <td th:if="${match.player2} == null"></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="round,iter : ${match.rounds}">
+            <td th:text="${round.roundNumber}"></td>
+            <td class="text-right" th:text="${round.scorePlayer1}"></td>
+            <td class="text-center"> :</td>
+            <td th:text="${round.scorePlayer2}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/matches}">Back to list</a>
 </div>
 </body>
 </html>

@@ -30,7 +30,7 @@ public class MatchServiceImpl implements MatchService {
 
     @Override
     public Collection<Match> getMatchByPlayer(Long id) {
-        return matchRepository.findByPlayer1IdOrPlayer2Id(id);
+        return matchRepository.findByPlayer1IdOrPlayer2Id(id, id);
     }
 
 }

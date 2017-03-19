@@ -36,7 +36,7 @@ class DummyDataCLR implements CommandLineRunner {
         playerRepository.save(new Player("Barney", "Stinson"));
         playerRepository.save(new Player("Sonny", "Crockett"));
 
-        Stream.of("Semifinal 1", "Semifinal 2", "Final")
+        Stream.of("Semifinal 1", "Semifinal 2", "Final", "Practice")
                 .forEach(name -> matches.add(new Match(name)));
 
         matches.stream().filter(match -> match.getName().equals("Semifinal 1"))
@@ -71,6 +71,9 @@ class DummyDataCLR implements CommandLineRunner {
             match.setPlayer2(playerRepository.findByFirstNameAndLastName("Barney", "Stinson").iterator().next());
             match.setRounds(roundsList);
         });
+
+        matches.stream().filter(match -> match.getName().equals("Practice"))
+                .findFirst().ifPresent(match -> match.setPlayer1(playerRepository.findByFirstNameAndLastName("Marty", "McFly").iterator().next()));
 
         matchRepository.save(matches);
 

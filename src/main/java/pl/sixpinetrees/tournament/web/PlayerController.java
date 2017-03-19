@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import pl.sixpinetrees.tournament.domain.Player;
+import pl.sixpinetrees.tournament.service.MatchService;
 import pl.sixpinetrees.tournament.service.PlayerService;
 
 import javax.validation.Valid;
@@ -20,11 +21,13 @@ import javax.validation.Valid;
 @RequestMapping("/players")
 public class PlayerController {
 
+    @Autowired
     private PlayerService playerService;
 
     @Autowired
-    public PlayerController(PlayerService playerService) {
-        this.playerService = playerService;
+    private MatchService matchService;
+
+    public PlayerController() {
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -38,6 +41,7 @@ public class PlayerController {
     public String player(@PathVariable("playerId") long playerId, Model model) {
 
         model.addAttribute("player", playerService.getPlayer(playerId));
+        model.addAttribute("matches", matchService.getMatchByPlayer(playerId));
         return "player";
     }
 

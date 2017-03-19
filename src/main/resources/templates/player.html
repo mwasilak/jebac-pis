@@ -14,12 +14,30 @@
             <tr>
                 <td>#</td>
                 <td>Match</td>
+                <td>Competitor</td>
+                <td>Results</td>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="match,iter : ${player.matchPlayers}">
+            <tr th:each="match,iter : ${matches}">
                 <td th:text="${iter.count}"></td>
-                <td th:text="${match.id}"></td>
+                <td><a th:text="${match.name}" th:href="|/matches/${match.id}|"></a></td>
+                <td th:unless="${match.player1} == null or ${match.player2} == null" th:switch="${match.player2.id}">
+                    <a th:case="${player.id}" th:text="${match.player1.firstName + ' ' + match.player1.lastName}"
+                       th:href="|/players/${match.player1.id}|"></a>
+                    <a th:case="*" th:text="${match.player2.firstName + ' ' + match.player2.lastName}"
+                       th:href="|/players/${match.player2.id}|"></a>
+                </td>
+                <td th:if="${match.player1} == null or ${match.player2} == null"></td>
+                <td>
+                    <div th:unless="${match.player1} == null or ${match.player2} == null"
+                         th:each="round,iter : ${match.rounds}">
+                        <div th:switch="${match.player2.id}">
+                            <div th:case="${player.id}" th:text="${round.scorePlayer2}+':'+${round.scorePlayer1}"></div>
+                            <div th:case="*" th:text="${round.scorePlayer1}+':'+${round.scorePlayer2}"></div>
+                        </div>
+                    </div>
+                </td>
             </tr>
             </tbody>
         </table>
