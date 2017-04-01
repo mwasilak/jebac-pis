@@ -3,19 +3,19 @@ package pl.sixpinetrees.tournament.domain;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Created by maciej on 25.12.16.
  */
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Match {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    private String name;
+    protected String name;
 
     @ManyToOne
     private Player player1;

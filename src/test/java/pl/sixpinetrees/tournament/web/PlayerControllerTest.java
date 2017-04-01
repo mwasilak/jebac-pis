@@ -9,11 +9,11 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import pl.sixpinetrees.tournament.domain.Player;
+import pl.sixpinetrees.tournament.service.MatchService;
 import pl.sixpinetrees.tournament.service.PlayerService;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -31,6 +31,9 @@ public class PlayerControllerTest {
 
     @MockBean
     private PlayerService playerService;
+
+    @MockBean
+    private MatchService matchService;
 
     @Test
     public void players() throws Exception {
