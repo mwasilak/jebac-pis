@@ -1,5 +1,6 @@
 package pl.sixpinetrees.tournament.domain;
 
+import pl.sixpinetrees.tournament.domain.dto.StageForm;
 import pl.sixpinetrees.tournament.util.Calculator;
 
 import javax.persistence.*;
@@ -27,29 +28,74 @@ public class Stage {
     public Stage() {
     }
 
-    public Stage(Integer noOfPlayers) {
+    public Stage(StageForm stageForm) {
 
+        calculateRounds(stageForm.getNumberOfPlayers());
+    }
+
+    private void calculateRounds(Integer noOfPlayers) {
         numberOfPlayers = noOfPlayers;
         numberOfRounds = Calculator.log2ceil(numberOfPlayers);
         numberOfMatchesInFirstRound = numberOfPlayers - Calculator.pow2N(numberOfRounds - 1);
 
-        ArrayList<BracketMatch> matchesList = new ArrayList<>();
+        matches = new ArrayList<>();
+
+        generateRounds();
+    }
+
+    private void generateRounds() {
 
         for (Integer round = 1; round <= numberOfRounds; round++) {
-
-            Integer matchesInRound;
-            if (round == 1) {
-                matchesInRound = numberOfMatchesInFirstRound;
-            } else {
-                matchesInRound = Calculator.pow2N(numberOfRounds - round);
-            }
-
-            for (Integer match = 1; match <= matchesInRound; match++) {
-
-                String name = "1/" + matchesInRound.toString() + "-final no. " + match.toString();
-                matchesList.add(new BracketMatch(name, round, match));
-            }
-
+            Integer matchesInRound = calculateMatchesInRound(round);
+            generateRoundMatches(round, matchesInRound);
         }
+    }
+
+    private Integer calculateMatchesInRound(Integer round) {
+        Integer matchesInRound;
+        if (round == 1) {
+            return numberOfMatchesInFirstRound;
+        }
+        return Calculator.pow2N(numberOfRounds - round);
+    }
+
+    private void generateRoundMatches(Integer round, Integer matchesInRound) {
+
+        for (Integer match = 1; match <= matchesInRound; match++) {
+            String name = "1/" + Calculator.pow2N(round).toString() + "-final no. " + match.toString();
+            matches.add(new BracketMatch(name, round, match));
+        }
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Collection<BracketMatch> getMatches() {
+        return matches;
+    }
+
+    public Integer getNumberOfPlayers() {
+        return numberOfPlayers;
+    }
+
+    public Integer getNumberOfRounds() {
+        return numberOfRounds;
+    }
+
+    public Integer getNumberOfMatchesInFirstRound() {
+        return numberOfMatchesInFirstRound;
     }
 }
