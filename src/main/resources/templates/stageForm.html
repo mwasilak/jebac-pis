@@ -1,0 +1,25 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="stage.name">Bracket Stage</title>
+    <!--/*/ <th:block th:include="fragments :: head"></th:block> /*/-->
+</head>
+<body>
+<!--/*/ <th:block th:include="fragments :: header"></th:block> /*/-->
+<div class="container content-padding">
+    <h3>Add new stage</h3>
+    <form method="POST" th:object="${stageForm}">
+        <div class="errors" th:if="${#fields.hasErrors('*')}">
+            <ul>
+                <li th:each="err : ${#fields.errors('*')}"
+                    th:text="${err}">Input is incorrect</li>
+            </ul>
+        </div>
+        <label th:class="${#fields.hasErrors('numberOfPlayers')}? 'error'">Number of players</label>:
+        <input type="text" th:field="*{numberOfPlayers}" th:class="${#fields.hasErrors('numberOfPlayers')}? 'error'"/>
+        <input type="submit" value="Add" />
+    </form>
+
+</div>
+</body>
+</html>
