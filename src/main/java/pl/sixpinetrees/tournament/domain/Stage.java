@@ -15,7 +15,7 @@ public class Stage {
 
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Collection<BracketMatch> matches;
 
     private Integer numberOfPlayers;
