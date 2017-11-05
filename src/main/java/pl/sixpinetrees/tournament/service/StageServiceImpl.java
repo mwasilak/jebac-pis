@@ -6,9 +6,6 @@ import pl.sixpinetrees.tournament.repository.StageRepository;
 
 import java.util.Collection;
 
-/**
- * Created by maciej on 23.03.17.
- */
 public class StageServiceImpl implements StageService {
 
     @Autowired

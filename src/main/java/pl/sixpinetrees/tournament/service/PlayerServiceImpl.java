@@ -8,10 +8,6 @@ import pl.sixpinetrees.tournament.repository.PlayerRepository;
 
 import java.util.Collection;
 
-/**
- * Project: tournament
- * Created by maciej on 21.01.17.
- */
 @Service
 @Transactional(readOnly = true)
 public class PlayerServiceImpl implements PlayerService {

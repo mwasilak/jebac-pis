@@ -6,9 +6,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/**
- * Created by maciej on 20.03.17.
- */
 @Entity
 public class Stage {
 
