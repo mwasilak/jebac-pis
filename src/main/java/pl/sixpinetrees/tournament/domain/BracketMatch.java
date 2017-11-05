@@ -19,5 +19,7 @@ public class BracketMatch extends Match {
 
     public BracketMatch(String name, Integer round, Integer position) {
         this.name = name;
+        this.bracketRound = round;
+        this.bracketPosition = position;
     }
 }
