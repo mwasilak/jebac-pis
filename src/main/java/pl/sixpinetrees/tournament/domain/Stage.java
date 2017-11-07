@@ -62,7 +62,7 @@ public class Stage {
     private void generateRoundMatches(Integer round, Integer matchesInRound) {
 
         for (Integer match = 1; match <= matchesInRound; match++) {
-            String name = "1/" + Calculator.pow2N(round).toString() + "-final no. " + match.toString();
+            String name = "1/" + Calculator.pow2N(numberOfRounds - round).toString() + "-final no. " + match.toString();
             matches.add(new BracketMatch(name, round, match));
         }
     }
