@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
-import pl.sixpinetrees.tournament.domain.BracketMatch;
 import pl.sixpinetrees.tournament.domain.Match;
 import pl.sixpinetrees.tournament.domain.Round;
 import pl.sixpinetrees.tournament.domain.Player;
@@ -16,7 +13,6 @@ import pl.sixpinetrees.tournament.repository.PlayerRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 @SpringBootApplication
 public class TournamentApplication {
@@ -39,10 +35,7 @@ class DummyDataCLR implements CommandLineRunner {
         playerRepository.save(new Player("Barney", "Stinson"));
         playerRepository.save(new Player("Sonny", "Crockett"));
 
-        //Stream.of("Semifinal 1", "Semifinal 2", "Final", "Practice")
-        //        .forEach(name -> matches.add(new BracketMatch(name)));
-
-        Match match1 = new BracketMatch("Semifinal 1", 1, 1);
+        Match match1 = new Match("Semifinal 1", 1, 1);
         ArrayList<Round> roundsList1 = new ArrayList<>();
         roundsList1.add(new Round(1, 5, 11));
         roundsList1.add(new Round(2, 11, 9));
@@ -52,7 +45,7 @@ class DummyDataCLR implements CommandLineRunner {
         match1.setRounds(roundsList1);
 
 
-        Match match2 = new BracketMatch("Semifinal 2", 1, 2);
+        Match match2 = new Match("Semifinal 2", 1, 2);
         ArrayList<Round> roundsList2 = new ArrayList<>();
         roundsList2.add(new Round(1, 12, 10));
         roundsList2.add(new Round(2, 4, 11));
@@ -61,7 +54,7 @@ class DummyDataCLR implements CommandLineRunner {
         match2.setPlayer2(playerRepository.findByFirstNameAndLastName("Sonny", "Crockett").iterator().next());
         match2.setRounds(roundsList2);
 
-        Match match3 = new BracketMatch("Final", 2, 1);
+        Match match3 = new Match("Final", 2, 1);
         ArrayList<Round> roundsList3 = new ArrayList<>();
         roundsList3.add(new Round(1, 9, 11));
         roundsList3.add(new Round(2, 11, 8));

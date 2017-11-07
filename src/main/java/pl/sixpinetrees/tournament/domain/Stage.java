@@ -17,7 +17,7 @@ public class Stage {
     private String name;
 
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    private Collection<BracketMatch> matches;
+    private Collection<Match> matches;
 
     private Integer numberOfPlayers;
 
@@ -63,7 +63,7 @@ public class Stage {
 
         for (Integer match = 1; match <= matchesInRound; match++) {
             String name = "1/" + Calculator.pow2N(numberOfRounds - round).toString() + "-final no. " + match.toString();
-            matches.add(new BracketMatch(name, round, match));
+            matches.add(new Match(name, round, match));
         }
     }
 
@@ -83,7 +83,7 @@ public class Stage {
         this.name = name;
     }
 
-    public Collection<BracketMatch> getMatches() {
+    public Collection<Match> getMatches() {
         return matches;
     }
 

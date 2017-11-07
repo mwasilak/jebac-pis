@@ -26,11 +26,18 @@ public class Match {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Collection<Round> rounds;
 
+    private Integer bracketRound;
+
+    private Integer bracketPosition;
+
+
     public Match() {
     }
 
-    public Match(String name) {
+    public Match(String name, Integer round, Integer position) {
         this.name = name;
+        this.bracketRound = round;
+        this.bracketPosition = position;
     }
 
     public Long getId() {
