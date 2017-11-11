@@ -5,27 +5,31 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import pl.sixpinetrees.tournament.domain.Match;
+import pl.sixpinetrees.tournament.domain.Stage;
 import pl.sixpinetrees.tournament.domain.dto.StageForm;
-import pl.sixpinetrees.tournament.repository.StageRepository;
 import pl.sixpinetrees.tournament.service.StageService;
 
 import javax.validation.Valid;
+import java.util.Map;
 
-/**
- * Created by maciej on 23.03.17.
- */
+import static pl.sixpinetrees.tournament.util.Calculator.pow2N;
+
 @Controller
 @RequestMapping("/stages")
 public class StageController {
+
+    private final BracketMapCalculator bracketMapCalculator = new BracketMapCalculator();
 
     @Autowired
     private StageService stageService;
 
     @GetMapping("/{stageId}")
     public String stage(@PathVariable("stageId") Long stageId, Model model) {
-
-        model.addAttribute("stage", stageService.getStage(stageId));
+        Stage stage = stageService.getStage(stageId);
+        model.addAttribute("stage", stage);
+        model.addAttribute("matchBracket", bracketMapCalculator.prepareMatchBracketMap(stage));
+        model.addAttribute("bracketMaxSize", pow2N(stage.getNumberOfRounds()+1)-1);
         return "stage";
     }
 

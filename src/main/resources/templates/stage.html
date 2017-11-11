@@ -7,7 +7,26 @@
 <body>
 <!--/*/ <th:block th:include="fragments :: header"></th:block> /*/-->
 <div class="container content-padding">
-    <h3 th:text="stage.name">Stage</h3>
+    <h3 th:text="${stage.name}">Stage</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <td th:each="column : ${#numbers.sequence(1, stage.numberOfRounds)}">
+                    <label th:text="'1/'+${(1 + stage.numberOfRounds - column).toString()}">1/2</label>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="row : ${#numbers.sequence(1, bracketMaxSize)}">
+                <td th:each="column : ${#numbers.sequence(1, stage.numberOfRounds)}">
+                    <div th:if="${#maps.containsKey(matchBracket, column+'/'+row)}">
+                        <a th:text="${matchBracket.get(column+'/'+row).name}"
+                           th:href="|/matches/${matchBracket.get(column+'/'+row).id}|">Semifinal 1</a>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>
