@@ -4,8 +4,7 @@ import pl.sixpinetrees.tournament.domain.dto.StageForm;
 import pl.sixpinetrees.tournament.util.Calculator;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.*;
 
 @Entity
 public class Stage {
@@ -16,7 +15,7 @@ public class Stage {
 
     private String name;
 
-    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Collection<Match> matches;
 
     private Integer numberOfPlayers;
@@ -30,17 +29,16 @@ public class Stage {
 
     public Stage(StageForm stageForm) {
 
+        matches = new HashSet<>();
+        this.name = stageForm.getName();
         calculateRounds(stageForm.getNumberOfPlayers());
+        generateRounds();
     }
 
     private void calculateRounds(Integer noOfPlayers) {
         numberOfPlayers = noOfPlayers;
         numberOfRounds = Calculator.log2ceil(numberOfPlayers);
         numberOfMatchesInFirstRound = numberOfPlayers - Calculator.pow2N(numberOfRounds - 1);
-
-        matches = new ArrayList<>();
-
-        generateRounds();
     }
 
     private void generateRounds() {
@@ -52,7 +50,6 @@ public class Stage {
     }
 
     private Integer calculateMatchesInRound(Integer round) {
-        Integer matchesInRound;
         if (round == 1) {
             return numberOfMatchesInFirstRound;
         }
