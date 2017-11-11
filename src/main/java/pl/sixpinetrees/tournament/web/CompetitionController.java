@@ -27,6 +27,12 @@ public class CompetitionController {
         return "competition";
     }
 
+    @GetMapping
+    public String getCompetitions(Model model) {
+        model.addAttribute("competitions", competitionService.getCompetitions());
+        return "competitions";
+    }
+
     @GetMapping("/{competitionId}")
     public String competition(@PathVariable("competitionId") Long competitionId, Model model) {
         Competition competition = competitionService.getCompetition(competitionId);
