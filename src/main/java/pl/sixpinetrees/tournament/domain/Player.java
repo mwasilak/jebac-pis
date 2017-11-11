@@ -3,10 +3,6 @@ package pl.sixpinetrees.tournament.domain;
 import javax.persistence.*;
 import java.util.Collection;
 
-/**
- * Project: tournament
- * Created by maciej on 25.12.16.
- */
 @Entity
 public class Player {
 

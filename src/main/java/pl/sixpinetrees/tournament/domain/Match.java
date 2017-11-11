@@ -6,9 +6,6 @@ import java.util.Collection;
 
 import static pl.sixpinetrees.tournament.util.Calculator.pow2N;
 
-/**
- * Created by maciej on 25.12.16.
- */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Match {

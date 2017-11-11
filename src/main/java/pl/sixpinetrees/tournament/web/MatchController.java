@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import pl.sixpinetrees.tournament.service.MatchService;
 
-/**
- * Created by maciej on 19.02.17.
- */
 @Controller
 @RequestMapping("/matches")
 public class MatchController {

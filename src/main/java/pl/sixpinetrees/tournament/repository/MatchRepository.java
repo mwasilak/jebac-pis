@@ -7,10 +7,6 @@ import pl.sixpinetrees.tournament.domain.Match;
 
 import java.util.Collection;
 
-/**
- * Project: tournament
- * Created by maciej on 21.01.17.
- */
 public interface MatchRepository extends JpaRepository<Match, Long> {
 
     Collection<Match> findByName(@Param("nm") String name);

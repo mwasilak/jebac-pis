@@ -5,10 +5,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-/**
- * Project: tournament
- * Created by maciej on 25.01.17.
- */
 @Controller
 public class HomeController {
 

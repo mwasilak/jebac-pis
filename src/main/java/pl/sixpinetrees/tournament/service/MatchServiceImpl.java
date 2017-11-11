@@ -8,9 +8,6 @@ import pl.sixpinetrees.tournament.repository.MatchRepository;
 
 import java.util.Collection;
 
-/**
- * Created by maciej on 19.02.17.
- */
 @Service
 @Transactional(readOnly = true)
 public class MatchServiceImpl implements MatchService {
