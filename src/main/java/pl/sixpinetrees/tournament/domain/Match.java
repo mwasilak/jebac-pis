@@ -4,6 +4,8 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import static pl.sixpinetrees.tournament.util.Calculator.pow2N;
+
 /**
  * Created by maciej on 25.12.16.
  */
@@ -15,7 +17,7 @@ public class Match {
     @GeneratedValue
     private Long id;
 
-    protected String name;
+    private String name;
 
     @ManyToOne
     private Player player1;
@@ -38,6 +40,12 @@ public class Match {
         this.name = name;
         this.bracketRound = round;
         this.bracketPosition = position;
+    }
+
+    public String calculateBracketKey() {
+        return Integer.toString(getBracketRound())
+                + "/"
+                + Integer.toString(pow2N(getBracketRound())*getBracketPosition() - pow2N(getBracketRound()-1));
     }
 
     public Long getId() {
@@ -78,4 +86,13 @@ public class Match {
     public void setRounds(Collection<Round> rounds) {
         this.rounds = rounds;
     }
+
+    public Integer getBracketRound() {
+        return bracketRound;
+    }
+
+    public Integer getBracketPosition() {
+        return bracketPosition;
+    }
+
 }
