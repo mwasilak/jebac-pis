@@ -1,7 +1,7 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="stage.name">Bracket Stage</title>
+    <title>New Stage</title>
     <!--/*/ <th:block th:include="fragments :: head"></th:block> /*/-->
 </head>
 <body>
@@ -15,8 +15,10 @@
                     th:text="${err}">Input is incorrect</li>
             </ul>
         </div>
+        <label th:class="${#fields.hasErrors('name')}? 'error'">Stage name</label>:
+        <input type="text" th:field="*{name}" th:class="${#fields.hasErrors('name')}? 'error'"/><br/>
         <label th:class="${#fields.hasErrors('numberOfPlayers')}? 'error'">Number of players</label>:
-        <input type="text" th:field="*{numberOfPlayers}" th:class="${#fields.hasErrors('numberOfPlayers')}? 'error'"/>
+        <input type="text" th:field="*{numberOfPlayers}" th:class="${#fields.hasErrors('numberOfPlayers')}? 'error'"/><br/>
         <input type="submit" value="Add" />
     </form>
 
