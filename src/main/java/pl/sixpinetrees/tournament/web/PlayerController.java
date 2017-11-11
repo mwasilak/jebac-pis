@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,10 +14,6 @@ import pl.sixpinetrees.tournament.service.PlayerService;
 
 import javax.validation.Valid;
 
-/**
- * Project: tournament
- * Created by maciej on 21.01.17.
- */
 @Controller
 @RequestMapping("/players")
 public class PlayerController {
@@ -28,6 +25,11 @@ public class PlayerController {
     private MatchService matchService;
 
     public PlayerController() {
+    }
+
+    @ModelAttribute("module")
+    public String module() {
+        return "player";
     }
 
     @RequestMapping(method = RequestMethod.GET)

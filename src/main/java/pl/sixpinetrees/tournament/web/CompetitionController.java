@@ -22,6 +22,11 @@ public class CompetitionController {
     @Autowired
     private CompetitionService competitionService;
 
+    @ModelAttribute("module")
+    public String module() {
+        return "competition";
+    }
+
     @GetMapping("/{competitionId}")
     public String competition(@PathVariable("competitionId") Long competitionId, Model model) {
         Competition competition = competitionService.getCompetition(competitionId);
