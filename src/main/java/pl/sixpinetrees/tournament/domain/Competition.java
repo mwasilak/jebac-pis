@@ -1,13 +1,13 @@
 package pl.sixpinetrees.tournament.domain;
 
-import pl.sixpinetrees.tournament.domain.dto.StageForm;
+import pl.sixpinetrees.tournament.domain.dto.CompetitionForm;
 import pl.sixpinetrees.tournament.util.Calculator;
 
 import javax.persistence.*;
 import java.util.*;
 
 @Entity
-public class Stage {
+public class Competition {
 
     @Id
     @GeneratedValue
@@ -24,14 +24,14 @@ public class Stage {
 
     private Integer numberOfMatchesInFirstRound;
 
-    public Stage() {
+    public Competition() {
     }
 
-    public Stage(StageForm stageForm) {
+    public Competition(CompetitionForm competitionForm) {
 
         matches = new HashSet<>();
-        this.name = stageForm.getName();
-        calculateRounds(stageForm.getNumberOfPlayers());
+        this.name = competitionForm.getName();
+        calculateRounds(competitionForm.getNumberOfPlayers());
         generateRounds();
     }
 

@@ -1,12 +1,12 @@
 package pl.sixpinetrees.tournament.domain.dto;
 
-public class StageForm {
+public class CompetitionForm {
 
     private String name;
 
     private Integer numberOfPlayers;
 
-    public StageForm() {
+    public CompetitionForm() {
     }
 
     public String getName() {

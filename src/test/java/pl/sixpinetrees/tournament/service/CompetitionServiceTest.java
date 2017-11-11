@@ -4,22 +4,19 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
-import pl.sixpinetrees.tournament.domain.Stage;
-import pl.sixpinetrees.tournament.repository.StageRepository;
-
-import static org.junit.Assert.*;
+import pl.sixpinetrees.tournament.repository.CompetitionRepository;
 
 /**
  * Created by maciej on 28.03.17.
  */
 @RunWith(SpringRunner.class)
-public class StageServiceTest {
+public class CompetitionServiceTest {
 
     @MockBean
-    private StageRepository stageRepository;
+    private CompetitionRepository competitionRepository;
 
     @Test
-    public void createStage() throws Exception {
+    public void createCompetition() throws Exception {
 
     }
 
