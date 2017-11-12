@@ -31,7 +31,7 @@ public class Competition {
 
         matches = new HashSet<>();
         this.name = competitionForm.getName();
-        calculateRounds(competitionForm.getNumberOfPlayers());
+        calculateRounds(competitionForm.getPlayerIds().size());
         generateRounds();
     }
 

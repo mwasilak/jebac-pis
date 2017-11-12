@@ -9,17 +9,22 @@
 <div class="container content-padding">
     <h3>Add new competition</h3>
     <form method="POST" th:object="${competitionForm}">
-        <div class="errors" th:if="${#fields.hasErrors('*')}">
-            <ul>
-                <li th:each="err : ${#fields.errors('*')}"
-                    th:text="${err}">Input is incorrect</li>
-            </ul>
+        <div class="form-group">
+            <label>Competition name</label>:
+            <input class="form-control" type="text" th:field="*{name}"/>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect name</div>
         </div>
-        <label th:class="${#fields.hasErrors('name')}? 'error'">Competition name</label>:
-        <input type="text" th:field="*{name}" th:class="${#fields.hasErrors('name')}? 'error'"/><br/>
-        <label th:class="${#fields.hasErrors('numberOfPlayers')}? 'error'">Number of players</label>:
-        <input type="text" th:field="*{numberOfPlayers}" th:class="${#fields.hasErrors('numberOfPlayers')}? 'error'"/><br/>
-        <input type="submit" value="Add" />
+        <div class="form-group">
+            <label>Players</label>:
+            <select class="form-control" th:field="*{playerIds}" multiple="multiple">
+                <option th:each="player : ${allPlayers}"
+                        th:text="${player.firstName + ' ' + player.lastName}"
+                        th:value="${player.id}"></option>
+            </select>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('playerIds')}" th:errors="*{playerIds}">Incorrect players</div>
+        </div>
+
+        <input class="btn btn-primary" type="submit" value="Add" />
     </form>
 
 </div>

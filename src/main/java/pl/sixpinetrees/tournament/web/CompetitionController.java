@@ -6,10 +6,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.sixpinetrees.tournament.domain.Competition;
+import pl.sixpinetrees.tournament.domain.Player;
 import pl.sixpinetrees.tournament.domain.dto.CompetitionForm;
 import pl.sixpinetrees.tournament.service.CompetitionService;
+import pl.sixpinetrees.tournament.service.PlayerService;
 
 import javax.validation.Valid;
+
+import java.util.Collection;
 
 import static pl.sixpinetrees.tournament.util.Calculator.pow2N;
 
@@ -22,9 +26,17 @@ public class CompetitionController {
     @Autowired
     private CompetitionService competitionService;
 
+    @Autowired
+    private PlayerService playerService;
+
     @ModelAttribute("module")
     public String module() {
         return "competition";
+    }
+
+    @ModelAttribute("allPlayers")
+    public Collection<Player> populatePlayers() {
+        return playerService.getPlayers();
     }
 
     @GetMapping
@@ -43,7 +55,7 @@ public class CompetitionController {
     }
 
     @GetMapping("/add")
-    public String competitionForm(CompetitionForm competitionForm) {
+    public String competitionForm(CompetitionForm competitionForm, Model model) {
         return "competitionForm";
     }
 

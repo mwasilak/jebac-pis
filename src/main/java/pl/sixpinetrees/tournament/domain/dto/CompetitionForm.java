@@ -1,10 +1,17 @@
 package pl.sixpinetrees.tournament.domain.dto;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.Collection;
+
 public class CompetitionForm {
 
+    @Size(min = 1, max = 32, message = "Competition name length must be between {min} and {max}.")
     private String name;
 
-    private Integer numberOfPlayers;
+    @Size(min = 2, message = "Competition must be joined by at least 2 players.")
+    private Collection<Long> playerIds = new ArrayList<>();
 
     public CompetitionForm() {
     }
@@ -17,11 +24,11 @@ public class CompetitionForm {
         this.name = name;
     }
 
-    public Integer getNumberOfPlayers() {
-        return numberOfPlayers;
+    public Collection<Long> getPlayerIds() {
+        return playerIds;
     }
 
-    public void setNumberOfPlayers(Integer numberOfPlayers) {
-        this.numberOfPlayers = numberOfPlayers;
+    public void setPlayerIds(Collection<Long> playerIds) {
+        this.playerIds = playerIds;
     }
 }
