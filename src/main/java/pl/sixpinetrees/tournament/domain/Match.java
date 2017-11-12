@@ -7,7 +7,6 @@ import java.util.Collection;
 import static pl.sixpinetrees.tournament.util.Calculator.pow2N;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Match {
 
     @Id
@@ -22,7 +21,7 @@ public class Match {
     @ManyToOne
     private Player player2;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL)
     private Collection<Round> rounds;
 
     private Integer bracketRound;
