@@ -50,7 +50,7 @@ public class CompetitionController {
         Competition competition = competitionService.getCompetition(competitionId);
         model.addAttribute("competition", competition);
         model.addAttribute("matchBracket", bracketMapCalculator.prepareMatchBracketMap(competition));
-        model.addAttribute("bracketMaxSize", pow2N(competition.getNumberOfRounds()+1)-1);
+        model.addAttribute("bracketMaxSize", pow2N(competition.getNumberOfRounds())-1);
         return "competition";
     }
 
