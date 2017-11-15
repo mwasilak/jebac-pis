@@ -24,24 +24,21 @@ public class Match {
     @OneToMany(cascade = CascadeType.ALL)
     private Collection<Round> rounds;
 
-    private Integer bracketRound;
-
-    private Integer bracketPosition;
-
+    @Embedded
+    private BracketPosition position;
 
     public Match() {
     }
 
     public Match(String name, Integer round, Integer position) {
         this.name = name;
-        this.bracketRound = round;
-        this.bracketPosition = position;
+        this.position = new BracketPosition(round, position);
     }
 
     public String calculateBracketKey() {
-        return Integer.toString(getBracketRound())
+        return Integer.toString(getPosition().getRound())
                 + "/"
-                + Integer.toString(pow2N(getBracketRound())*getBracketPosition() - pow2N(getBracketRound()-1));
+                + Integer.toString(pow2N(getPosition().getRound())*getPosition().getPosition() - pow2N(getPosition().getRound()-1));
     }
 
     public Long getId() {
@@ -83,12 +80,7 @@ public class Match {
         this.rounds = rounds;
     }
 
-    public Integer getBracketRound() {
-        return bracketRound;
+    public BracketPosition getPosition() {
+        return position;
     }
-
-    public Integer getBracketPosition() {
-        return bracketPosition;
-    }
-
 }

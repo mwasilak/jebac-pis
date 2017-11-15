@@ -11,7 +11,7 @@ public class BracketMapCalculator {
     }
 
     public Map<String, Match> prepareMatchBracketMap(Competition competition) {
-        return competition.getMatches()
+        return competition.getMatches().values()
                 .stream()
                 .collect(
                         Collectors.toMap(Match::calculateBracketKey, match -> match)

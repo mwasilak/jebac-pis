@@ -16,7 +16,8 @@ public class Competition {
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Collection<Match> matches;
+    @MapKey(name = "position")
+    private Map<BracketPosition, Match> matches;
 
     private Integer numberOfPlayers;
 
@@ -29,9 +30,9 @@ public class Competition {
 
     public Competition(CompetitionForm competitionForm) {
 
-        matches = new HashSet<>();
         this.name = competitionForm.getName();
         calculateRounds(competitionForm.getPlayerIds().size());
+        matches = new HashMap<>();
         generateRounds();
     }
 
@@ -60,7 +61,7 @@ public class Competition {
 
         for (Integer match = 1; match <= matchesInRound; match++) {
             String name = "1/" + Calculator.pow2N(numberOfRounds - round).toString() + "-final no. " + match.toString();
-            matches.add(new Match(name, round, match));
+            matches.put(new BracketPosition(round, match), new Match(name, round, match));
         }
     }
 
@@ -80,7 +81,7 @@ public class Competition {
         this.name = name;
     }
 
-    public Collection<Match> getMatches() {
+    public Map<BracketPosition, Match> getMatches() {
         return matches;
     }
 
