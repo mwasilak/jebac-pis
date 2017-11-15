@@ -1,6 +1,5 @@
 package pl.sixpinetrees.tournament.domain;
 
-import pl.sixpinetrees.tournament.domain.dto.CompetitionForm;
 import pl.sixpinetrees.tournament.util.Calculator;
 
 import javax.persistence.*;
@@ -28,11 +27,11 @@ public class Competition {
     public Competition() {
     }
 
-    public Competition(CompetitionForm competitionForm) {
+    public Competition(String name, List<Player> players) {
 
-        this.name = competitionForm.getName();
-        calculateRounds(competitionForm.getPlayerIds().size());
         matches = new HashMap<>();
+        this.name = name;
+        calculateRounds(players.size());
         generateRounds();
     }
 
@@ -96,4 +95,6 @@ public class Competition {
     public Integer getNumberOfMatchesInFirstRound() {
         return numberOfMatchesInFirstRound;
     }
+
+
 }
