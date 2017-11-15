@@ -33,6 +33,7 @@ public class Competition {
         this.name = name;
         calculateRounds(players.size());
         generateRounds();
+        assignPlayers(players);
     }
 
     private void calculateRounds(Integer noOfPlayers) {
@@ -61,6 +62,24 @@ public class Competition {
         for (Integer match = 1; match <= matchesInRound; match++) {
             String name = "1/" + Calculator.pow2N(numberOfRounds - round).toString() + "-final no. " + match.toString();
             matches.put(new BracketPosition(round, match), new Match(name, round, match));
+        }
+    }
+
+    private void assignPlayers(List<Player> players) {
+        for(Integer i = 0; i<players.size(); i++) {
+            if(i < 2*numberOfMatchesInFirstRound) {
+                if((i % 2) == 0 ) {
+                    matches.get(new BracketPosition(1, (i / 2)+1)).setPlayer1(players.get(i));
+                } else {
+                    matches.get(new BracketPosition(1, (i / 2)+1)).setPlayer2(players.get(i));
+                }
+            } else {
+                if(((i-numberOfMatchesInFirstRound) % 2) == 0 ) {
+                    matches.get(new BracketPosition(2, ((i-numberOfMatchesInFirstRound) / 2)+1)).setPlayer1(players.get(i));
+                } else {
+                    matches.get(new BracketPosition(2, ((i-numberOfMatchesInFirstRound) / 2)+1)).setPlayer2(players.get(i));
+                }
+            }
         }
     }
 

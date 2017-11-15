@@ -21,7 +21,9 @@
                 <td th:each="column : ${#numbers.sequence(1, competition.numberOfRounds)}">
                     <div th:if="${#maps.containsKey(matchBracket, column+'/'+row)}">
                         <a th:text="${matchBracket.get(column+'/'+row).name}"
-                           th:href="|/matches/${matchBracket.get(column+'/'+row).id}|">Semifinal 1</a>
+                           th:href="|/matches/${matchBracket.get(column+'/'+row).id}|">Semifinal 1</a><br/>
+                        <label th:text="${matchBracket.get(column+'/'+row).player1?.firstName+' '+matchBracket.get(column+'/'+row).player1?.lastName}">John Doe</label> :
+                        <label th:text="${matchBracket.get(column+'/'+row).player2?.firstName+' '+matchBracket.get(column+'/'+row).player2?.lastName}">John Doe</label>
                     </div>
                 </td>
             </tr>
