@@ -12,7 +12,7 @@
         <thead>
             <tr>
                 <td th:each="column : ${#numbers.sequence(1, competition.numberOfRounds)}">
-                    <label th:text="'1/'+${(1 + competition.numberOfRounds - column).toString()}">1/2</label>
+                    <label th:text="${column}">1</label>
                 </td>
             </tr>
         </thead>
@@ -22,8 +22,16 @@
                     <div th:if="${#maps.containsKey(matchBracket, column+'/'+row)}">
                         <a th:text="${matchBracket.get(column+'/'+row).name}"
                            th:href="|/matches/${matchBracket.get(column+'/'+row).id}|">Semifinal 1</a><br/>
-                        <label th:text="${matchBracket.get(column+'/'+row).player1?.firstName+' '+matchBracket.get(column+'/'+row).player1?.lastName}">John Doe</label> :
-                        <label th:text="${matchBracket.get(column+'/'+row).player2?.firstName+' '+matchBracket.get(column+'/'+row).player2?.lastName}">John Doe</label>
+                        <span th:if="${matchBracket.get(column+'/'+row).player1 != null}">
+                            <a th:text="${matchBracket.get(column+'/'+row).player1?.firstName+' '+
+                            matchBracket.get(column+'/'+row).player1?.lastName}"
+                               th:href="|/players/${matchBracket.get(column+'/'+row).player1.id}|">John Doe</a>
+                        </span> :
+                        <span th:if="${matchBracket.get(column+'/'+row).player2 != null}">
+                            <a th:text="${matchBracket.get(column+'/'+row).player2?.firstName+' '
+                            +matchBracket.get(column+'/'+row).player2?.lastName}"
+                               th:href="|/players/${matchBracket.get(column+'/'+row).player2.id}|">John Doe</a>
+                        </span>
                     </div>
                 </td>
             </tr>
