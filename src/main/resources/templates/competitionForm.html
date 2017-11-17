@@ -11,12 +11,12 @@
     <form method="POST" th:object="${competitionForm}">
         <div class="form-group">
             <label>Competition name</label>:
-            <input class="form-control" type="text" th:field="*{name}"/>
+            <input class="form-control" type="text" th:errorclass="is-invalid" th:field="*{name}"/>
             <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect name</div>
         </div>
         <div class="form-group">
             <label>Players</label>:
-            <select class="form-control" th:field="*{playerIds}" multiple="multiple">
+            <select class="form-control" th:field="*{playerIds}" th:errorclass="is-invalid" multiple="multiple">
                 <option th:each="player : ${allPlayers}"
                         th:text="${player.firstName + ' ' + player.lastName}"
                         th:value="${player.id}"></option>
