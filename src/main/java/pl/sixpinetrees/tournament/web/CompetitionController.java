@@ -1,6 +1,7 @@
 package pl.sixpinetrees.tournament.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -47,7 +48,7 @@ public class CompetitionController {
 
     @GetMapping("/{competitionId}")
     public String competition(@PathVariable("competitionId") Long competitionId, Model model) {
-        Competition competition = competitionService.getCompetition(competitionId);
+        Competition competition = competitionService.getCompetition(competitionId).orElseThrow(NotFoundException::new);
         model.addAttribute("competition", competition);
         model.addAttribute("matchBracket", bracketMapCalculator.prepareMatchBracketMap(competition));
         model.addAttribute("bracketMaxSize", pow2N(competition.getNumberOfRounds())-1);

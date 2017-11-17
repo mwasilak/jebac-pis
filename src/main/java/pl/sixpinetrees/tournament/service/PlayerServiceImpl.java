@@ -7,6 +7,7 @@ import pl.sixpinetrees.tournament.domain.Player;
 import pl.sixpinetrees.tournament.repository.PlayerRepository;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -31,7 +32,7 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public Player getPlayer(Long id) {
-        return playerRepository.findOne(id);
+    public Optional<Player> getPlayer(Long id) {
+        return playerRepository.findById(id);
     }
 }

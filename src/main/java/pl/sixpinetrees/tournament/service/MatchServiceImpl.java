@@ -7,6 +7,7 @@ import pl.sixpinetrees.tournament.domain.Match;
 import pl.sixpinetrees.tournament.repository.MatchRepository;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -16,8 +17,8 @@ public class MatchServiceImpl implements MatchService {
     private MatchRepository matchRepository;
 
     @Override
-    public Match getMatch(Long id) {
-        return matchRepository.findOne(id);
+    public Optional<Match> getMatch(Long id) {
+        return matchRepository.findById(id);
     }
 
     @Override

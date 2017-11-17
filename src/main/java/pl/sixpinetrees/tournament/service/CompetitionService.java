@@ -4,12 +4,13 @@ import pl.sixpinetrees.tournament.domain.Competition;
 import pl.sixpinetrees.tournament.domain.dto.CompetitionForm;
 
 import java.util.Collection;
+import java.util.Optional;
 
 public interface CompetitionService {
 
     Long createCompetition(CompetitionForm competitionForm);
 
-    Competition getCompetition(Long id);
+    Optional<Competition> getCompetition(Long id);
 
     Collection<Competition> getCompetitions();
 

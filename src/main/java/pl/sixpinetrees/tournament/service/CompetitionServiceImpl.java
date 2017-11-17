@@ -13,6 +13,7 @@ import pl.sixpinetrees.tournament.repository.PlayerRepository;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -25,8 +26,8 @@ public class CompetitionServiceImpl implements CompetitionService {
     private PlayerRepository playerRepository;
 
     @Override
-    public Competition getCompetition(Long id) {
-        return competitionRepository.findOne(id);
+    public Optional<Competition> getCompetition(Long id) {
+        return competitionRepository.findById(id);
     }
 
     @Override
