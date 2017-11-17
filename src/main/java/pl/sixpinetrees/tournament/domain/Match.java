@@ -53,16 +53,16 @@ public class Match {
         return player1;
     }
 
-    public void setPlayer1(Player player1) {
-        this.player1 = player1;
-    }
-
     public Player getPlayer2() {
         return player2;
     }
 
-    public void setPlayer2(Player player2) {
-        this.player2 = player2;
+    public void assignPlayerToSlot(Player player, Integer slot) {
+        if(slot == 1) {
+            this.player1 = player;
+        } else if (slot == 2) {
+            this.player2 = player;
+        }
     }
 
     public Collection<Player> getPlayers() {

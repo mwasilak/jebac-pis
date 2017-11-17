@@ -66,21 +66,25 @@ public class Competition {
     }
 
     private void assignPlayers(List<Player> players) {
-        for(Integer i = 0; i<players.size(); i++) {
-            if(i < 2*numberOfMatchesInFirstRound) {
-                if((i % 2) == 0 ) {
-                    matches.get(new BracketPosition(1, (i / 2)+1)).setPlayer1(players.get(i));
-                } else {
-                    matches.get(new BracketPosition(1, (i / 2)+1)).setPlayer2(players.get(i));
-                }
-            } else {
-                if(((i-numberOfMatchesInFirstRound) % 2) == 0 ) {
-                    matches.get(new BracketPosition(2, ((i-numberOfMatchesInFirstRound) / 2)+1)).setPlayer1(players.get(i));
-                } else {
-                    matches.get(new BracketPosition(2, ((i-numberOfMatchesInFirstRound) / 2)+1)).setPlayer2(players.get(i));
-                }
-            }
+        for(Integer playerNumber = 0; playerNumber<players.size(); playerNumber++) {
+            assignPlayerToMatchSlot(playerNumber, players.get(playerNumber));
         }
+    }
+
+    private void assignPlayerToMatchSlot(Integer playerNumber, Player player) {
+        Integer bracketRound, bracketPosition, playerSlot;
+
+        if(playerNumber < 2*numberOfMatchesInFirstRound) {
+            bracketRound = 1;
+            bracketPosition = (playerNumber / 2) + 1;
+            playerSlot = playerNumber % 2 + 1;
+        } else {
+            bracketRound = 2;
+            bracketPosition = ((playerNumber - numberOfMatchesInFirstRound) / 2)+1;
+            playerSlot = (playerNumber-numberOfMatchesInFirstRound) % 2 + 1;
+        }
+        Match match = matches.get(new BracketPosition(bracketRound, bracketPosition));
+        match.assignPlayerToSlot(player, playerSlot);
     }
 
     public Long getId() {
