@@ -4,12 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import pl.sixpinetrees.tournament.domain.Player;
+import org.springframework.web.bind.annotation.*;
 import pl.sixpinetrees.tournament.domain.dto.RegistrationForm;
 import pl.sixpinetrees.tournament.service.MatchService;
 import pl.sixpinetrees.tournament.service.PlayerService;
@@ -34,14 +29,14 @@ public class PlayerController {
         return "player";
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     public String players(Model model) {
 
         model.addAttribute("players", playerService.getPlayers());
         return "players";
     }
 
-    @RequestMapping(value="/{playerId}", method=RequestMethod.GET)
+    @GetMapping("/{playerId}")
     public String player(@PathVariable("playerId") long playerId, Model model) {
 
         model.addAttribute("player", playerService.getPlayer(playerId)
@@ -50,12 +45,12 @@ public class PlayerController {
         return "player";
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    @GetMapping("/register")
     public String registerForm(RegistrationForm registrationForm, Model model) {
         return "registrationForm";
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @PostMapping("/register")
     public String processRegistration(@Valid RegistrationForm registrationForm, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
