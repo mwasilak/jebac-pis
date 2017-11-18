@@ -52,14 +52,14 @@ public class PlayerController {
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String registerForm(RegistrationForm registrationForm, Model model) {
-        return "registerForm";
+        return "registrationForm";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String processRegistration(@Valid RegistrationForm registrationForm, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return "registerForm";
+            return "registrationForm";
         }
 
         Long id = playerService.registerPlayer(registrationForm);
