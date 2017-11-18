@@ -42,7 +42,8 @@ public class PlayerController {
     @RequestMapping(value="/{playerId}", method=RequestMethod.GET)
     public String player(@PathVariable("playerId") long playerId, Model model) {
 
-        model.addAttribute("player", playerService.getPlayer(playerId));
+        model.addAttribute("player", playerService.getPlayer(playerId)
+                        .orElseThrow(NotFoundException::new));
         model.addAttribute("matches", matchService.getMatchByPlayer(playerId));
         return "player";
     }

@@ -35,7 +35,8 @@ public class MatchController {
     @RequestMapping(value = "/{matchId}", method = RequestMethod.GET)
     public String match(@PathVariable("matchId") Long matchId, Model model) {
 
-        model.addAttribute("match", matchService.getMatch(matchId));
+        model.addAttribute("match", matchService.getMatch(matchId)
+                .orElseThrow(NotFoundException::new));
         return "match";
     }
 }
