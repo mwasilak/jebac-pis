@@ -8,12 +8,12 @@
 <body>
     <header th:insert="fragments :: header"></header>
     <div class="container content-padding">
-        <form method="POST" th:object="${player}">
             <div class="errors" th:if="${#fields.hasErrors('*')}">
                 <ul>
                     <li th:each="err : ${#fields.errors('*')}"
                         th:text="${err}">Input is incorrect</li>
                 </ul>
+        <form method="POST" th:object="${registrationForm}">
             </div>
             <label th:class="${#fields.hasErrors('firstName')}? 'error'">
                 First Name</label>:
