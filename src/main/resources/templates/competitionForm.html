@@ -2,10 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>New Competition</title>
-    <head th:insert="fragments :: head"></head>
+    <head th:insert="fragments/header :: head"></head>
 </head>
 <body>
-    <header th:insert="fragments :: header"></header>
+    <header th:insert="fragments/header :: header"></header>
     <div class="container content-padding">
         <h3>Add new competition</h3>
         <form method="POST" th:object="${competitionForm}">
