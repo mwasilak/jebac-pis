@@ -15,7 +15,8 @@
             </div>
             <div class="form-group">
                 <label>Players</label>:
-                <select class="form-control" th:field="*{playerIds}" th:errorclass="is-invalid" multiple="multiple">
+                <select multiple class="form-control" th:field="*{playerIds}" th:errorclass="is-invalid"
+                        th:size="${#lists.size(allPlayers)}">
                     <option th:each="player : ${allPlayers}"
                             th:text="${player.firstName + ' ' + player.lastName}"
                             th:value="${player.id}"></option>
