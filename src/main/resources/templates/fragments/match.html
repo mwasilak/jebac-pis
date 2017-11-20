@@ -1,16 +1,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <body>
-    <div th:fragment="matchBox(match)">
-        <a th:text="${match.name}" th:href="|/matches/${match.id}|">Semifinal 1</a><br/>
-        <span th:if="${match.player1 != null}">
+    <th:block th:fragment="matchBox(match)">
+        <li>
+            <div th:if="${match?.player1 != null}">
                 <a th:text="${match.player1?.firstName+' '+match.player1?.lastName}"
                    th:href="|/players/${match.player1.id}|">John Doe</a>
-            </span> :
-        <span th:if="${match.player2 != null}">
+            </div>
+            <div th:unless="${match?.player1 != null}">
+                &nbsp
+            </div>
+        </li>
+        <li>
+            <div th:if="${match?.player2 != null}">
                 <a th:text="${match.player2?.firstName+' '+match.player2?.lastName}"
                    th:href="|/players/${match.player2.id}|">John Doe</a>
-            </span>
-    </div>
+            </div>
+            <div th:unless="${match?.player2 != null}">
+                &nbsp
+            </div>
+        </li>
+    </th:block>
 </body>
 </html>

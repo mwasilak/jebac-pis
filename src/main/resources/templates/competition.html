@@ -3,29 +3,48 @@
 <head>
     <title th:text="competition.name">Competition</title>
     <head th:insert="fragments/header :: head"></head>
+    <style>
+
+        main {
+            display:flex;
+            flex-direction:row;
+        }
+
+        .round{
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            width:200px;
+            list-style:none;
+            padding:0;
+        }
+
+        .round .spacer{ flex-grow:1; }
+        .round .spacer:first-child,
+        .round .spacer:last-child{ flex-grow:.5; }
+
+        .bracket li {
+
+            border: 1px solid #ccc;
+            /*padding: 5px 10px;*/
+        }
+
+
+    </style>
 </head>
 <body>
 <header th:insert="fragments/header :: header"></header>
 <div class="container content-padding">
     <h3 th:text="${competition.name}">Competition</h3>
-    <table class="table">
-        <thead>
-            <tr>
-                <td th:each="column : ${#numbers.sequence(1, competition.numberOfRounds)}">
-                    <label th:text="${column}">1</label>
-                </td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="row : ${#numbers.sequence(1, bracketMaxSize)}">
-                <td th:each="column : ${#numbers.sequence(1, competition.numberOfRounds)}">
-                    <div th:if="${#maps.containsKey(matchBracket, column+'/'+row)}"
-                         th:insert="fragments/match :: matchBox(match=${matchBracket.get(column+'/'+row)})">
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <main class="bracket">
+        <ul class="round" th:each="round : ${#numbers.sequence(1, competition.numberOfRounds)}">
+            <li class="spacer">&nbsp;</li>
+            <th:block th:each="position : ${#numbers.sequence(1, competition.calculateMaxMatchesInRound(round))}">
+                <li th:replace="fragments/match :: matchBox(match=${competition.getMatchByPosition(round, position)})"></li>
+                <li class="spacer">&nbsp;</li>
+            </th:block>
+        </ul>
+    </main>
 </div>
 </body>
 </html>

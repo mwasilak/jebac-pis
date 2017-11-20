@@ -50,10 +50,14 @@ public class Competition {
         }
     }
 
-    private Integer calculateMatchesInRound(Integer round) {
+    public Integer calculateMatchesInRound(Integer round) {
         if (round == 1) {
             return numberOfMatchesInFirstRound;
         }
+        return Calculator.pow2N(numberOfRounds - round);
+    }
+
+    public Integer calculateMaxMatchesInRound(Integer round) {
         return Calculator.pow2N(numberOfRounds - round);
     }
 
@@ -105,6 +109,10 @@ public class Competition {
 
     public Map<BracketPosition, Match> getMatches() {
         return matches;
+    }
+
+    public Match getMatchByPosition(Integer round, Integer position) {
+        return matches.get(new BracketPosition(round, position));
     }
 
     public Integer getNumberOfPlayers() {
