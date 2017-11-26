@@ -30,16 +30,20 @@ class DummyDataCLR implements CommandLineRunner {
 
         playerRepository.save(new Player("Johnny", "Bravo"));
         playerRepository.save(new Player("Marty", "McFly"));
-        playerRepository.save(new Player("Barney", "Stinson"));
+        playerRepository.save(new Player("Barney", "Mead"));
         playerRepository.save(new Player("Sonny", "Crockett"));
-        playerRepository.save(new Player("Laura", "Roslin"));
-        playerRepository.save(new Player("Cersei", "Lannister"));
+        playerRepository.save(new Player("Laura", "Philips"));
+        playerRepository.save(new Player("Monica", "King"));
         playerRepository.save(new Player("Kate", "Austen"));
         playerRepository.save(new Player("Sally", "Blue"));
         playerRepository.save(new Player("John", "Wick"));
-        playerRepository.save(new Player("Jason", "Bourne"));
+        playerRepository.save(new Player("Jason", "Long"));
         playerRepository.save(new Player("Anna", "Grimm"));
         playerRepository.save(new Player("Lucy", "Prince"));
+        playerRepository.save(new Player("Peter", "West"));
+        playerRepository.save(new Player("Joseph", "North"));
+        playerRepository.save(new Player("Matt", "East"));
+        playerRepository.save(new Player("Jack", "South"));
     }
 
     @Autowired

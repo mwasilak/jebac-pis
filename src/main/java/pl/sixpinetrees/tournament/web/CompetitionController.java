@@ -50,7 +50,6 @@ public class CompetitionController {
     public String competition(@PathVariable("competitionId") Long competitionId, Model model) {
         Competition competition = competitionService.getCompetition(competitionId).orElseThrow(NotFoundException::new);
         model.addAttribute("competition", competition);
-        model.addAttribute("matchBracket", bracketMapCalculator.prepareMatchBracketMap(competition));
         model.addAttribute("bracketMaxSize", pow2N(competition.getNumberOfRounds())-1);
         return "competition";
     }
