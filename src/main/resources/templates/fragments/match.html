@@ -1,29 +1,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <body>
-    <li th:fragment="matchBox(match)" th:classappend="${match}?'match':''">
-        <div th:class="route-box">
-            <div></div>
+    <div th:fragment="matchBox(match)" th:class="match-box" th:classappend="${match}?'match':''">
+        <div>
+            <a th:if="${match?.player1 != null}"
+               th:text="${match.player1?.firstName+' '+match.player1?.lastName}"
+               th:href="|/players/${match.player1.id}|">John Doe</a>
+            <span th:if="${match?.player1 == null}">&nbsp</span>
         </div>
-        <div th:class="match-box" th:classappend="${match}?'match':''">
-            <div th:if="${match?.player1 != null}">
-                <a th:text="${match.player1?.firstName+' '+match.player1?.lastName}"
-                   th:href="|/players/${match.player1.id}|">John Doe</a>
-            </div>
-            <div th:if="${match?.player1 == null}">
-                &nbsp
-            </div>
-            <div th:if="${match?.player2 != null}">
-                <a th:text="${match.player2?.firstName+' '+match.player2?.lastName}"
-                   th:href="|/players/${match.player2.id}|">John Doe</a>
-            </div>
-            <div th:if="${match?.player2 == null}">
-                &nbsp
-            </div>
+        <div>
+            <a th:if="${match?.player2 != null}"
+               th:text="${match.player2?.firstName+' '+match.player2?.lastName}"
+               th:href="|/players/${match.player2.id}|">John Doe</a>
+            <span th:if="${match?.player2 == null}">&nbsp</span>
         </div>
-        <div th:class="route-box">
-            <div></div>
-        </div>
-    </li>
+    </div>
 </body>
 </html>

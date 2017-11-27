@@ -3,91 +3,6 @@
 <head>
     <title th:text="competition.name">Competition</title>
     <head th:insert="fragments/header :: head"></head>
-    <style>
-
-        main {
-            display:flex;
-            flex-direction:row;
-        }
-
-        .round{
-            display:flex;
-            flex-direction:column;
-            justify-content:center;
-            width:200px;
-            list-style:none;
-            padding:0;
-            margin: 0;
-        }
-
-        .round li:not(.spacer) {
-            display:flex;
-            flex-direction: row;
-        }
-
-        .round li.spacer{
-            flex-grow:1;
-            padding-bottom: 1px;
-        }
-
-        .double-match {
-            border-right: 1px solid #ccc;
-        }
-
-        .single-match:after {
-            content:"\00a0";
-            border-right: 1px solid #ccc;
-            float: right;
-            bottom: 0;
-            right: 0;
-            height: 50%;
-            width: 1px;
-        }
-
-        ul:before, ul:after {
-            content: "\00a0";
-            padding-bottom: 1px;
-            display: inline-block;
-            flex-grow:0.5;
-        }
-
-        .match-box {
-            border: 1px solid transparent;
-            flex:0 0 80%;
-        }
-
-        .match-box.match {
-            border-color: #ccc;
-        }
-
-        .route-box {
-            flex:0 0 10%;
-            display: flex;
-        }
-
-        .route-box div {
-            height: 50%;
-            width: 100%;
-            display:table-cell;
-        }
-
-        .round:not(:first-child) .match .route-box:first-child div {
-            border-bottom: 1px solid #ccc;
-            align-self: flex-start;
-        }
-
-        .round:not(:last-child) .match:nth-child(4n+3) .route-box:last-child div {
-            border-bottom: 1px solid #ccc;
-            border-right: 1px solid #ccc;
-            align-self: flex-start;
-        }
-
-        .round:not(:last-child) .match:nth-child(4n+1) .route-box:last-child div {
-            border-top: 1px solid #ccc;
-            border-right: 1px solid #ccc;
-            align-self: flex-end;
-        }
-    </style>
 </head>
 <body>
 <header th:insert="fragments/header :: header"></header>
@@ -96,7 +11,16 @@
     <main class="bracket">
         <ul class="round" th:each="round : ${#numbers.sequence(1, competition.numberOfRounds)}">
             <th:block th:each="position : ${#numbers.sequence(1, competition.calculateMaxMatchesInRound(round))}">
-                <li th:replace="fragments/match :: matchBox(match=${competition.getMatchByPosition(round, position)})"></li>
+                <li th:object="${competition.getMatchByPosition(round, position)}" th:classappend="${#object}?'match':''">
+                    <div th:class="route-box"
+                         th:classappend="${((round == 1) || (round == 2 && position > (competition.calculateMatchesInRound(1)+1)/2) ? '' : 'middle')}">
+                        <div></div>
+                    </div>
+                    <div th:replace="fragments/match :: matchBox(match=${#object})">Match</div>
+                    <div th:class="route-box">
+                        <div></div>
+                    </div>
+                </li>
                 <li th:if="${position<competition.calculateMaxMatchesInRound(round)}"
                     class="spacer"
                     th:classappend="${(position % 2 == 1 && position < competition.calculateMatchesInRound(round) ? 'double-match' : '') +
