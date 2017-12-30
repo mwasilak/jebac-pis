@@ -1,10 +1,13 @@
 package pl.sixpinetrees.tournament.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.sixpinetrees.tournament.domain.Match;
+import pl.sixpinetrees.tournament.domain.dto.MatchForm;
 import pl.sixpinetrees.tournament.repository.MatchRepository;
+import pl.sixpinetrees.tournament.web.NotFoundException;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -29,6 +32,16 @@ public class MatchServiceImpl implements MatchService {
     @Override
     public Collection<Match> getMatchByPlayer(Long id) {
         return matchRepository.findByPlayer1IdOrPlayer2Id(id, id);
+    }
+
+    @Override
+    @Transactional
+    public Long updateMatch(MatchForm matchForm) {
+        Match match = matchRepository.findById(matchForm.getId()).orElseThrow(NotFoundException::new);
+
+        match.update(matchForm);
+
+        return match.getId();
     }
 
 }

@@ -22,7 +22,7 @@
                     </div>
                 </li>
                 <li th:if="${position<competition.calculateMaxMatchesInRound(round)}"
-                    class="spacer"
+                    th:class="spacer"
                     th:classappend="${(position % 2 == 1 && position < competition.calculateMatchesInRound(round) ? 'double-match' : '') +
                     (position % 2 == 1 && position == competition.calculateMatchesInRound(round) ? 'single-match' : '')}">&nbsp;</li>
             </th:block>

@@ -33,7 +33,8 @@
         </tr>
         </tbody>
     </table>
-    <a th:href="@{/matches}">Back to list</a>
+    <a class="btn btn-primary" th:href="|/matches/${match.id}/edit|">Record match results</a>
+    <a class="btn btn-outline-primary" th:href="@{/matches/}">Back to list</a>
 </div>
 </body>
 </html>

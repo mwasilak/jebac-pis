@@ -57,6 +57,11 @@ main.bracket {
     border-color: #ccc;
 }
 
+.bracket .match-box.match:before {
+    content: "<i class="fa fa-trophy" aria-hidden="true"></i>";
+    display: inline-block;
+}
+
 .bracket .route-box {
     flex:0 0 10%;
     display: flex;

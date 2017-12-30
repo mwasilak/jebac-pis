@@ -1,5 +1,8 @@
 package pl.sixpinetrees.tournament.domain;
 
+import pl.sixpinetrees.tournament.domain.dto.GameRow;
+import pl.sixpinetrees.tournament.domain.dto.MatchForm;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -76,11 +79,18 @@ public class Match {
         return rounds;
     }
 
-    public void setRounds(Collection<Round> rounds) {
-        this.rounds = rounds;
-    }
+//    public void setRounds(Collection<Round> rounds) {
+//        this.rounds = rounds;
+//    }
 
     public BracketPosition getPosition() {
         return position;
+    }
+
+    public void update(MatchForm matchForm) {
+        for(GameRow game : matchForm.getGameRows()) {
+            Round round = new Round(game.getRoundNumber(), game.getScorePlayer1(), game.getScorePlayer2());
+            rounds.add(round);
+        }
     }
 }

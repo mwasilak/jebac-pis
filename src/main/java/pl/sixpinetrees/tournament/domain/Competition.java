@@ -14,7 +14,7 @@ public class Competition {
 
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL)
     @MapKey(name = "position")
     private Map<BracketPosition, Match> matches;
 
