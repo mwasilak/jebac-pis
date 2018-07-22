@@ -27,8 +27,9 @@
                 </thead>
                 <tbody>
                     <tr th:each="gameRow, rowStat: ${matchForm.gameRows}">
-                        <td th:text="rowStat">1</td>
-                        <td><input type="text" th:field="${matchForm.gameRows[__${rowStat.index}__].scorePlayer1}"></td>
+                        <td th:text="${rowStat.count}">1</td>
+                        <td class="text-right" ><input type="text" th:field="${matchForm.gameRows[__${rowStat.index}__].scorePlayer1}"></td>
+                        <td class="text-center">:</td>
                         <td><input type="text" th:field="${matchForm.gameRows[__${rowStat.index}__].scorePlayer2}"></td>
                     </tr>
                 </tbody>
