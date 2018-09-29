@@ -18,8 +18,8 @@ import java.util.Collection;
 
 import static pl.sixpinetrees.tournament.util.Calculator.pow2N;
 
-@Controller
-@RequestMapping("/competitions")
+@RestController
+@RequestMapping("/api/competitions")
 public class CompetitionController {
 
     private final BracketMapCalculator bracketMapCalculator = new BracketMapCalculator();
@@ -41,9 +41,8 @@ public class CompetitionController {
     }
 
     @GetMapping
-    public String getCompetitions(Model model) {
-        model.addAttribute("competitions", competitionService.getCompetitions());
-        return "competitions";
+    public Collection<Competition> getCompetitions() {
+        return competitionService.getCompetitions();
     }
 
     @GetMapping("/{competitionId}")
