@@ -7,6 +7,8 @@ import { CompetitionsComponent } from './components/competitions/competitions.co
 import { PlayersComponent } from './components/players/players.component';
 import { MatchesComponent } from './components/matches/matches.component';
 import {AppRoutingModule} from "./app-routing.module";
+import { DatagridComponent } from './components/datagrid/datagrid.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -14,10 +16,12 @@ import {AppRoutingModule} from "./app-routing.module";
     HomeComponent,
     CompetitionsComponent,
     PlayersComponent,
-    MatchesComponent
+    MatchesComponent,
+    DatagridComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule
   ],
   providers: [],
