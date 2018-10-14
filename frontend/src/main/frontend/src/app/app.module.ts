@@ -1,14 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
 
+import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { CompetitionsComponent } from './components/competitions/competitions.component';
 import { PlayersComponent } from './components/players/players.component';
 import { MatchesComponent } from './components/matches/matches.component';
-import {AppRoutingModule} from "./app-routing.module";
 import { DatagridComponent } from './components/datagrid/datagrid.component';
-import {FormsModule} from "@angular/forms";
+
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import {FormsModule} from "@angular/forms";
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [],
