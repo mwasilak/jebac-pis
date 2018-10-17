@@ -1,1 +1,91 @@
-/* You can add global styles to this file, and also import other style files */
+.content-padding {
+  padding: 40px 40px;
+}
+
+main.bracket {
+  display:flex;
+  flex-direction:row;
+}
+
+.bracket .round{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  width:200px;
+  list-style:none;
+  padding:0;
+  margin: 0;
+}
+
+.bracket .round li:not(.spacer) {
+  display:flex;
+  flex-direction: row;
+}
+
+.bracket .round li.spacer{
+  flex-grow:1;
+  padding-bottom: 1px;
+}
+
+.bracket .double-match {
+  border-right: 1px solid #ccc;
+}
+
+.bracket .single-match:after {
+  content:"\00a0";
+  border-right: 1px solid #ccc;
+  float: right;
+  bottom: 0;
+  right: 0;
+  height: 50%;
+  width: 1px;
+}
+
+.bracket ul:before, ul:after {
+  content: "\00a0";
+  padding-bottom: 1px;
+  display: inline-block;
+  flex-grow:0.5;
+}
+
+.bracket .match-box {
+  border: 1px solid transparent;
+  flex:0 0 80%;
+}
+
+.bracket .match-box.match {
+  border-color: #ccc;
+}
+
+.bracket .match-box.match:before {
+  content: "<i class="fa fa-trophy" aria-hidden="true"></i>";
+  display: inline-block;
+}
+
+.bracket .route-box {
+  flex:0 0 10%;
+  display: flex;
+}
+
+.bracket .route-box div {
+  height: 50%;
+  width: 100%;
+  display:table-cell;
+}
+
+.bracket .route-box.middle div {
+  border-bottom: 1px solid #ccc;
+  align-self: flex-start;
+}
+
+.bracket .round:not(:last-child) .match:nth-child(4n+3) .route-box:last-child div {
+  border-bottom: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  align-self: flex-start;
+}
+
+.bracket .round:not(:last-child) .match:nth-child(4n+1) .route-box:last-child div {
+  border-top: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  align-self: flex-end;
+}
