@@ -9,7 +9,8 @@ import { HomeComponent } from './components/home/home.component';
 import { CompetitionsComponent } from './components/competitions/competitions.component';
 import { PlayersComponent } from './components/players/players.component';
 import { MatchesComponent } from './components/matches/matches.component';
-import { DatagridComponent } from './components/datagrid/datagrid.component';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { MaterialModule } from "./modules/material/material.module";
 
 
 @NgModule({
@@ -18,14 +19,15 @@ import { DatagridComponent } from './components/datagrid/datagrid.component';
     HomeComponent,
     CompetitionsComponent,
     PlayersComponent,
-    MatchesComponent,
-    DatagridComponent
+    MatchesComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,23 +1,54 @@
 <div>
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container">
-        <a class="navbar-brand" routerLink="/"><i class="fa fa-trophy"></i></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+
+    <mat-toolbar color="primary" fxLayoutAlign="center center">
+
+
+      <div fxLayout="row"
+           fxLayoutAlign="left center"
+           fxFlex.gt-xs="500px"
+           fxFlex.gt-sm="800px"
+           fxFlex.gt-md="1000px"
+           fxFlex.gt-lg="1140px">
+      <div fxShow="true" fxHide.gt-sm="true">
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
         </button>
-
-        <div class="collapse navbar-collapse" id="tournament-navbar-content">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item nav-link" routerLink="/competitions" routerLinkActive="active">Competitions</li>
-            <li class="nav-item nav-link" routerLink="/players" routerLinkActive="active">Players</li>
-            <li class="nav-item nav-link" routerLink="/matches" routerLinkActive="active">Matches</li>
-          </ul>
-        </div>
       </div>
-    </nav>
-  </header>
 
-  <router-outlet></router-outlet>
+      <a mat-button class="companyName" routerLink="/">
+        <mat-icon fontSet="fa" fontIcon="fa-trophy" style="font-size: 1.8em"></mat-icon>
+      </a>
+
+      <div fxShow="true" fxHide.lt-md="true">
+        <a mat-button routerLink="/competitions">Competitions</a>
+        <a mat-button routerLink="/players">Players</a>
+        <a mat-button routerLink="/matches">Matches</a>
+      </div>
+      </div>
+
+    </mat-toolbar>
+    <mat-sidenav-container fxFlexFill class="example-container">
+
+      <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over"  opened="false" fxHide.gt-sm="true">
+        <div fxLayout="column">
+          <a mat-button routerLink="/competitions">Competitions</a>
+          <a mat-button routerLink="/players">Players</a>
+          <a mat-button routerLink="/matches">Matches</a>
+        </div>
+      </mat-sidenav>
+
+      <mat-sidenav-content fxFlexFill fxLayoutAlign="center center">
+        <div class="content-padding"
+             fxLayout="column"
+             fxFlex.gt-xs="500px"
+             fxFlex.gt-sm="800px"
+             fxFlex.gt-md="1000px"
+             fxFlex.gt-lg="1140px">
+          <router-outlet></router-outlet>
+        </div>
+      </mat-sidenav-content>
+
+    </mat-sidenav-container>
+
 </div>
 

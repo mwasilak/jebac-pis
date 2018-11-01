@@ -8,13 +8,11 @@ import {CompetitionsService} from "../../services/competitions.service";
 })
 export class CompetitionsComponent implements OnInit {
 
+  displayedColumns = ['position', 'name'];
   competitions: any[];
 
-  config: any[] = [
-    {key: 'name'}
-  ]
-
   constructor(private competitionService:CompetitionsService) {
+
     this.competitionService.fetchList()
       .subscribe((resp:any)=>{
         this.competitions = resp;

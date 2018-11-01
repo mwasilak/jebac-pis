@@ -1,5 +1,7 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 .content-padding {
-  padding: 40px 40px;
+  padding: 20px 20px;
 }
 
 main.bracket {
@@ -58,7 +60,7 @@ main.bracket {
 }
 
 .bracket .match-box.match:before {
-  content: "<i class="fa fa-trophy" aria-hidden="true"></i>";
+  content: "<mat-icon fontSet="fa" fontIcon="fa-trophy" style="font-size: 1.8em"></mat-icon>";
   display: inline-block;
 }
 
