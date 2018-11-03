@@ -9,6 +9,7 @@ import { HomeComponent } from './components/home/home.component';
 import { CompetitionsComponent } from './components/competitions/competitions.component';
 import { PlayersComponent } from './components/players/players.component';
 import { MatchesComponent } from './components/matches/matches.component';
+import { CompetitionDetailsComponent } from './components/competition-details/competition-details.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { MatchesComponent } from './components/matches/matches.component';
     CompetitionsComponent,
     PlayersComponent,
     MatchesComponent,
+    CompetitionDetailsComponent
   ],
   imports: [
     BrowserModule,

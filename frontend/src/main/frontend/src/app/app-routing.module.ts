@@ -4,29 +4,16 @@ import {CompetitionsComponent} from "./components/competitions/competitions.comp
 import {PlayersComponent} from "./components/players/players.component";
 import {MatchesComponent} from "./components/matches/matches.component";
 import {HomeComponent} from "./components/home/home.component";
+import {CompetitionDetailsComponent} from "./components/competition-details/competition-details.component";
 
 
 const appRoutes: Routes = [
-  {
-    path: 'competitions',
-    component: CompetitionsComponent
-  },
-  {
-    path: 'players',
-    component: PlayersComponent
-  },
-  {
-    path: 'matches',
-    component: MatchesComponent
-  },
-  {
-    path: 'home',
-    component: HomeComponent
-  },
-  { path: '',
-    redirectTo: '/home',
-    pathMatch: 'full'
-  }
+  { path: 'competitions', component: CompetitionsComponent },
+  { path: 'competitions/:id', component: CompetitionDetailsComponent},
+  { path: 'players', component: PlayersComponent },
+  { path: 'matches', component: MatchesComponent },
+  { path: 'home', component: HomeComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 
 @NgModule({
