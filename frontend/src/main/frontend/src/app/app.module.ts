@@ -9,7 +9,6 @@ import { HomeComponent } from './components/home/home.component';
 import { CompetitionsComponent } from './components/competitions/competitions.component';
 import { PlayersComponent } from './components/players/players.component';
 import { MatchesComponent } from './components/matches/matches.component';
-import { DatagridComponent } from './components/datagrid/datagrid.component';
 
 
 @NgModule({
@@ -19,7 +18,6 @@ import { DatagridComponent } from './components/datagrid/datagrid.component';
     CompetitionsComponent,
     PlayersComponent,
     MatchesComponent,
-    DatagridComponent
   ],
   imports: [
     BrowserModule,
