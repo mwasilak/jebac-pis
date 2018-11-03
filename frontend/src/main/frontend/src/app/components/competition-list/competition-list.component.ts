@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {CompetitionsService} from "../../services/competitions.service";
 
 @Component({
-  selector: 'app-competitions',
-  templateUrl: './competitions.component.html',
-  styleUrls: ['./competitions.component.css']
+  selector: 'app-competition-list',
+  templateUrl: './competition-list.component.html',
+  styleUrls: ['./competition-list.component.css']
 })
-export class CompetitionsComponent implements OnInit {
+export class CompetitionListComponent implements OnInit {
 
   competitions: any[];
 

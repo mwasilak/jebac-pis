@@ -1,6 +1,6 @@
 import {RouterModule, Routes} from "@angular/router";
 import {NgModule} from "@angular/core";
-import {CompetitionsComponent} from "./components/competitions/competitions.component";
+import {CompetitionListComponent} from "./components/competition-list/competition-list.component";
 import {PlayersComponent} from "./components/players/players.component";
 import {MatchesComponent} from "./components/matches/matches.component";
 import {HomeComponent} from "./components/home/home.component";
@@ -8,7 +8,7 @@ import {CompetitionDetailsComponent} from "./components/competition-details/comp
 
 
 const appRoutes: Routes = [
-  { path: 'competitions', component: CompetitionsComponent },
+  { path: 'competitions', component: CompetitionListComponent },
   { path: 'competitions/:id', component: CompetitionDetailsComponent},
   { path: 'players', component: PlayersComponent },
   { path: 'matches', component: MatchesComponent },
@@ -22,5 +22,5 @@ const appRoutes: Routes = [
 })
 
 export class AppRoutingModule {
-  
+
 }

@@ -6,7 +6,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
-import { CompetitionsComponent } from './components/competitions/competitions.component';
+import { CompetitionListComponent } from './components/competition-list/competition-list.component';
 import { PlayersComponent } from './components/players/players.component';
 import { MatchesComponent } from './components/matches/matches.component';
 import { CompetitionDetailsComponent } from './components/competition-details/competition-details.component';
@@ -16,7 +16,7 @@ import { CompetitionDetailsComponent } from './components/competition-details/co
   declarations: [
     AppComponent,
     HomeComponent,
-    CompetitionsComponent,
+    CompetitionListComponent,
     PlayersComponent,
     MatchesComponent,
     CompetitionDetailsComponent
