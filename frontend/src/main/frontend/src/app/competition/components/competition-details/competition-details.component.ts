@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CompetitionsService} from "../../services/competitions.service";
 import {ActivatedRoute} from "@angular/router";
-import {Competition} from "../competition";
+import {Competition} from "../../competition";
 
 @Component({
   selector: 'app-competition-details',

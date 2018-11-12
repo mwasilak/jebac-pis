@@ -19,7 +19,6 @@ export class Competition {
   }
 
   getMatchByPosition(round: number, position: number): any {
-    console.log(this.matches);
     return this.matches['['+round+'/'+position+']']
   }
 
