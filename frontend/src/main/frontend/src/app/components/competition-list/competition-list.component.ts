@@ -10,18 +10,14 @@ export class CompetitionListComponent implements OnInit {
 
   competitions: any[];
 
-  config: any[] = [
-    {key: 'name'}
-  ]
-
   constructor(private competitionService:CompetitionsService) {
+  }
+
+  ngOnInit() {
     this.competitionService.fetchList()
       .subscribe((resp:any)=>{
         this.competitions = resp;
       });
-  }
-
-  ngOnInit() {
   }
 
 }
