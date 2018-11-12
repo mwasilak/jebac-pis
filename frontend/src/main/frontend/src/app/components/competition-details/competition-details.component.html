@@ -1,3 +1,13 @@
-<p>
-  competition-details works!
-</p>
+<div class="container content-padding">
+  <h3>{{competition.name}}</h3>
+  <main class="bracket">
+    <ul class="round" *ngFor="let round of range(competition.numberOfRounds)">
+      <ng-container *ngFor="let position of range(competition.calculateMaxMatchesInRound(round))">
+        <app-bracket-match [match]="competition.getMatchByPosition(round, position)"
+                           [middleBar]="competition.isWithoutMiddleBar(round, position)"></app-bracket-match>
+        <li *ngIf="position < competition.calculateMaxMatchesInRound(round)"
+            [class]="'spacer' + ' ' + competition.isDoubleMatch(round, position) ? 'double-match' : 'single-match'">&nbsp;</li>
+      </ng-container>
+    </ul>
+  </main>
+</div>

@@ -42,4 +42,9 @@ public class BracketPosition {
         result = 31 * result + position.hashCode();
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "[" + round + "/" + position + "]";
+    }
 }

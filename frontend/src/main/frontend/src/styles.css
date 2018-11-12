@@ -78,13 +78,13 @@ main.bracket {
   align-self: flex-start;
 }
 
-.bracket .round:not(:last-child) .match:nth-child(4n+3) .route-box:last-child div {
+.bracket .round:not(:last-child) app-bracket-match:nth-child(4n+3) .match .route-box:last-child div {
   border-bottom: 1px solid #ccc;
   border-right: 1px solid #ccc;
   align-self: flex-start;
 }
 
-.bracket .round:not(:last-child) .match:nth-child(4n+1) .route-box:last-child div {
+.bracket .round:not(:last-child) app-bracket-match:nth-child(4n+1) .match .route-box:last-child div {
   border-top: 1px solid #ccc;
   border-right: 1px solid #ccc;
   align-self: flex-end;

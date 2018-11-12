@@ -1,0 +1,13 @@
+<li  [class]="match?'match':''">
+  <div [class]="middleBar ? 'route-box' : 'route-box middle'">
+    <div></div>
+  </div>
+    <div [class]="match?'match match-box':'match-box'">
+        <div>{{match?.player1 != null ? match.player1?.firstName+' '+match.player1?.lastName : '&nbsp;'}}</div>
+        <div>{{match?.player2 != null ? match.player2?.firstName+' '+match.player2?.lastName : '&nbsp;'}}</div>
+    </div>
+  <div class="route-box">
+    <div></div>
+  </div>
+</li>
+

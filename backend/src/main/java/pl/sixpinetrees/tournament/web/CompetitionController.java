@@ -46,11 +46,8 @@ public class CompetitionController {
     }
 
     @GetMapping("/{competitionId}")
-    public String competition(@PathVariable("competitionId") Long competitionId, Model model) {
-        Competition competition = competitionService.getCompetition(competitionId).orElseThrow(NotFoundException::new);
-        model.addAttribute("competition", competition);
-        model.addAttribute("bracketMaxSize", pow2N(competition.getNumberOfRounds())-1);
-        return "competition";
+    public Competition competition(@PathVariable("competitionId") Long competitionId) {
+        return competitionService.getCompetition(competitionId).orElseThrow(NotFoundException::new);
     }
 
     @GetMapping("/add")

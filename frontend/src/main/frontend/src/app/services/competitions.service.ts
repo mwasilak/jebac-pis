@@ -9,8 +9,12 @@ export class CompetitionsService {
 
   constructor(private http: HttpClient) { }
 
-  fetchList(params?: any): Observable<any> {
+  fetchList(): Observable<any> {
     return this.http.get('api/competitions');
+  }
+
+  fetchDetails(id: string): Observable<any> {
+    return this.http.get('api/competitions/' + id);
   }
 
 }

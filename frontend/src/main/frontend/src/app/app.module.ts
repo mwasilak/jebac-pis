@@ -10,6 +10,7 @@ import { CompetitionListComponent } from './components/competition-list/competit
 import { PlayersComponent } from './components/players/players.component';
 import { MatchesComponent } from './components/matches/matches.component';
 import { CompetitionDetailsComponent } from './components/competition-details/competition-details.component';
+import { BracketMatchComponent } from './components/bracket-match/bracket-match.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { CompetitionDetailsComponent } from './components/competition-details/co
     CompetitionListComponent,
     PlayersComponent,
     MatchesComponent,
-    CompetitionDetailsComponent
+    CompetitionDetailsComponent,
+    BracketMatchComponent
   ],
   imports: [
     BrowserModule,
