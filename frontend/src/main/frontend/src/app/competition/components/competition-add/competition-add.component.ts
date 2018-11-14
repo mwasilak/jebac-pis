@@ -22,7 +22,7 @@ export class CompetitionAddComponent implements OnInit {
   });
 
   constructor(private playersService: PlayersService,
-              private competitionsService: CompetitionsService
+              private competitionsService: CompetitionsService,
               private router: Router) {}
 
   ngOnInit() {
