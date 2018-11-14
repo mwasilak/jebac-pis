@@ -10,9 +10,9 @@
     <tbody>
     <tr *ngFor="let competition of competitions; let i = index">
       <td>{{i+1}}</td>
-      <td><a [routerLink]="['/competitions', competition.id]">{{competition.name}}</a></td>
+      <td><a [routerLink]="['/competitions/details', competition.id]">{{competition.name}}</a></td>
     </tr>
     </tbody>
   </table>
-  <a [href]="'/competitions/add'">Add competition</a>
+  <a [routerLink]="'/competitions/add'">Add competition</a>
 </div>

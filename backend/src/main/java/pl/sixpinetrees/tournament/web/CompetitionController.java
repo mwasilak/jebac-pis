@@ -2,9 +2,9 @@ package pl.sixpinetrees.tournament.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.sixpinetrees.tournament.domain.Competition;
 import pl.sixpinetrees.tournament.domain.Player;
@@ -50,20 +50,12 @@ public class CompetitionController {
         return competitionService.getCompetition(competitionId).orElseThrow(NotFoundException::new);
     }
 
-    @GetMapping("/add")
-    public String competitionForm(CompetitionForm competitionForm, Model model) {
-        return "competitionForm";
-    }
-
     @PostMapping("/add")
-    public String processCompetitionForm(@Valid CompetitionForm competitionForm, BindingResult bindingResult) {
-
-        if(bindingResult.hasErrors()) {
-            return "competitionForm";
-        }
+    public ResponseEntity<?> processCompetitionForm(@Valid @RequestBody CompetitionForm competitionForm) {
 
         Long id = competitionService.createCompetition(competitionForm);
-        return "redirect:/competitions/" + id;
+        HttpHeaders responseHeader = new HttpHeaders();
+        return new ResponseEntity<>(id, responseHeader, HttpStatus.CREATED);
     }
 
 }

@@ -1,0 +1,17 @@
+<div class="container content-padding">
+  <h3>Add new competition</h3>
+  <form [formGroup]='form'>
+    <div class="form-group">
+      <input class="form-control" type="text" placeholder="Competition name" formControlName="name"/>
+      <!--<div class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect name</div>-->
+    </div>
+    <div class="form-group">
+      <label>Players</label>:
+      <select multiple class="form-control" formControlName="playerIds" [size]="players.length">
+        <option *ngFor="let player of players" [value]="player.id">{{player.firstName + ' ' + player.lastName}}</option>
+      </select>
+      <!--<div class="invalid-feedback" th:if="${#fields.hasErrors('playerIds')}" th:errors="*{playerIds}">Incorrect players</div>-->
+    </div>
+    <button class="btn btn-primary" (click)="sendForm(form)">Add</button>
+  </form>
+</div>

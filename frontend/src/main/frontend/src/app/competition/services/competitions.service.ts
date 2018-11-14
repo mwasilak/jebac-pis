@@ -17,4 +17,8 @@ export class CompetitionsService {
     return this.http.get('api/competitions/' + id);
   }
 
+  add(competitionForm) {
+    return this.http.post('api/competitions/add', competitionForm);
+  }
+
 }
