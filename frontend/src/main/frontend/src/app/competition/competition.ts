@@ -26,6 +26,10 @@ export class Competition {
     return (position % 2 == 1 && position < this.calculateMatchesInRound(round));
   }
 
+  isSingleMatch(round: number, position: number): boolean {
+    return (position % 2 == 1 && position == this.calculateMatchesInRound(round));
+  }
+
   isWithoutMiddleBar(round: number, position: number): boolean {
     return (round == 1) || (round == 2 && position > (this.numberOfMatchesInFirstRound+1)/2);
   }

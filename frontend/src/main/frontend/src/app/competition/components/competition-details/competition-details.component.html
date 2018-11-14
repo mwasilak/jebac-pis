@@ -6,7 +6,8 @@
         <app-bracket-match [match]="competition.getMatchByPosition(round, position)"
                            [middleBar]="competition.isWithoutMiddleBar(round, position)"></app-bracket-match>
         <li *ngIf="position < competition.calculateMaxMatchesInRound(round)"
-            [class]="'spacer' + ' ' + competition.isDoubleMatch(round, position) ? 'double-match' : 'single-match'">&nbsp;</li>
+            [class]="'spacer ' + (competition.isDoubleMatch(round, position) ? 'double-match' : '') +
+                      (competition.isSingleMatch(round, position) ? 'single-match' : '')">&nbsp;</li>
       </ng-container>
     </ul>
   </main>
