@@ -6,14 +6,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import pl.sixpinetrees.tournament.domain.Player;
 import pl.sixpinetrees.tournament.domain.dto.RegistrationForm;
 import pl.sixpinetrees.tournament.service.MatchService;
 import pl.sixpinetrees.tournament.service.PlayerService;
 
 import javax.validation.Valid;
+import java.util.Collection;
 
-@Controller
-@Profile("never")
+@RestController
 @RequestMapping("/api/players")
 public class PlayerController {
 
@@ -32,10 +33,9 @@ public class PlayerController {
     }
 
     @GetMapping
-    public String players(Model model) {
+    public Collection<Player> getPlayers() {
 
-        model.addAttribute("players", playerService.getPlayers());
-        return "players";
+        return playerService.getPlayers();
     }
 
     @GetMapping("/{playerId}")

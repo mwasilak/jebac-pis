@@ -6,7 +6,6 @@ import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
-import { PlayersComponent } from './components/players/players.component';
 import { MatchesComponent } from './components/matches/matches.component';
 
 
@@ -14,7 +13,6 @@ import { MatchesComponent } from './components/matches/matches.component';
   declarations: [
     AppComponent,
     HomeComponent,
-    PlayersComponent,
     MatchesComponent
   ],
   imports: [
