@@ -10,7 +10,7 @@
     <tbody>
     <tr *ngFor="let player of players; let i = index">
       <td>{{i+1}}</td>
-      <td><a [routerLink]="['/players', player.id]">{{player.firstName + ' ' + player.lastName}}</a></td>
+      <td><a [routerLink]="['/players/details', player.id]">{{player.firstName + ' ' + player.lastName}}</a></td>
     </tr>
     </tbody>
   </table>

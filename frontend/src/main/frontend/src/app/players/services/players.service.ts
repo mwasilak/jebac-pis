@@ -12,4 +12,8 @@ export class PlayersService {
   fetchList(): Observable<any> {
     return this.http.get('api/players');
   }
+
+  fetchDetails(id: string): Observable<any> {
+    return this.http.get('api/players/' + id);
+  }
 }

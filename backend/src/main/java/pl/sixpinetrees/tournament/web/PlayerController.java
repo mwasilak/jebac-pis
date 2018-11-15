@@ -39,17 +39,9 @@ public class PlayerController {
     }
 
     @GetMapping("/{playerId}")
-    public String player(@PathVariable("playerId") long playerId, Model model) {
+    public Player player(@PathVariable("playerId") long playerId) {
 
-        model.addAttribute("player", playerService.getPlayer(playerId)
-                        .orElseThrow(NotFoundException::new));
-        model.addAttribute("matches", matchService.getMatchByPlayer(playerId));
-        return "player";
-    }
-
-    @GetMapping("/register")
-    public String registerForm(RegistrationForm registrationForm, Model model) {
-        return "registrationForm";
+        return playerService.getPlayer(playerId).orElseThrow(NotFoundException::new);
     }
 
     @PostMapping("/register")
