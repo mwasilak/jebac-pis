@@ -9,7 +9,7 @@
     <header th:insert="fragments/header :: header"></header>
     <div class="container content-padding">
         <h3>Register new player</h3>
-        <form method="POST" th:object="${registrationForm}">
+        <form method="POST" th:object="${playerForm}">
             <div class="form-group">
                 <input class="form-control" type="text" th:field="*{firstName}" placeholder="First Name" th:errorclass="is-invalid"/>
                 <div class="invalid-feedback" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Incorrect first name</div>

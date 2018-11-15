@@ -16,4 +16,8 @@ export class PlayersService {
   fetchDetails(id: string): Observable<any> {
     return this.http.get('api/players/' + id);
   }
+
+  add(playerForm) {
+    return this.http.post('api/players/add', playerForm);
+  }
 }

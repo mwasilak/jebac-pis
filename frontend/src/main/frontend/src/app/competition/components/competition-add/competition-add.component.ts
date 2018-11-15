@@ -39,7 +39,6 @@ export class CompetitionAddComponent implements OnInit {
           ...form.value
         })
         .subscribe((resp) => {
-          console.log(resp);
           this.router.navigate(['/competitions/details', resp]);
         });
     } else {

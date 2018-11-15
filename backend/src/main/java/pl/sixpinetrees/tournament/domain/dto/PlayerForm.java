@@ -2,7 +2,7 @@ package pl.sixpinetrees.tournament.domain.dto;
 
 import javax.validation.constraints.Size;
 
-public class RegistrationForm {
+public class PlayerForm {
 
     @Size(min = 1, max = 32, message = "First name's length must be between {min} and {max} characters.")
     private String firstName;

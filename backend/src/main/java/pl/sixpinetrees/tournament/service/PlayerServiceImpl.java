@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.sixpinetrees.tournament.domain.Player;
-import pl.sixpinetrees.tournament.domain.dto.RegistrationForm;
+import pl.sixpinetrees.tournament.domain.dto.PlayerForm;
 import pl.sixpinetrees.tournament.repository.PlayerRepository;
 
 import java.util.Collection;
@@ -19,9 +19,9 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     @Transactional
-    public Long registerPlayer(RegistrationForm registrationForm) {
+    public Long addPlayer(PlayerForm playerForm) {
 
-        Player player = new Player(registrationForm.getFirstName(), registrationForm.getLastName());
+        Player player = new Player(playerForm.getFirstName(), playerForm.getLastName());
         Player savedPlayer = playerRepository.save(player);
         return savedPlayer.getId();
     }
