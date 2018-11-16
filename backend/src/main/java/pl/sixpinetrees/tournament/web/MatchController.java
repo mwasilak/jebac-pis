@@ -2,18 +2,22 @@ package pl.sixpinetrees.tournament.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import pl.sixpinetrees.tournament.domain.Match;
 import pl.sixpinetrees.tournament.domain.dto.GameRow;
 import pl.sixpinetrees.tournament.domain.dto.MatchForm;
 import pl.sixpinetrees.tournament.service.MatchService;
 
 import javax.validation.Valid;
+import java.util.Collection;
 
-@Controller
-@Profile("never")
+@RestController
 @RequestMapping("/api/matches")
 public class MatchController {
 
@@ -24,56 +28,48 @@ public class MatchController {
         this.matchService = matchService;
     }
 
-    @ModelAttribute("module")
-    public String module() {
-        return "match";
-    }
+//    @ModelAttribute("module")
+//    public String module() {
+//        return "match";
+//    }
 
     @GetMapping
-    public String matches(Model model) {
+    public Collection<Match> matches() {
 
-        model.addAttribute("matches", matchService.getMatches());
-        return "matches";
+        return matchService.getMatches();
     }
 
     @GetMapping("/{matchId}")
-    public String match(@PathVariable("matchId") Long matchId, Model model) {
+    public Match match(@PathVariable("matchId") Long matchId) {
 
-        model.addAttribute("match", matchService.getMatch(matchId)
-                .orElseThrow(NotFoundException::new));
-        return "match";
+        return matchService.getMatch(matchId).orElseThrow(NotFoundException::new);
     }
 
-    @GetMapping("/{matchId}/edit")
-    public String matchForm(@PathVariable("matchId") Long matchId, MatchForm matchForm, Model model) {
-
-        model.addAttribute("match", matchService.getMatch(matchId)
-                .orElseThrow(NotFoundException::new));
-        return "matchForm";
-    }
-
-    @PostMapping(value = "/{matchId}/edit", params = { "addGame" })
-    public String addRow(@PathVariable("matchId") Long matchId, final MatchForm matchForm, Model model) {
-        model.addAttribute("match", matchService.getMatch(matchId)
-                .orElseThrow(NotFoundException::new));
-        GameRow gameRow = new GameRow();
-        matchForm.getGameRows().add(gameRow);
-        return "matchForm";
-    }
+//    @GetMapping("/{matchId}/edit")
+//    public String matchForm(@PathVariable("matchId") Long matchId, MatchForm matchForm, Model model) {
+//
+//        model.addAttribute("match", matchService.getMatch(matchId)
+//                .orElseThrow(NotFoundException::new));
+//        return "matchForm";
+//    }
+//
+//    @PostMapping(value = "/{matchId}/edit", params = { "addGame" })
+//    public String addRow(@PathVariable("matchId") Long matchId, final MatchForm matchForm, Model model) {
+//        model.addAttribute("match", matchService.getMatch(matchId)
+//                .orElseThrow(NotFoundException::new));
+//        GameRow gameRow = new GameRow();
+//        matchForm.getGameRows().add(gameRow);
+//        return "matchForm";
+//    }
 
 
     @PostMapping("/{matchId}/edit")
-    public String processMatchForm(@PathVariable("matchId") Long matchId, @Valid MatchForm matchForm, BindingResult bindingResult) {
-
-        System.out.println("editMatch");
-
-        if(bindingResult.hasErrors()) {
-            return "matchForm";
-        }
+    public ResponseEntity<?> processMatchForm(@PathVariable("matchId") Long matchId, @Valid @RequestBody MatchForm matchForm) {
 
         matchForm.setId(matchId);
         Long id = matchService.updateMatch(matchForm);
-        return "redirect:/matches/" + id;
+        HttpHeaders responseHeader = new HttpHeaders();
+        return new ResponseEntity<>(id, responseHeader, HttpStatus.OK);
     }
 
 }

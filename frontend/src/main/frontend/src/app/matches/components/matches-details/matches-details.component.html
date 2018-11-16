@@ -1,0 +1,31 @@
+<div class="container content-padding">
+  <h3>{{match.name}}</h3>
+  <table class="table">
+    <thead>
+    <tr>
+      <td>{{match?.rounds?.length > 0 ? 'Round' : ''}}</td>
+      <td class="text-right">
+        <ng-container *ngIf="match?.player1?.id !== null">
+          <a [routerLink]="['/players/details', match.player1.id]">{{match?.player1?.firstName + ' ' + match?.player1?.lastName}}</a>
+        </ng-container>
+      </td>
+      <td class="text-center">:</td>
+      <td>
+        <ng-container *ngIf="match?.player2?.id !== null">
+          <a [routerLink]="['/players/details', match.player2.id]">{{match?.player2?.firstName + ' ' + match?.player2?.lastName}}</a>
+        </ng-container>
+      </td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let round of match.rounds">
+      <td>{{round.roundNumber}}</td>
+      <td class="text-right">{{round.scorePlayer1}}</td>
+      <td class="text-center"> :</td>
+      <td>{{round.scorePlayer2}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <a class="btn btn-primary" [routerLink]="['/matches', match.id, '/edit']">Record match results</a>
+  <a class="btn btn-outline-primary" [routerLink]="['/matches']">Back to list</a>
+</div>

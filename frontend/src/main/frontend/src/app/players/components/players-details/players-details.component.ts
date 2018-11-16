@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-import {PlayersService} from "../../services/players.service";
-import {Player} from "../../player";
+import { ActivatedRoute } from "@angular/router";
+import { PlayersService } from "../../services/players.service";
+import { Player } from "../../player";
 
 @Component({
   selector: 'app-players-details',
