@@ -3,6 +3,6 @@ export class Match {
   name: string;
   player1: any;
   player2: any;
-  rounds: any[];
+  games: any[];
   position: any;
 }

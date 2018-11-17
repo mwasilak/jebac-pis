@@ -16,4 +16,9 @@ export class MatchesService {
   fetchDetails(id: string): Observable<any> {
     return this.http.get('api/matches/' + id);
   }
+
+  edit(id: string, matchForm) {
+    return this.http.post('api/matches/edit/' + id, matchForm);
+  }
+
 }

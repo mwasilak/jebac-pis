@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { MatchesService } from "../../services/matches.service";
-import {Match} from "../../match";
+import { Match } from "../../match";
 
 @Component({
   selector: 'app-matches-details',
@@ -22,7 +22,7 @@ export class MatchesDetailsComponent implements OnInit {
           this.match.name = resp['name'];
           this.match.player1 = resp['player1'];
           this.match.player2 = resp['player2'];
-          this.match.rounds = resp['rounds'];
+          this.match.games = resp['games'];
           this.match.position = resp['position'];
         });
     });

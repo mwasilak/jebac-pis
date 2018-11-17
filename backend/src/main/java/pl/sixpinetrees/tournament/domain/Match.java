@@ -25,7 +25,7 @@ public class Match {
     private Player player2;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private Collection<Round> rounds;
+    private Collection<Game> games;
 
     @Embedded
     private BracketPosition position;
@@ -75,22 +75,22 @@ public class Match {
         return players;
     }
 
-    public Collection<Round> getRounds() {
-        return rounds;
+    public Collection<Game> getGames() {
+        return games;
     }
-
-//    public void setRounds(Collection<Round> rounds) {
-//        this.rounds = rounds;
-//    }
 
     public BracketPosition getPosition() {
         return position;
     }
 
     public void update(MatchForm matchForm) {
-        for(GameRow game : matchForm.getGameRows()) {
-            Round round = new Round(game.getRoundNumber(), game.getScorePlayer1(), game.getScorePlayer2());
-            rounds.add(round);
+
+        this.games.clear();
+        Integer i = 1;
+        for(GameRow game : matchForm.getGames()) {
+            Game newGame = new Game(i, game.getScorePlayer1(), game.getScorePlayer2());
+            this.games.add(newGame);
+            i++;
         }
     }
 }

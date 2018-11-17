@@ -2,19 +2,9 @@ package pl.sixpinetrees.tournament.domain.dto;
 
 public class GameRow {
 
-    private Integer roundNumber;
-
     private Integer scorePlayer1;
 
     private Integer scorePlayer2;
-
-    public Integer getRoundNumber() {
-        return roundNumber;
-    }
-
-    public void setRoundNumber(Integer roundNumber) {
-        this.roundNumber = roundNumber;
-    }
 
     public Integer getScorePlayer1() {
         return scorePlayer1;

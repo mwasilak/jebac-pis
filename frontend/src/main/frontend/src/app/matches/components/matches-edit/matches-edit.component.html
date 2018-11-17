@@ -1,0 +1,41 @@
+<div class="container content-padding">
+  <h3>Record match results</h3>
+  <form [formGroup]='form'>
+    <table class="table">
+      <thead>
+      <tr>
+        <td>Game</td>
+        <td class="text-right">
+          <ng-container *ngIf="match?.player1?.id !== null">
+            <a [routerLink]="['/players/details', match.player1.id]">{{match?.player1?.firstName + ' ' + match?.player1?.lastName}}</a>
+          </ng-container>
+        </td>
+        <td class="text-center">:</td>
+        <td>
+          <ng-container *ngIf="match?.player2?.id !== null">
+            <a [routerLink]="['/players/details', match.player2.id]">{{match?.player2?.firstName + ' ' + match?.player2?.lastName}}</a>
+          </ng-container>
+        </td>
+      <td>Action</td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr formArrayName="games" *ngFor="let game of form.controls.games.controls; let i = index">
+        <ng-container [formGroupName]="i">
+        <td>{{i+1}}</td>
+        <td class="text-right" >
+          <input type="text" formControlName="scorePlayer1">
+        </td>
+        <td class="text-center">:</td>
+        <td>
+          <input type="text" formControlName="scorePlayer2">
+        </td>
+          <td><button class="btn btn-outline-primary" (click)="removeGame(i)">Remove</button></td>
+        </ng-container>
+      </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-primary" (click)="sendForm(form)">Register results</button>&nbsp;
+    <button class="btn btn-outline-primary" (click)="addGame()">Add game</button>
+  </form>
+</div>

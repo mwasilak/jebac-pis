@@ -6,17 +6,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Component;
 import pl.sixpinetrees.tournament.domain.Competition;
-import pl.sixpinetrees.tournament.domain.Match;
-import pl.sixpinetrees.tournament.domain.Round;
 import pl.sixpinetrees.tournament.domain.Player;
-import pl.sixpinetrees.tournament.domain.dto.CompetitionForm;
 import pl.sixpinetrees.tournament.repository.CompetitionRepository;
 import pl.sixpinetrees.tournament.repository.MatchRepository;
 import pl.sixpinetrees.tournament.repository.PlayerRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @SpringBootApplication
 public class TournamentApplication {

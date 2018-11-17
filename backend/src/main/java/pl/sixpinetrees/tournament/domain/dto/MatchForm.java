@@ -7,10 +7,10 @@ public class MatchForm {
 
     private Long id;
 
-    private List<GameRow> gameRows;
+    private List<GameRow> games;
 
     public MatchForm() {
-        gameRows = new ArrayList<>();
+        games = new ArrayList<>();
     }
 
     public Long getId() {
@@ -21,11 +21,11 @@ public class MatchForm {
         this.id = id;
     }
 
-    public List<GameRow> getGameRows() {
-        return gameRows;
+    public List<GameRow> getGames() {
+        return games;
     }
 
-    public void setGameRows(List<GameRow> gameRows) {
-        this.gameRows = gameRows;
+    public void setGames(List<GameRow> games) {
+        this.games = games;
     }
 }

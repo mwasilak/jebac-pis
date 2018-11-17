@@ -3,7 +3,7 @@
   <table class="table">
     <thead>
     <tr>
-      <td>{{match?.rounds?.length > 0 ? 'Round' : ''}}</td>
+      <td>{{match?.games?.length > 0 ? 'Game' : ''}}</td>
       <td class="text-right">
         <ng-container *ngIf="match?.player1?.id !== null">
           <a [routerLink]="['/players/details', match.player1.id]">{{match?.player1?.firstName + ' ' + match?.player1?.lastName}}</a>
@@ -18,14 +18,14 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let round of match.rounds">
-      <td>{{round.roundNumber}}</td>
-      <td class="text-right">{{round.scorePlayer1}}</td>
+    <tr *ngFor="let game of match.games">
+      <td>{{game.gameNumber}}</td>
+      <td class="text-right">{{game.scorePlayer1}}</td>
       <td class="text-center"> :</td>
-      <td>{{round.scorePlayer2}}</td>
+      <td>{{game.scorePlayer2}}</td>
     </tr>
     </tbody>
   </table>
-  <a class="btn btn-primary" [routerLink]="['/matches', match.id, '/edit']">Record match results</a>
+  <a class="btn btn-primary" [routerLink]="['/matches/edit', match.id]">Record match results</a>
   <a class="btn btn-outline-primary" [routerLink]="['/matches']">Back to list</a>
 </div>
