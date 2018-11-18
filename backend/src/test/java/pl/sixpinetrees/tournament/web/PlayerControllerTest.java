@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import pl.sixpinetrees.tournament.domain.Player;
+import pl.sixpinetrees.tournament.repository.PlayerRepository;
 import pl.sixpinetrees.tournament.service.MatchService;
 import pl.sixpinetrees.tournament.service.PlayerService;
 
@@ -33,7 +34,7 @@ public class PlayerControllerTest {
     private MockMvc mvc;
 
     @MockBean
-    private PlayerService playerService;
+    private PlayerRepository playerRepository;
 
     @MockBean
     private MatchService matchService;
@@ -44,7 +45,7 @@ public class PlayerControllerTest {
 
         ArrayList<Player> a = new ArrayList<Player>();
         a.add(new Player("Johnny", "Bravo"));
-        given(this.playerService.getPlayers())
+        given(this.playerRepository.findAll())
                 .willReturn(a);
 
         this.mvc.perform(get("/players").accept(MediaType.TEXT_HTML))

@@ -3,7 +3,9 @@ package pl.sixpinetrees.tournament.domain;
 import pl.sixpinetrees.tournament.util.Calculator;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Entity
 public class Competition {

@@ -9,30 +9,21 @@ import pl.sixpinetrees.tournament.domain.dto.CompetitionForm;
 import pl.sixpinetrees.tournament.repository.CompetitionRepository;
 import pl.sixpinetrees.tournament.repository.PlayerRepository;
 
-
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
 public class CompetitionServiceImpl implements CompetitionService {
 
-    @Autowired
     private CompetitionRepository competitionRepository;
 
-    @Autowired
     private PlayerRepository playerRepository;
 
-    @Override
-    public Optional<Competition> getCompetition(Long id) {
-        return competitionRepository.findById(id);
-    }
-
-    @Override
-    public Collection<Competition> getCompetitions() {
-        return competitionRepository.findAll();
+    @Autowired
+    public CompetitionServiceImpl(CompetitionRepository competitionRepository, PlayerRepository playerRepository) {
+        this.competitionRepository = competitionRepository;
+        this.playerRepository = playerRepository;
     }
 
     @Override

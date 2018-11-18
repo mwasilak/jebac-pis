@@ -7,15 +7,16 @@ import pl.sixpinetrees.tournament.domain.Player;
 import pl.sixpinetrees.tournament.domain.dto.PlayerForm;
 import pl.sixpinetrees.tournament.repository.PlayerRepository;
 
-import java.util.Collection;
-import java.util.Optional;
-
 @Service
 @Transactional(readOnly = true)
 public class PlayerServiceImpl implements PlayerService {
 
-    @Autowired
     private PlayerRepository playerRepository;
+
+    @Autowired
+    public PlayerServiceImpl(PlayerRepository playerRepository) {
+        this.playerRepository = playerRepository;
+    }
 
     @Override
     @Transactional
@@ -26,13 +27,4 @@ public class PlayerServiceImpl implements PlayerService {
         return savedPlayer.getId();
     }
 
-    @Override
-    public Collection<Player> getPlayers() {
-        return playerRepository.findAll();
-    }
-
-    @Override
-    public Optional<Player> getPlayer(Long id) {
-        return playerRepository.findById(id);
-    }
 }

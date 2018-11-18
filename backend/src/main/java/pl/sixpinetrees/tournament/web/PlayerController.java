@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.sixpinetrees.tournament.domain.Player;
 import pl.sixpinetrees.tournament.domain.dto.PlayerForm;
+import pl.sixpinetrees.tournament.repository.PlayerRepository;
 import pl.sixpinetrees.tournament.service.PlayerService;
 
 import javax.validation.Valid;
@@ -16,22 +17,26 @@ import java.util.Collection;
 @RequestMapping("/api/players")
 public class PlayerController {
 
-    @Autowired
+    private PlayerRepository playerRepository;
+
     private PlayerService playerService;
 
-    public PlayerController() {
+    @Autowired
+    public PlayerController(PlayerRepository playerRepository, PlayerService playerService) {
+        this.playerRepository = playerRepository;
+        this.playerService = playerService;
     }
 
     @GetMapping
     public Collection<Player> getPlayers() {
 
-        return playerService.getPlayers();
+        return playerRepository.findAll();
     }
 
     @GetMapping("/{playerId}")
     public Player player(@PathVariable("playerId") long playerId) {
 
-        return playerService.getPlayer(playerId).orElseThrow(NotFoundException::new);
+        return playerRepository.findById(playerId).orElseThrow(NotFoundException::new);
     }
 
     @PostMapping("/add")

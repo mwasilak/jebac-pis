@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.sixpinetrees.tournament.domain.Match;
 import pl.sixpinetrees.tournament.domain.dto.MatchForm;
+import pl.sixpinetrees.tournament.repository.MatchRepository;
 import pl.sixpinetrees.tournament.service.MatchService;
 
 import javax.validation.Valid;
@@ -16,23 +17,26 @@ import java.util.Collection;
 @RequestMapping("/api/matches")
 public class MatchController {
 
+    MatchRepository matchRepository;
+
     MatchService matchService;
 
     @Autowired
-    public MatchController(MatchService matchService) {
+    public MatchController(MatchRepository matchRepository, MatchService matchService) {
+        this.matchRepository = matchRepository;
         this.matchService = matchService;
     }
 
     @GetMapping
     public Collection<Match> matches() {
 
-        return matchService.getMatches();
+        return matchRepository.findAll();
     }
 
     @GetMapping("/{matchId}")
     public Match match(@PathVariable("matchId") Long matchId) {
 
-        return matchService.getMatch(matchId).orElseThrow(NotFoundException::new);
+        return matchRepository.findById(matchId).orElseThrow(NotFoundException::new);
     }
 
     @PostMapping("/edit/{matchId}")
