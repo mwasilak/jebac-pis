@@ -12,15 +12,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import pl.sixpinetrees.tournament.domain.Player;
 import pl.sixpinetrees.tournament.repository.PlayerRepository;
 import pl.sixpinetrees.tournament.service.MatchService;
-import pl.sixpinetrees.tournament.service.PlayerService;
 
 import java.util.ArrayList;
 
-import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
  * Project: tournament

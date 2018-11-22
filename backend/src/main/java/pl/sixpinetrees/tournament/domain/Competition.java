@@ -18,6 +18,9 @@ public class Competition {
 
     @OneToMany(cascade = CascadeType.ALL)
     @MapKey(name = "position")
+    @JoinColumn(
+            name = "competitionId"
+    )
     private Map<BracketPosition, Match> matches;
 
     private Integer numberOfPlayers;
@@ -26,13 +29,19 @@ public class Competition {
 
     private Integer numberOfMatchesInFirstRound;
 
+    private Integer numberOfWinsRequired;
+
+    private Integer numberOfPointsToWin;
+
     public Competition() {
     }
 
-    public Competition(String name, List<Player> players) {
+    public Competition(String name, List<Player> players, Integer numberOfWinsRequired, Integer numberOfPointsToWin) {
 
         matches = new HashMap<>();
         this.name = name;
+        this.numberOfWinsRequired = numberOfWinsRequired;
+        this.numberOfPointsToWin = numberOfPointsToWin;
         calculateRounds(players.size());
         generateRounds();
         assignPlayers(players);
@@ -129,5 +138,11 @@ public class Competition {
         return numberOfMatchesInFirstRound;
     }
 
+    public Integer getNumberOfWinsRequired() {
+        return numberOfWinsRequired;
+    }
 
+    public Integer getNumberOfPointsToWin() {
+        return numberOfPointsToWin;
+    }
 }

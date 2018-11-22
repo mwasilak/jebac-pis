@@ -51,7 +51,7 @@ class DummyDataCLR implements CommandLineRunner {
         playerList.addAll(playerRepository.findByFirstNameAndLastName("Barney", "Mead"));
         playerList.addAll(playerRepository.findByFirstNameAndLastName("Lucy", "Prince"));
 
-        competitionRepository.save(new Competition("Competition",  playerList));
+        competitionRepository.save(new Competition("Competition",  playerList, 3, 11));
     }
 
     @Autowired

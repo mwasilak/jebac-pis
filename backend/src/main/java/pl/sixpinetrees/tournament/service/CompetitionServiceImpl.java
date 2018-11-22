@@ -34,7 +34,10 @@ public class CompetitionServiceImpl implements CompetitionService {
 
         Collections.shuffle(players);
 
-        Competition competition = competitionRepository.save(new Competition(competitionForm.getName(), players));
+        Competition competition = competitionRepository.save(new Competition(competitionForm.getName(),
+                players,
+                competitionForm.getNumberOfWinsRequired(),
+                competitionForm.getNumberOfPointsToWin()));
         return competition.getId();
     }
 }

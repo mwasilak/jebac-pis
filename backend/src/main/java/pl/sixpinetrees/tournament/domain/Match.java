@@ -18,6 +18,9 @@ public class Match {
 
     private String name;
 
+    @Column(insertable = false, updatable = false)
+    private Long competitionId;
+
     @ManyToOne
     private Player player1;
 
@@ -81,6 +84,10 @@ public class Match {
 
     public BracketPosition getPosition() {
         return position;
+    }
+
+    public Long getCompetitionId() {
+        return competitionId;
     }
 
     public void update(MatchForm matchForm) {

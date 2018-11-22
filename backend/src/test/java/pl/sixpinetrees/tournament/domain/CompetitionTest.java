@@ -22,7 +22,7 @@ public class CompetitionTest {
         players.add(new Player("Lucy", "Prince"));
 
         //when
-        Competition competition = new Competition("test", players);
+        Competition competition = new Competition("test", players, 3, 11);
 
         //then
         assertThat(competition.getNumberOfPlayers()).isEqualTo(5);

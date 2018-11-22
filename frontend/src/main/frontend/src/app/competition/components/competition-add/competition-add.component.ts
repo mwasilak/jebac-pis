@@ -18,6 +18,14 @@ export class CompetitionAddComponent implements OnInit {
     ]),
     playerIds: new FormControl('', [
       Validators.minLength(2)
+    ]),
+    numberOfWinsRequired: new FormControl(3, [
+      Validators.min(1),
+      Validators.max(5)
+    ]),
+    numberOfPointsToWin: new FormControl(11, [
+      Validators.min(11),
+      Validators.max(25)
     ])
   });
 
@@ -43,6 +51,7 @@ export class CompetitionAddComponent implements OnInit {
         });
     } else {
       console.error('form invalid');
+      console.log(form.value);
     }
   }
 

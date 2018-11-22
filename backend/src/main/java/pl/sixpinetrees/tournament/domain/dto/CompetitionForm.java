@@ -1,6 +1,8 @@
 package pl.sixpinetrees.tournament.domain.dto;
 
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,14 @@ public class CompetitionForm {
 
     @Size(min = 2, message = "Competition must be joined by at least 2 players.")
     private List<Long> playerIds = new ArrayList<>();
+
+    @Min(1)
+    @Max(5)
+    private Integer numberOfWinsRequired;
+
+    @Min(11)
+    @Max(25)
+    private Integer numberOfPointsToWin;
 
     public CompetitionForm() {
     }
@@ -30,5 +40,21 @@ public class CompetitionForm {
 
     public void setPlayerIds(List<Long> playerIds) {
         this.playerIds = playerIds;
+    }
+
+    public Integer getNumberOfWinsRequired() {
+        return numberOfWinsRequired;
+    }
+
+    public void setNumberOfWinsRequired(Integer numberOfWinsRequired) {
+        this.numberOfWinsRequired = numberOfWinsRequired;
+    }
+
+    public Integer getNumberOfPointsToWin() {
+        return numberOfPointsToWin;
+    }
+
+    public void setNumberOfPointsToWin(Integer numberOfPointsToWin) {
+        this.numberOfPointsToWin = numberOfPointsToWin;
     }
 }
