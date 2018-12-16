@@ -20,10 +20,13 @@ public class MatchServiceImpl implements MatchService {
 
     private CompetitionRepository competitionRepository;
 
+    private MatchFormValidator matchFormValidator;
+
     @Autowired
-    public MatchServiceImpl(MatchRepository matchRepository, CompetitionRepository competitionRepository) {
+    public MatchServiceImpl(MatchRepository matchRepository, CompetitionRepository competitionRepository, MatchFormValidator matchFormValidator) {
         this.matchRepository = matchRepository;
         this.competitionRepository = competitionRepository;
+        this.matchFormValidator = matchFormValidator;
     }
 
     @Override
@@ -38,6 +41,8 @@ public class MatchServiceImpl implements MatchService {
 
         CompetitionGameSettings gameSettings = competitionRepository.findById(match.getCompetitionId(), CompetitionGameSettings.class)
                 .orElseThrow( () -> new NotFoundException("Competition with id " + match.getCompetitionId() + " not found.") );
+
+        matchFormValidator.isValid(matchForm, gameSettings);
 
         match.update(matchForm);
 

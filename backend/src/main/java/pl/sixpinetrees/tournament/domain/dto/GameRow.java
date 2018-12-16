@@ -6,6 +6,11 @@ public class GameRow {
 
     private Integer scorePlayer2;
 
+    public GameRow(Integer scorePlayer1, Integer scorePlayer2) {
+        this.scorePlayer1 = scorePlayer1;
+        this.scorePlayer2 = scorePlayer2;
+    }
+
     public Integer getScorePlayer1() {
         return scorePlayer1;
     }
