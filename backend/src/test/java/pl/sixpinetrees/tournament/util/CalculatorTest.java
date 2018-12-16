@@ -1,15 +1,14 @@
 package pl.sixpinetrees.tournament.util;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by maciej on 30.03.17.
  */
-@RunWith(SpringRunner.class)
+@SpringBootTest
 public class CalculatorTest {
 
     @Test
