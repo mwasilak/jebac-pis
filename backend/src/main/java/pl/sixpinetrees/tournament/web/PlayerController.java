@@ -36,7 +36,7 @@ public class PlayerController {
     @GetMapping("/{playerId}")
     public Player player(@PathVariable("playerId") long playerId) {
 
-        return playerRepository.findById(playerId).orElseThrow(NotFoundException::new);
+        return playerRepository.findById(playerId).orElseThrow( () -> new NotFoundException("Player with id " + playerId + " not found") );
     }
 
     @PostMapping("/add")

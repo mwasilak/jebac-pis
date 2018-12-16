@@ -34,7 +34,7 @@ public class CompetitionController {
 
     @GetMapping("/{competitionId}")
     public Competition competition(@PathVariable("competitionId") Long competitionId) {
-        return competitionRepository.findById(competitionId).orElseThrow(NotFoundException::new);
+        return competitionRepository.findById(competitionId).orElseThrow( () -> new NotFoundException("Competition with id " + competitionId + " not found") );
     }
 
     @PostMapping("/add")

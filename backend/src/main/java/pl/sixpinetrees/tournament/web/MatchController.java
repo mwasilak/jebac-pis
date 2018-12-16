@@ -36,7 +36,7 @@ public class MatchController {
     @GetMapping("/{matchId}")
     public Match match(@PathVariable("matchId") Long matchId) {
 
-        return matchRepository.findById(matchId).orElseThrow(NotFoundException::new);
+        return matchRepository.findById(matchId).orElseThrow( () -> new NotFoundException("Match with id " + matchId + " not found") );
     }
 
     @PostMapping("/edit/{matchId}")

@@ -34,10 +34,10 @@ public class MatchServiceImpl implements MatchService {
     @Override
     @Transactional
     public Long updateMatch(MatchForm matchForm) {
-        Match match = matchRepository.findById(matchForm.getId()).orElseThrow(NotFoundException::new);
+        Match match = matchRepository.findById(matchForm.getId()).orElseThrow( () -> new NotFoundException("Match with id " + matchForm.getId() + " not found") );
 
         CompetitionGameSettings gameSettings = competitionRepository.findById(match.getCompetitionId(), CompetitionGameSettings.class)
-                .orElseThrow(NotFoundException::new);
+                .orElseThrow( () -> new NotFoundException("Competition with id " + match.getCompetitionId() + " not found.") );
 
         match.update(matchForm);
 
