@@ -96,8 +96,32 @@ public class MatchFormValidatorTest {
         List<GameRow> gameList = new ArrayList<>();
         gameList.add(new GameRow(11, 2));
         gameList.add(new GameRow(9, 11));
-        gameList.add(new GameRow(1, 13));
+        gameList.add(new GameRow(1, 11));
         gameList.add(new GameRow(12, 10));
+
+        MatchForm matchForm = new MatchForm();
+        matchForm.setGames(gameList);
+
+        CompetitionGameSettings competitionGameSettings = factory.createProjection(CompetitionGameSettings.class);
+        competitionGameSettings.setNumberOfPointsToWin(11);
+        competitionGameSettings.setNumberOfWinsRequired(3);
+
+        //when
+        matchFormValidator.isValid(matchForm, competitionGameSettings);
+
+        //then
+    }
+
+    @Test(expected = ServiceValidationException.class)
+    public void shouldFailWhenMatchFormWithSameNumberOfWinsProvided() throws Exception {
+        //given
+        List<GameRow> gameList = new ArrayList<>();
+        gameList.add(new GameRow(11, 2));
+        gameList.add(new GameRow(2, 11));
+        gameList.add(new GameRow(11, 2));
+        gameList.add(new GameRow(2, 11));
+        gameList.add(new GameRow(11, 2));
+        gameList.add(new GameRow(2, 11));
 
         MatchForm matchForm = new MatchForm();
         matchForm.setGames(gameList);

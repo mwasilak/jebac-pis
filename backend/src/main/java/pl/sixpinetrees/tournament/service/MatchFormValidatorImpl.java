@@ -48,8 +48,9 @@ public class MatchFormValidatorImpl implements MatchFormValidator {
             throw new ServiceValidationException(errorList);
         }
 
-        if((player1Wins>player2Wins && player1Wins != gameSettings.getNumberOfWinsRequired()) &&
-            (player2Wins>player1Wins && player2Wins != gameSettings.getNumberOfWinsRequired())) {
+        if(((player1Wins>player2Wins && player1Wins != gameSettings.getNumberOfWinsRequired()) ||
+                (player2Wins>player1Wins && player2Wins != gameSettings.getNumberOfWinsRequired())) ||
+                (player1Wins==player2Wins) ) {
             errorList.add("Incorrect number of games won.");
             throw new ServiceValidationException(errorList);
         }
