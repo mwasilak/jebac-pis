@@ -33,7 +33,8 @@ export class MatchesEditComponent implements OnInit {
         this.match.player1 = resp['player1'];
         this.match.player2 = resp['player2'];
         this.match.games = resp['games'];
-        this.match.position = resp['position'];
+        this.match.bracketPosition = resp['bracketPosition'];
+        this.match.resultRegistrationTime = resp['resultRegistrationTime'];
         for(let game of this.match.games) {
           this.games = this.form.get('games') as FormArray;
           this.games.push(this.createGame(game.scorePlayer1, game.scorePlayer2));

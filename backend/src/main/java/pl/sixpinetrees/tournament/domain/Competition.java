@@ -17,7 +17,7 @@ public class Competition {
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @MapKey(name = "position")
+    @MapKey(name = "bracketPosition")
     @JoinColumn(
             name = "competitionId"
     )

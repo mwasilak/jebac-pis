@@ -26,6 +26,6 @@
     </tr>
     </tbody>
   </table>
-  <a class="btn btn-primary" [routerLink]="['/matches/edit', match.id]">Record match results</a>
+  <a *ngIf="match.status === 'pending'" class="btn btn-primary" [routerLink]="['/matches/edit', match.id]">Record match results</a>
   <a class="btn btn-outline-primary" [routerLink]="['/matches']">Back to list</a>
 </div>

@@ -23,7 +23,9 @@ export class MatchesDetailsComponent implements OnInit {
           this.match.player1 = resp['player1'];
           this.match.player2 = resp['player2'];
           this.match.games = resp['games'];
-          this.match.position = resp['position'];
+          this.match.bracketPosition = resp['bracketPosition'];
+          this.match.resultRegistrationTime = resp['resultRegistrationTime'];
+          this.match.initialize();
         });
     });
   }

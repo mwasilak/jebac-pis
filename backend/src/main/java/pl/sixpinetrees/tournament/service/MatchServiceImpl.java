@@ -44,7 +44,7 @@ public class MatchServiceImpl implements MatchService {
 
         matchFormValidator.isValid(matchForm, gameSettings);
 
-        match.update(matchForm);
+        match.registerResults(matchForm);
 
         return match.getId();
     }
