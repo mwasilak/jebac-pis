@@ -6,9 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.sixpinetrees.tournament.domain.Match;
-import pl.sixpinetrees.tournament.domain.dto.MatchForm;
+import pl.sixpinetrees.tournament.domain.dto.ResultRegistrationForm;
 import pl.sixpinetrees.tournament.repository.MatchRepository;
-import pl.sixpinetrees.tournament.service.MatchService;
+import pl.sixpinetrees.tournament.service.ResultRegistrationService;
 
 import javax.validation.Valid;
 import java.util.Collection;
@@ -19,12 +19,12 @@ public class MatchController {
 
     MatchRepository matchRepository;
 
-    MatchService matchService;
+    ResultRegistrationService resultRegistrationService;
 
     @Autowired
-    public MatchController(MatchRepository matchRepository, MatchService matchService) {
+    public MatchController(MatchRepository matchRepository, ResultRegistrationService resultRegistrationService) {
         this.matchRepository = matchRepository;
-        this.matchService = matchService;
+        this.resultRegistrationService = resultRegistrationService;
     }
 
     @GetMapping
@@ -40,10 +40,10 @@ public class MatchController {
     }
 
     @PostMapping("/edit/{matchId}")
-    public ResponseEntity<?> processMatchForm(@PathVariable("matchId") Long matchId, @Valid @RequestBody MatchForm matchForm) {
+    public ResponseEntity<?> processMatchForm(@PathVariable("matchId") Long matchId, @Valid @RequestBody ResultRegistrationForm resultRegistrationForm) {
 
-        matchForm.setId(matchId);
-        Long id = matchService.updateMatch(matchForm);
+        resultRegistrationForm.setId(matchId);
+        Long id = resultRegistrationService.registerResults(resultRegistrationForm);
         HttpHeaders responseHeader = new HttpHeaders();
         return new ResponseEntity<>(id, responseHeader, HttpStatus.OK);
     }

@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import pl.sixpinetrees.tournament.domain.Player;
 import pl.sixpinetrees.tournament.repository.PlayerRepository;
-import pl.sixpinetrees.tournament.service.MatchService;
+import pl.sixpinetrees.tournament.service.ResultRegistrationService;
 
 import java.util.ArrayList;
 
@@ -35,7 +35,7 @@ public class PlayerControllerTest {
     private PlayerRepository playerRepository;
 
     @MockBean
-    private MatchService matchService;
+    private ResultRegistrationService resultRegistrationService;
 
     @Test
     @Ignore

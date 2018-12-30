@@ -3,13 +3,13 @@ package pl.sixpinetrees.tournament.domain.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MatchForm {
+public class ResultRegistrationForm {
 
     private Long id;
 
     private List<GameRow> games;
 
-    public MatchForm() {
+    public ResultRegistrationForm() {
         games = new ArrayList<>();
     }
 

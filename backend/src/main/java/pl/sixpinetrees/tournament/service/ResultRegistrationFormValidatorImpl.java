@@ -2,26 +2,25 @@ package pl.sixpinetrees.tournament.service;
 
 import org.springframework.stereotype.Component;
 import pl.sixpinetrees.tournament.domain.dto.GameRow;
-import pl.sixpinetrees.tournament.domain.dto.MatchForm;
+import pl.sixpinetrees.tournament.domain.dto.ResultRegistrationForm;
 import pl.sixpinetrees.tournament.domain.projections.CompetitionGameSettings;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
 @Component
-public class MatchFormValidatorImpl implements MatchFormValidator {
+public class ResultRegistrationFormValidatorImpl implements ResultRegistrationFormValidator {
 
-    public MatchFormValidatorImpl() {
+    public ResultRegistrationFormValidatorImpl() {
     }
 
     @Override
-    public void isValid(MatchForm matchForm, CompetitionGameSettings gameSettings) {
+    public void isValid(ResultRegistrationForm resultRegistrationForm, CompetitionGameSettings gameSettings) {
 
         List<String> errorList = new ArrayList<>();
 
-        if(matchForm == null) {
+        if(resultRegistrationForm == null) {
             errorList.add("No match form provided.");
             throw new ServiceValidationException(errorList);
         }
@@ -30,7 +29,7 @@ public class MatchFormValidatorImpl implements MatchFormValidator {
         Integer player2Wins = 0;
         Integer index = 0;
 
-        for(GameRow game : matchForm.getGames()) {
+        for(GameRow game : resultRegistrationForm.getGames()) {
             index += 1;
             if ((game.getScorePlayer1() > (game.getScorePlayer2() + 1)) && (game.getScorePlayer1() == gameSettings.getNumberOfPointsToWin())) {
                 player1Wins += 1;

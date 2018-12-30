@@ -1,7 +1,7 @@
 package pl.sixpinetrees.tournament.domain;
 
 import pl.sixpinetrees.tournament.domain.dto.GameRow;
-import pl.sixpinetrees.tournament.domain.dto.MatchForm;
+import pl.sixpinetrees.tournament.domain.dto.ResultRegistrationForm;
 import pl.sixpinetrees.tournament.service.ServiceValidationException;
 
 import javax.persistence.*;
@@ -99,14 +99,14 @@ public class Match {
         return resultRegistrationTime;
     }
 
-    public void registerResults(MatchForm matchForm) {
+    public void registerResults(ResultRegistrationForm resultRegistrationForm) {
 
         validateMatchPlayers();
         validateMatchRegistrationStatus();
 
         games.clear();
         Integer i = 1;
-        for(GameRow game : matchForm.getGames()) {
+        for(GameRow game : resultRegistrationForm.getGames()) {
             Game newGame = new Game(i, game.getScorePlayer1(), game.getScorePlayer2());
             games.add(newGame);
             i++;
