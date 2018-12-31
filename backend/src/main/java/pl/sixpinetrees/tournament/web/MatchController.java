@@ -42,8 +42,7 @@ public class MatchController {
     @PostMapping("/edit/{matchId}")
     public ResponseEntity<?> processMatchForm(@PathVariable("matchId") Long matchId, @Valid @RequestBody ResultRegistrationForm resultRegistrationForm) {
 
-        resultRegistrationForm.setId(matchId);
-        Long id = resultRegistrationService.registerResults(resultRegistrationForm);
+        Long id = resultRegistrationService.registerResults(matchId, resultRegistrationForm);
         HttpHeaders responseHeader = new HttpHeaders();
         return new ResponseEntity<>(id, responseHeader, HttpStatus.OK);
     }

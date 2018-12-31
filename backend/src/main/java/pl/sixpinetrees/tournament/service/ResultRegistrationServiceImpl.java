@@ -29,12 +29,14 @@ public class ResultRegistrationServiceImpl implements ResultRegistrationService 
 
     @Override
     @Transactional
-    public Long registerResults(ResultRegistrationForm resultRegistrationForm) {
-        Match match = matchRepository.findById(resultRegistrationForm.getId())
-                .orElseThrow( () -> new NotFoundException("Match with id " + resultRegistrationForm.getId() + " not found") );
+    public Long registerResults(Long matchId, ResultRegistrationForm resultRegistrationForm) {
+
+        Match match = matchRepository.findById(matchId).orElseThrow( () -> new NotFoundException("Match with id " + matchId + " not found") );
 
         validateResultRegistrationForm(resultRegistrationForm, match.getCompetitionId());
         match.registerResults(resultRegistrationForm);
+
+
 
         return match.getId();
     }
