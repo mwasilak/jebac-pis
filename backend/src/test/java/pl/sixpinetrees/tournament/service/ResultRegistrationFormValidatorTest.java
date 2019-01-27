@@ -1,20 +1,19 @@
 package pl.sixpinetrees.tournament.service;
 
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.projection.ProjectionFactory;
-import org.springframework.data.projection.SpelAwareProxyProjectionFactory;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import pl.sixpinetrees.tournament.domain.VictoryConditions;
+import pl.sixpinetrees.tournament.domain.Winner;
 import pl.sixpinetrees.tournament.domain.dto.GameRow;
 import pl.sixpinetrees.tournament.domain.dto.ResultRegistrationForm;
-import pl.sixpinetrees.tournament.domain.projections.CompetitionGameSettings;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -23,12 +22,7 @@ public class ResultRegistrationFormValidatorTest {
     @Autowired
     ResultRegistrationFormValidator resultRegistrationFormValidator;
 
-    ProjectionFactory factory = new SpelAwareProxyProjectionFactory();
-
-    @Rule
-    public ExpectedException exceptionRule = ExpectedException.none();
-
-    @Test(expected = Test.None.class)
+    @Test
     public void shouldSucceedWhenCorrectMatchFormProvided() throws Exception {
         //given
         List<GameRow> gameList = new ArrayList<>();
@@ -41,14 +35,13 @@ public class ResultRegistrationFormValidatorTest {
         ResultRegistrationForm resultRegistrationForm = new ResultRegistrationForm();
         resultRegistrationForm.setGames(gameList);
 
-        CompetitionGameSettings competitionGameSettings = factory.createProjection(CompetitionGameSettings.class);
-        competitionGameSettings.setNumberOfPointsToWin(11);
-        competitionGameSettings.setNumberOfWinsRequired(3);
+        VictoryConditions victoryConditions = new VictoryConditions(3, 11);
 
         //when
-        resultRegistrationFormValidator.isValid(resultRegistrationForm, competitionGameSettings);
+        Winner winner = resultRegistrationFormValidator.isValid(resultRegistrationForm, victoryConditions);
 
         //then
+        assertThat(winner).isEqualTo(Winner.PLAYER1);
     }
 
     @Test(expected = ServiceValidationException.class)
@@ -56,12 +49,10 @@ public class ResultRegistrationFormValidatorTest {
         //given
         ResultRegistrationForm resultRegistrationForm = null;
 
-        CompetitionGameSettings competitionGameSettings = factory.createProjection(CompetitionGameSettings.class);
-        competitionGameSettings.setNumberOfPointsToWin(11);
-        competitionGameSettings.setNumberOfWinsRequired(3);
+        VictoryConditions victoryConditions = new VictoryConditions(3, 11);
 
         //when
-        resultRegistrationFormValidator.isValid(resultRegistrationForm, competitionGameSettings);
+        resultRegistrationFormValidator.isValid(resultRegistrationForm, victoryConditions);
 
         //then
     }
@@ -79,12 +70,10 @@ public class ResultRegistrationFormValidatorTest {
         ResultRegistrationForm resultRegistrationForm = new ResultRegistrationForm();
         resultRegistrationForm.setGames(gameList);
 
-        CompetitionGameSettings competitionGameSettings = factory.createProjection(CompetitionGameSettings.class);
-        competitionGameSettings.setNumberOfPointsToWin(11);
-        competitionGameSettings.setNumberOfWinsRequired(3);
+        VictoryConditions victoryConditions = new VictoryConditions(3, 11);
 
         //when
-        resultRegistrationFormValidator.isValid(resultRegistrationForm, competitionGameSettings);
+        resultRegistrationFormValidator.isValid(resultRegistrationForm, victoryConditions);
 
         //then
     }
@@ -101,12 +90,10 @@ public class ResultRegistrationFormValidatorTest {
         ResultRegistrationForm resultRegistrationForm = new ResultRegistrationForm();
         resultRegistrationForm.setGames(gameList);
 
-        CompetitionGameSettings competitionGameSettings = factory.createProjection(CompetitionGameSettings.class);
-        competitionGameSettings.setNumberOfPointsToWin(11);
-        competitionGameSettings.setNumberOfWinsRequired(3);
+        VictoryConditions victoryConditions = new VictoryConditions(3, 11);
 
         //when
-        resultRegistrationFormValidator.isValid(resultRegistrationForm, competitionGameSettings);
+        resultRegistrationFormValidator.isValid(resultRegistrationForm, victoryConditions);
 
         //then
     }
@@ -125,12 +112,10 @@ public class ResultRegistrationFormValidatorTest {
         ResultRegistrationForm resultRegistrationForm = new ResultRegistrationForm();
         resultRegistrationForm.setGames(gameList);
 
-        CompetitionGameSettings competitionGameSettings = factory.createProjection(CompetitionGameSettings.class);
-        competitionGameSettings.setNumberOfPointsToWin(11);
-        competitionGameSettings.setNumberOfWinsRequired(3);
+        VictoryConditions victoryConditions = new VictoryConditions(3, 11);
 
         //when
-        resultRegistrationFormValidator.isValid(resultRegistrationForm, competitionGameSettings);
+        resultRegistrationFormValidator.isValid(resultRegistrationForm, victoryConditions);
 
         //then
     }

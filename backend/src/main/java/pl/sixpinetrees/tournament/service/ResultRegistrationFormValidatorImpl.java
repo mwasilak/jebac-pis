@@ -1,9 +1,10 @@
 package pl.sixpinetrees.tournament.service;
 
 import org.springframework.stereotype.Component;
+import pl.sixpinetrees.tournament.domain.VictoryConditions;
+import pl.sixpinetrees.tournament.domain.Winner;
 import pl.sixpinetrees.tournament.domain.dto.GameRow;
 import pl.sixpinetrees.tournament.domain.dto.ResultRegistrationForm;
-import pl.sixpinetrees.tournament.domain.projections.CompetitionGameSettings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ public class ResultRegistrationFormValidatorImpl implements ResultRegistrationFo
     }
 
     @Override
-    public void isValid(ResultRegistrationForm resultRegistrationForm, CompetitionGameSettings gameSettings) {
+    public Winner isValid(ResultRegistrationForm resultRegistrationForm, VictoryConditions victoryConditions) {
 
         List<String> errorList = new ArrayList<>();
 
@@ -31,13 +32,13 @@ public class ResultRegistrationFormValidatorImpl implements ResultRegistrationFo
 
         for(GameRow game : resultRegistrationForm.getGames()) {
             index += 1;
-            if ((game.getScorePlayer1() > (game.getScorePlayer2() + 1)) && (game.getScorePlayer1() == gameSettings.getNumberOfPointsToWin())) {
+            if ((game.getScorePlayer1() > (game.getScorePlayer2() + 1)) && (game.getScorePlayer1() == victoryConditions.getNumberOfPointsToWin())) {
                 player1Wins += 1;
-            } else if ((game.getScorePlayer1() == (game.getScorePlayer2() + 2)) && (game.getScorePlayer1() > gameSettings.getNumberOfPointsToWin())) {
+            } else if ((game.getScorePlayer1() == (game.getScorePlayer2() + 2)) && (game.getScorePlayer1() > victoryConditions.getNumberOfPointsToWin())) {
                 player1Wins += 1;
-            } else if ((game.getScorePlayer2() > (game.getScorePlayer1() + 1)) && (game.getScorePlayer2() == gameSettings.getNumberOfPointsToWin())) {
+            } else if ((game.getScorePlayer2() > (game.getScorePlayer1() + 1)) && (game.getScorePlayer2() == victoryConditions.getNumberOfPointsToWin())) {
                 player2Wins += 1;
-            } else if ((game.getScorePlayer2() == (game.getScorePlayer1() + 2)) && (game.getScorePlayer2() > gameSettings.getNumberOfPointsToWin())) {
+            } else if ((game.getScorePlayer2() == (game.getScorePlayer1() + 2)) && (game.getScorePlayer2() > victoryConditions.getNumberOfPointsToWin())) {
                 player2Wins += 1;
             } else {
                 errorList.add("Game no. " + index + " has incorrect score.");
@@ -47,11 +48,16 @@ public class ResultRegistrationFormValidatorImpl implements ResultRegistrationFo
             throw new ServiceValidationException(errorList);
         }
 
-        if(((player1Wins>player2Wins && player1Wins != gameSettings.getNumberOfWinsRequired()) ||
-                (player2Wins>player1Wins && player2Wins != gameSettings.getNumberOfWinsRequired())) ||
+        if(((player1Wins>player2Wins && player1Wins != victoryConditions.getNumberOfWinsRequired()) ||
+                (player2Wins>player1Wins && player2Wins != victoryConditions.getNumberOfWinsRequired())) ||
                 (player1Wins==player2Wins) ) {
             errorList.add("Incorrect number of games won.");
             throw new ServiceValidationException(errorList);
         }
+        if(player1Wins > player2Wins) {
+            return Winner.PLAYER1;
+        }
+        return Winner.PLAYER2;
+
     }
 }

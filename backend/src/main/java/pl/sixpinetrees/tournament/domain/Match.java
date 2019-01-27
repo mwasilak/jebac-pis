@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import static pl.sixpinetrees.tournament.util.Calculator.pow2N;
 
@@ -38,12 +39,16 @@ public class Match {
 
     private LocalDateTime resultRegistrationTime;
 
+    private Winner winner;
+
     public Match() {
+        this.winner = Winner.UNKNOWN;
     }
 
     public Match(String name, Integer round, Integer position) {
         this.name = name;
         this.bracketPosition = new BracketPosition(round, position);
+        this.winner = Winner.UNKNOWN;
     }
 
     public String calculateBracketKey() {
@@ -76,13 +81,6 @@ public class Match {
         }
     }
 
-    public Collection<Player> getPlayers() {
-        ArrayList<Player> players = new ArrayList<>();
-        players.add(player1);
-        players.add(player2);
-        return players;
-    }
-
     public Collection<Game> getGames() {
         return games;
     }
@@ -99,7 +97,21 @@ public class Match {
         return resultRegistrationTime;
     }
 
-    public void registerResults(ResultRegistrationForm resultRegistrationForm) {
+    public Winner getWinner() {
+        return winner;
+    }
+
+    public Optional<Player> getWinningPlayer() {
+        if(winner == Winner.PLAYER1) {
+            return Optional.ofNullable(player1);
+        } else if (winner == Winner.PLAYER2) {
+            return Optional.ofNullable(player2);
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    public void registerResults(ResultRegistrationForm resultRegistrationForm, Winner winner) {
 
         validateMatchPlayers();
         validateMatchRegistrationStatus();
@@ -112,6 +124,7 @@ public class Match {
             i++;
         }
         resultRegistrationTime = LocalDateTime.now();
+        this.winner = winner;
     }
 
     private void validateMatchPlayers() {

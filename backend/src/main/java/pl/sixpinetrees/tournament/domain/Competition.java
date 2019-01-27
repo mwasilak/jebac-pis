@@ -29,9 +29,10 @@ public class Competition {
 
     private Integer numberOfMatchesInFirstRound;
 
-    private Integer numberOfWinsRequired;
+    @Embedded
+    private VictoryConditions victoryConditions;
 
-    private Integer numberOfPointsToWin;
+    private Long winningPlayerId;
 
     public Competition() {
     }
@@ -40,8 +41,7 @@ public class Competition {
 
         matches = new HashMap<>();
         this.name = name;
-        this.numberOfWinsRequired = numberOfWinsRequired;
-        this.numberOfPointsToWin = numberOfPointsToWin;
+        this.victoryConditions = new VictoryConditions(numberOfWinsRequired, numberOfPointsToWin);
         calculateRounds(players.size());
         generateRounds();
         assignPlayers(players);
@@ -102,6 +102,10 @@ public class Competition {
         match.assignPlayerToSlot(player, playerSlot);
     }
 
+    public void assignWinner(Long playerId) {
+        this.winningPlayerId = playerId;
+    }
+
     public Long getId() {
         return id;
     }
@@ -138,11 +142,11 @@ public class Competition {
         return numberOfMatchesInFirstRound;
     }
 
-    public Integer getNumberOfWinsRequired() {
-        return numberOfWinsRequired;
+    public Long getWinningPlayerId() {
+        return winningPlayerId;
     }
 
-    public Integer getNumberOfPointsToWin() {
-        return numberOfPointsToWin;
+    public VictoryConditions getVictoryConditions() {
+        return victoryConditions;
     }
 }

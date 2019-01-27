@@ -1,11 +1,12 @@
 package pl.sixpinetrees.tournament.service;
 
+import pl.sixpinetrees.tournament.domain.VictoryConditions;
+import pl.sixpinetrees.tournament.domain.Winner;
 import pl.sixpinetrees.tournament.domain.dto.ResultRegistrationForm;
-import pl.sixpinetrees.tournament.domain.projections.CompetitionGameSettings;
 
 
 public interface ResultRegistrationFormValidator {
 
-    void isValid(ResultRegistrationForm resultRegistrationForm, CompetitionGameSettings gameSettings);
+    Winner isValid(ResultRegistrationForm resultRegistrationForm, VictoryConditions victoryConditions);
 
 }

@@ -3,9 +3,8 @@ package pl.sixpinetrees.tournament.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.sixpinetrees.tournament.domain.Match;
+import pl.sixpinetrees.tournament.domain.*;
 import pl.sixpinetrees.tournament.domain.dto.ResultRegistrationForm;
-import pl.sixpinetrees.tournament.domain.projections.CompetitionGameSettings;
 import pl.sixpinetrees.tournament.repository.CompetitionRepository;
 import pl.sixpinetrees.tournament.repository.MatchRepository;
 import pl.sixpinetrees.tournament.web.NotFoundException;
@@ -31,21 +30,46 @@ public class ResultRegistrationServiceImpl implements ResultRegistrationService 
     @Transactional
     public Long registerResults(Long matchId, ResultRegistrationForm resultRegistrationForm) {
 
-        Match match = matchRepository.findById(matchId).orElseThrow( () -> new NotFoundException("Match with id " + matchId + " not found") );
+        Match match = matchRepository.findById(matchId)
+                .orElseThrow( () -> new NotFoundException("Match with id " + matchId + " not found") );
 
-        validateResultRegistrationForm(resultRegistrationForm, match.getCompetitionId());
-        match.registerResults(resultRegistrationForm);
+        Competition competition = competitionRepository.findById(match.getCompetitionId())
+                .orElseThrow(InternalError::new);
 
+        Winner winner = resultRegistrationFormValidator.isValid(resultRegistrationForm, competition.getVictoryConditions());
+        match.registerResults(resultRegistrationForm, winner);
 
+        advanceWinnerToNextRound(match, competition);
 
         return match.getId();
     }
 
-    private void validateResultRegistrationForm(ResultRegistrationForm resultRegistrationForm, Long competitionId) {
-        CompetitionGameSettings gameSettings = competitionRepository.findById(competitionId, CompetitionGameSettings.class)
-                .orElseThrow( () -> new NotFoundException("Competition with id " + competitionId + " not found.") );
-
-        resultRegistrationFormValidator.isValid(resultRegistrationForm, gameSettings);
+    private void advanceWinnerToNextRound(Match match, Competition competition) {
+        if(match.getBracketPosition().getRound() == competition.getNumberOfRounds()) {
+            assignWinnerToCompetition(match, competition);
+        } else {
+            assignWinnerToNextMatch(match);
+        }
     }
+
+    private void assignWinnerToCompetition(Match match, Competition competition) {
+        Player winningPlayer = match.getWinningPlayer()
+                .orElseThrow(InternalError::new);
+        competition.assignWinner(winningPlayer.getId());
+    }
+
+    private void assignWinnerToNextMatch(Match match) {
+        BracketPosition nextMatchBracketPosition = new BracketPosition(match.getBracketPosition().getRound()+1, (match.getBracketPosition().getPosition()+1)/2);
+
+        Match nextMatch = matchRepository.findByCompetitionIdAndBracketPosition(match.getCompetitionId(), nextMatchBracketPosition)
+                .orElseThrow(InternalError::new);
+
+        Player winningPlayer = match.getWinningPlayer()
+                .orElseThrow(InternalError::new);
+
+        nextMatch.assignPlayerToSlot(winningPlayer, ((match.getBracketPosition().getPosition()+1) % 2)+1);
+
+    }
+
 
 }
