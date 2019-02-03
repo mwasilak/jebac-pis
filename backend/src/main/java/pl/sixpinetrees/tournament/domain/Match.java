@@ -11,8 +11,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-import static pl.sixpinetrees.tournament.util.Calculator.pow2N;
-
 @Entity
 public class Match {
 
@@ -22,7 +20,7 @@ public class Match {
 
     private String name;
 
-    @Column(insertable = false, updatable = false)
+    @Column(updatable = false)
     private Long competitionId;
 
     @ManyToOne
@@ -45,16 +43,11 @@ public class Match {
         this.winner = Winner.UNKNOWN;
     }
 
-    public Match(String name, Integer round, Integer position) {
+    public Match(String name, Long competitionId, Integer round, Integer position) {
         this.name = name;
+        this.competitionId = competitionId;
         this.bracketPosition = new BracketPosition(round, position);
         this.winner = Winner.UNKNOWN;
-    }
-
-    public String calculateBracketKey() {
-        return getBracketPosition().getRound()
-                + "/"
-                + (pow2N(getBracketPosition().getRound()) * getBracketPosition().getPosition() - pow2N(getBracketPosition().getRound() - 1));
     }
 
     public Long getId() {

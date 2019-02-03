@@ -5,6 +5,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.sixpinetrees.tournament.domain.BracketPosition;
 import pl.sixpinetrees.tournament.domain.Match;
 import pl.sixpinetrees.tournament.domain.dto.ResultRegistrationForm;
 import pl.sixpinetrees.tournament.repository.MatchRepository;
@@ -12,6 +13,8 @@ import pl.sixpinetrees.tournament.service.ResultRegistrationService;
 
 import javax.validation.Valid;
 import java.util.Collection;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/matches")
@@ -28,10 +31,17 @@ public class MatchController {
     }
 
     @GetMapping
-    public Collection<Match> matches() {
+    public Collection<Match> getMatches() {
 
         return matchRepository.findAll();
     }
+
+    @GetMapping("competition/{competitionId}")
+    public Map<BracketPosition, Match> getMatchesByCompetition(@PathVariable("competitionId") Long competitionId) {
+
+        return matchRepository.findByCompetitionId(competitionId).stream().collect(Collectors.toMap(Match::getBracketPosition, v -> v));
+    }
+
 
     @GetMapping("/{matchId}")
     public Match match(@PathVariable("matchId") Long matchId) {

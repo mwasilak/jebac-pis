@@ -1,7 +1,6 @@
 export class Competition {
   id: number;
   name: string;
-  matches: any[];
   numberOfPlayers: number;
   numberOfRounds: number;
   numberOfMatchesInFirstRound: number;
@@ -16,10 +15,6 @@ export class Competition {
 
   calculateMaxMatchesInRound(round: number): number {
     return Math.pow(2,this.numberOfRounds - round);
-  }
-
-  getMatchByPosition(round: number, position: number): any {
-    return this.matches['['+round+'/'+position+']']
   }
 
   isDoubleMatch(round: number, position: number): boolean {

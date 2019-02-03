@@ -1,9 +1,6 @@
 package pl.sixpinetrees.tournament.web;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

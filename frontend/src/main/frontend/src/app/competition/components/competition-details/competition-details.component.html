@@ -3,7 +3,7 @@
   <main class="bracket">
     <ul class="round" *ngFor="let round of range(competition.numberOfRounds)">
       <ng-container *ngFor="let position of range(competition.calculateMaxMatchesInRound(round))">
-        <app-bracket-match [match]="competition.getMatchByPosition(round, position)"
+        <app-bracket-match *ngIf="matches != null" [match]="matches['['+round+'/'+position+']']"
                            [middleBar]="competition.isWithoutMiddleBar(round, position)"></app-bracket-match>
         <li *ngIf="position < competition.calculateMaxMatchesInRound(round)"
             [class]="'spacer ' + (competition.isDoubleMatch(round, position) ? 'double-match' : '') +

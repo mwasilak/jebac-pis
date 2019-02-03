@@ -5,11 +5,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Component;
-import pl.sixpinetrees.tournament.domain.Competition;
 import pl.sixpinetrees.tournament.domain.Player;
-import pl.sixpinetrees.tournament.repository.CompetitionRepository;
-import pl.sixpinetrees.tournament.repository.MatchRepository;
+import pl.sixpinetrees.tournament.domain.dto.CompetitionForm;
 import pl.sixpinetrees.tournament.repository.PlayerRepository;
+import pl.sixpinetrees.tournament.service.CompetitionService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,22 +44,25 @@ class DummyDataCLR implements CommandLineRunner {
         playerRepository.save(new Player("Matt", "East"));
         playerRepository.save(new Player("Jack", "South"));
 
-        List<Player> playerList = new ArrayList<>();
-        playerList.addAll(playerRepository.findByFirstNameAndLastName("Johnny", "Bravo"));
-        playerList.addAll(playerRepository.findByFirstNameAndLastName("Marty", "McFly"));
-        playerList.addAll(playerRepository.findByFirstNameAndLastName("Barney", "Mead"));
-        playerList.addAll(playerRepository.findByFirstNameAndLastName("Lucy", "Prince"));
+        List<Long> playerIdList = new ArrayList<>();
+        playerIdList.add(playerRepository.findByFirstNameAndLastName("Johnny", "Bravo").orElseThrow(InternalError::new).getId());
+        playerIdList.add(playerRepository.findByFirstNameAndLastName("Marty", "McFly").orElseThrow(InternalError::new).getId());
+        playerIdList.add(playerRepository.findByFirstNameAndLastName("Barney", "Mead").orElseThrow(InternalError::new).getId());
+        playerIdList.add(playerRepository.findByFirstNameAndLastName("Lucy", "Prince").orElseThrow(InternalError::new).getId());
 
-        competitionRepository.save(new Competition("Competition",  playerList, 3, 11));
+        CompetitionForm competitionForm = new CompetitionForm();
+        competitionForm.setName("Competition");
+        competitionForm.setPlayerIds(playerIdList);
+        competitionForm.setNumberOfWinsRequired(3);
+        competitionForm.setNumberOfPointsToWin(11);
+
+        competitionService.createCompetition(competitionForm);
     }
 
     @Autowired
     private PlayerRepository playerRepository;
 
     @Autowired
-    private MatchRepository matchRepository;
-
-    @Autowired
-    private CompetitionRepository competitionRepository;
+    private CompetitionService competitionService;
 }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CompetitionsService} from "../../services/competitions.service";
 import {ActivatedRoute} from "@angular/router";
 import {Competition} from "../../competition";
+import {MatchesService} from "../../../matches/services/matches.service";
 
 @Component({
   selector: 'app-competition-details',
@@ -11,8 +12,9 @@ import {Competition} from "../../competition";
 export class CompetitionDetailsComponent implements OnInit {
 
   competition: Competition = new Competition();
+  matches: any[];
 
-  constructor(private competitionService:CompetitionsService, private route: ActivatedRoute) {
+  constructor(private competitionService:CompetitionsService, private matchesService:MatchesService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -21,11 +23,14 @@ export class CompetitionDetailsComponent implements OnInit {
         .subscribe((resp:any)=>{
           this.competition.id = resp['id'];
           this.competition.name = resp['name'];
-          this.competition.matches = resp['matches'];
           this.competition.numberOfMatchesInFirstRound = resp['numberOfMatchesInFirstRound'];
           this.competition.numberOfPlayers = resp['numberOfPlayers'];
           this.competition.numberOfRounds =  resp['numberOfRounds'];
         });
+      this.matchesService.fetchListByCompetitionId(params.get("id"))
+        .subscribe((resp:any)=>{
+          this.matches = resp;
+        })
     });
   }
 
