@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 import pl.sixpinetrees.tournament.domain.BracketPosition;
 import pl.sixpinetrees.tournament.domain.Competition;
 import pl.sixpinetrees.tournament.domain.Match;
-import pl.sixpinetrees.tournament.domain.Player;
 import pl.sixpinetrees.tournament.util.Calculator;
 
 import java.util.HashMap;
@@ -15,13 +14,13 @@ import java.util.Map;
 public class BracketMatchFactoryImpl implements BracketMatchFactory {
 
     @Override
-    public Map<BracketPosition, Match> generateMatches(Competition competition, List<Player> players) {
+    public Map<BracketPosition, Match> generateMatches(Competition competition, List<Long> playerIds) {
         Map<BracketPosition, Match> matches = new HashMap<>();
 
         for (Integer round = 1; round <= competition.getNumberOfRounds(); round++) {
             generateRoundMatches(matches, round, competition);
         }
-        assignPlayersToMatches(competition, players, matches);
+        assignPlayersToMatches(competition, playerIds, matches);
         return matches;
     }
 
@@ -35,12 +34,12 @@ public class BracketMatchFactoryImpl implements BracketMatchFactory {
         }
     }
 
-    void assignPlayersToMatches(Competition competition, List<Player> players, Map<BracketPosition, Match> matches ) {
-        for(Integer playerNumber = 0; playerNumber<players.size(); playerNumber++) {
+    void assignPlayersToMatches(Competition competition, List<Long> playerIds, Map<BracketPosition, Match> matches ) {
+        for(Integer playerNumber = 0; playerNumber<playerIds.size(); playerNumber++) {
 
             BracketPosition startingPosition = calculateStartingBracketPosition(competition, playerNumber);
             Integer startingSlot = calculateStartingPlayerSlot(competition, playerNumber);
-            matches.get(startingPosition).assignPlayerToSlot(players.get(playerNumber), startingSlot);
+            matches.get(startingPosition).assignPlayerToSlot(playerIds.get(playerNumber), startingSlot);
         }
     }
 

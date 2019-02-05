@@ -23,11 +23,9 @@ public class Match {
     @Column(updatable = false)
     private Long competitionId;
 
-    @ManyToOne
-    private Player player1;
+    private Long player1Id;
 
-    @ManyToOne
-    private Player player2;
+    private Long player2Id;
 
     @OneToMany(cascade = CascadeType.ALL)
     private Collection<Game> games;
@@ -58,19 +56,19 @@ public class Match {
         return name;
     }
 
-    public Player getPlayer1() {
-        return player1;
+    public Long getPlayer1Id() {
+        return player1Id;
     }
 
-    public Player getPlayer2() {
-        return player2;
+    public Long getPlayer2Id() {
+        return player2Id;
     }
 
-    public void assignPlayerToSlot(Player player, Integer slot) {
+    public void assignPlayerToSlot(Long playerId, Integer slot) {
         if(slot == 1) {
-            this.player1 = player;
+            this.player1Id = playerId;
         } else if (slot == 2) {
-            this.player2 = player;
+            this.player2Id = playerId;
         }
     }
 
@@ -94,11 +92,11 @@ public class Match {
         return winner;
     }
 
-    public Optional<Player> getWinningPlayer() {
+    public Optional<Long> getWinningPlayerId() {
         if(winner == Winner.PLAYER1) {
-            return Optional.ofNullable(player1);
+            return Optional.ofNullable(player1Id);
         } else if (winner == Winner.PLAYER2) {
-            return Optional.ofNullable(player2);
+            return Optional.ofNullable(player2Id);
         } else {
             return Optional.empty();
         }
@@ -121,7 +119,7 @@ public class Match {
     }
 
     private void validateMatchPlayers() {
-        if(player1 == null || player2 == null) {
+        if(player1Id == null || player2Id == null) {
             List<String> errorList = new ArrayList<>();
             errorList.add("Cannot register results when both players are not assigned to the match.");
             throw new ServiceValidationException(errorList);

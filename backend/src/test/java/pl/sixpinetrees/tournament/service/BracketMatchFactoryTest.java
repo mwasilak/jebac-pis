@@ -27,19 +27,19 @@ public class BracketMatchFactoryTest {
     @Test
     public void shouldGenerateMatches() throws Exception {
         //given
-        List<Player> players = new ArrayList<>();
+        List<Long> playerIds = new ArrayList<>();
 
-        players.add(new Player("Johnny", "Bravo"));
-        players.add(new Player("Marty", "McFly"));
-        players.add(new Player("Barney", "Stinson"));
-        players.add(new Player("Sonny", "Crockett"));
-        players.add(new Player("Lucy", "Prince"));
+        playerIds.add(101L);
+        playerIds.add(1500100900L);
+        playerIds.add(25L);
+        playerIds.add(100L);
+        playerIds.add(300L);
 
-        Competition competition = new Competition("test", players.size(), 3, 11);
+        Competition competition = new Competition("test", playerIds.size(), 3, 11);
         competition.setId(101L);
 
         //when
-        Map<BracketPosition, Match> matches = bracketMatchFactory.generateMatches(competition, players);
+        Map<BracketPosition, Match> matches = bracketMatchFactory.generateMatches(competition, playerIds);
 
         //then
         assertThat(matches.size()).isEqualTo(4);
@@ -54,13 +54,13 @@ public class BracketMatchFactoryTest {
         assertThat(matches.get(new BracketPosition(2,2)).getName()).isEqualTo("1/2-final no. 2");
         assertThat(matches.get(new BracketPosition(3,1)).getName()).isEqualTo("1/1-final no. 1");
 
-        assertThat(matches.get(new BracketPosition(1,1)).getPlayer1()).isEqualTo(players.get(0));
-        assertThat(matches.get(new BracketPosition(1,1)).getPlayer2()).isEqualTo(players.get(1));
-        assertThat(matches.get(new BracketPosition(2,1)).getPlayer1()).isNull();
-        assertThat(matches.get(new BracketPosition(2,1)).getPlayer2()).isEqualTo(players.get(2));
-        assertThat(matches.get(new BracketPosition(2,2)).getPlayer1()).isEqualTo(players.get(3));
-        assertThat(matches.get(new BracketPosition(2,2)).getPlayer2()).isEqualTo(players.get(4));
-        assertThat(matches.get(new BracketPosition(3,1)).getPlayer1()).isNull();
-        assertThat(matches.get(new BracketPosition(3,1)).getPlayer1()).isNull();
+        assertThat(matches.get(new BracketPosition(1,1)).getPlayer1Id()).isEqualTo(playerIds.get(0));
+        assertThat(matches.get(new BracketPosition(1,1)).getPlayer2Id()).isEqualTo(playerIds.get(1));
+        assertThat(matches.get(new BracketPosition(2,1)).getPlayer1Id()).isNull();
+        assertThat(matches.get(new BracketPosition(2,1)).getPlayer2Id()).isEqualTo(playerIds.get(2));
+        assertThat(matches.get(new BracketPosition(2,2)).getPlayer1Id()).isEqualTo(playerIds.get(3));
+        assertThat(matches.get(new BracketPosition(2,2)).getPlayer2Id()).isEqualTo(playerIds.get(4));
+        assertThat(matches.get(new BracketPosition(3,1)).getPlayer1Id()).isNull();
+        assertThat(matches.get(new BracketPosition(3,1)).getPlayer1Id()).isNull();
     }
 }

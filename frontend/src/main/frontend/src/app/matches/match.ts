@@ -12,7 +12,7 @@ export class Match {
   initialize() {
     if(this.resultRegistrationTime !== null) {
       this.status = "concluded";
-    } else if (this.player1 !== null && this.player2 !== null) {
+    } else if (this.player1 !== undefined && this.player2 !== undefined) {
       this.status = "pending";
     } else {
       this.status = "scheduled";

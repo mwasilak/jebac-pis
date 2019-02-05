@@ -13,6 +13,14 @@ export class PlayersService {
     return this.http.get('api/players');
   }
 
+  fetchListByMatchId(id: string): Observable<any> {
+    return this.http.get('api/players/match/' + id);
+  }
+
+  fetchListByCompetitionId(id: string): Observable<any> {
+    return this.http.get('api/players/competition/' + id);
+  }
+
   fetchDetails(id: string): Observable<any> {
     return this.http.get('api/players/' + id);
   }

@@ -12,6 +12,7 @@ import pl.sixpinetrees.tournament.repository.CompetitionRepository;
 import pl.sixpinetrees.tournament.repository.MatchRepository;
 import pl.sixpinetrees.tournament.repository.PlayerRepository;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -41,19 +42,29 @@ public class CompetitionServiceImpl implements CompetitionService {
     @Transactional
     public Long createCompetition(CompetitionForm competitionForm) {
 
-        List<Player> players = playerRepository.findByIdIn(competitionForm.getPlayerIds());
-
-        Collections.shuffle(players);
+        List<Long> playerIds = competitionForm.getPlayerIds();
+        validatePlayerIds(playerIds);
+        Collections.shuffle(playerIds);
 
         Competition competition = competitionRepository.save(new Competition(competitionForm.getName(),
-                players.size(),
+                playerIds.size(),
                 competitionForm.getNumberOfWinsRequired(),
                 competitionForm.getNumberOfPointsToWin()));
 
-        Map<BracketPosition, Match> matches = bracketMatchFactory.generateMatches(competition, players);
+        Map<BracketPosition, Match> matches = bracketMatchFactory.generateMatches(competition, playerIds);
 
         matchRepository.saveAll(matches.values());
 
         return competition.getId();
+    }
+
+    private void validatePlayerIds(List<Long> playerIds) {
+        List<String> errorList = new ArrayList<>();
+
+        List<Player> players = playerRepository.findByIdIn(playerIds);
+        if(players.size() != playerIds.size()) {
+            errorList.add("Invalid player list provided.");
+            throw new ServiceValidationException(errorList);
+        }
     }
 }

@@ -53,9 +53,9 @@ public class ResultRegistrationServiceImpl implements ResultRegistrationService 
     }
 
     private void assignWinnerToCompetition(Match match, Competition competition) {
-        Player winningPlayer = match.getWinningPlayer()
+        Long winningPlayerId = match.getWinningPlayerId()
                 .orElseThrow(InternalError::new);
-        competition.assignWinner(winningPlayer.getId());
+        competition.assignWinner(winningPlayerId);
     }
 
     private void assignWinnerToNextMatch(Match match) {
@@ -64,10 +64,10 @@ public class ResultRegistrationServiceImpl implements ResultRegistrationService 
         Match nextMatch = matchRepository.findByCompetitionIdAndBracketPosition(match.getCompetitionId(), nextMatchBracketPosition)
                 .orElseThrow(InternalError::new);
 
-        Player winningPlayer = match.getWinningPlayer()
+        Long winningPlayerId = match.getWinningPlayerId()
                 .orElseThrow(InternalError::new);
 
-        nextMatch.assignPlayerToSlot(winningPlayer, ((match.getBracketPosition().getPosition()+1) % 2)+1);
+        nextMatch.assignPlayerToSlot(winningPlayerId, ((match.getBracketPosition().getPosition()+1) % 2)+1);
 
     }
 
