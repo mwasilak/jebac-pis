@@ -17,13 +17,13 @@ public class ResultRegistrationServiceImpl implements ResultRegistrationService 
 
     private CompetitionRepository competitionRepository;
 
-    private ResultRegistrationFormValidator resultRegistrationFormValidator;
+    private VictoryConditionsChecker victoryConditionsChecker;
 
     @Autowired
-    public ResultRegistrationServiceImpl(MatchRepository matchRepository, CompetitionRepository competitionRepository, ResultRegistrationFormValidator resultRegistrationFormValidator) {
+    public ResultRegistrationServiceImpl(MatchRepository matchRepository, CompetitionRepository competitionRepository, VictoryConditionsChecker victoryConditionsChecker) {
         this.matchRepository = matchRepository;
         this.competitionRepository = competitionRepository;
-        this.resultRegistrationFormValidator = resultRegistrationFormValidator;
+        this.victoryConditionsChecker = victoryConditionsChecker;
     }
 
     @Override
@@ -36,7 +36,7 @@ public class ResultRegistrationServiceImpl implements ResultRegistrationService 
         Competition competition = competitionRepository.findById(match.getCompetitionId())
                 .orElseThrow(InternalError::new);
 
-        Winner winner = resultRegistrationFormValidator.isValid(resultRegistrationForm, competition.getVictoryConditions());
+        Winner winner = victoryConditionsChecker.determineWinner(resultRegistrationForm, competition.getVictoryConditions());
         match.registerResults(resultRegistrationForm, winner);
 
         advanceWinnerToNextRound(match, competition);

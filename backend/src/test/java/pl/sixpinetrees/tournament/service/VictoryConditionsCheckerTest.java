@@ -17,10 +17,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-public class ResultRegistrationFormValidatorTest {
+public class VictoryConditionsCheckerTest {
 
     @Autowired
-    ResultRegistrationFormValidator resultRegistrationFormValidator;
+    VictoryConditionsChecker victoryConditionsChecker;
 
     @Test
     public void shouldSucceedWhenCorrectMatchFormProvided() throws Exception {
@@ -38,7 +38,7 @@ public class ResultRegistrationFormValidatorTest {
         VictoryConditions victoryConditions = new VictoryConditions(3, 11);
 
         //when
-        Winner winner = resultRegistrationFormValidator.isValid(resultRegistrationForm, victoryConditions);
+        Winner winner = victoryConditionsChecker.determineWinner(resultRegistrationForm, victoryConditions);
 
         //then
         assertThat(winner).isEqualTo(Winner.PLAYER1);
@@ -52,7 +52,7 @@ public class ResultRegistrationFormValidatorTest {
         VictoryConditions victoryConditions = new VictoryConditions(3, 11);
 
         //when
-        resultRegistrationFormValidator.isValid(resultRegistrationForm, victoryConditions);
+        victoryConditionsChecker.determineWinner(resultRegistrationForm, victoryConditions);
 
         //then
     }
@@ -73,7 +73,7 @@ public class ResultRegistrationFormValidatorTest {
         VictoryConditions victoryConditions = new VictoryConditions(3, 11);
 
         //when
-        resultRegistrationFormValidator.isValid(resultRegistrationForm, victoryConditions);
+        victoryConditionsChecker.determineWinner(resultRegistrationForm, victoryConditions);
 
         //then
     }
@@ -93,7 +93,7 @@ public class ResultRegistrationFormValidatorTest {
         VictoryConditions victoryConditions = new VictoryConditions(3, 11);
 
         //when
-        resultRegistrationFormValidator.isValid(resultRegistrationForm, victoryConditions);
+        victoryConditionsChecker.determineWinner(resultRegistrationForm, victoryConditions);
 
         //then
     }
@@ -115,7 +115,7 @@ public class ResultRegistrationFormValidatorTest {
         VictoryConditions victoryConditions = new VictoryConditions(3, 11);
 
         //when
-        resultRegistrationFormValidator.isValid(resultRegistrationForm, victoryConditions);
+        victoryConditionsChecker.determineWinner(resultRegistrationForm, victoryConditions);
 
         //then
     }

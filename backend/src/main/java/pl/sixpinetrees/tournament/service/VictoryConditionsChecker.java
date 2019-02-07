@@ -5,8 +5,8 @@ import pl.sixpinetrees.tournament.domain.Winner;
 import pl.sixpinetrees.tournament.domain.dto.ResultRegistrationForm;
 
 
-public interface ResultRegistrationFormValidator {
+public interface VictoryConditionsChecker {
 
-    Winner isValid(ResultRegistrationForm resultRegistrationForm, VictoryConditions victoryConditions);
+    Winner determineWinner(ResultRegistrationForm resultRegistrationForm, VictoryConditions victoryConditions);
 
 }
