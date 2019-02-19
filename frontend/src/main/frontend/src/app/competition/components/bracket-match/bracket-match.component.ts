@@ -9,6 +9,7 @@ export class BracketMatchComponent implements OnInit {
 
   @Input() match: any[];
   @Input() middleBar: boolean;
+
   constructor() { }
 
   ngOnInit() {

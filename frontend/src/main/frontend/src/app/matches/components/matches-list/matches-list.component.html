@@ -10,7 +10,7 @@
     <tbody>
     <tr *ngFor="let match of matches; let i = index">
       <td>{{i+1}}</td>
-      <td><a [routerLink]="['/matches/details', match.id]">{{match.name}}</a></td>
+      <td><a [routerLink]="['', { outlets: { modal: ['matches', 'details', match.id] } }]">{{match.name}}</a></td>
     </tr>
     </tbody>
   </table>

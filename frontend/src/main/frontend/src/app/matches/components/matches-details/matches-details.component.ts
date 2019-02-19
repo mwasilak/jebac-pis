@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
+import { BsModalRef, BsModalService } from "ngx-bootstrap";
 import { forkJoin } from "rxjs";
 
-import { MatchesService } from "../../services/matches.service";
 import { Match } from "../../match";
+import { MatchesService } from "../../services/matches.service";
 import { PlayersService } from "../../../players/services/players.service";
 
 @Component({
@@ -13,15 +14,18 @@ import { PlayersService } from "../../../players/services/players.service";
 })
 export class MatchesDetailsComponent implements OnInit {
 
+  @ViewChild('template') template
+
+  modalRef: BsModalRef;
   match: Match = new Match();
 
-  constructor(private matchesService:MatchesService,
+  constructor(private route: ActivatedRoute,
+              private matchesService:MatchesService,
               private playersService:PlayersService,
-              private route: ActivatedRoute) { }
+              private modalService:BsModalService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-
       this.getData(params.get("id"))
         .subscribe(responseList => {
           let matchResponse = responseList[0];
@@ -35,8 +39,14 @@ export class MatchesDetailsComponent implements OnInit {
           this.match.bracketPosition = matchResponse['bracketPosition'];
           this.match.resultRegistrationTime = matchResponse['resultRegistrationTime'];
           this.match.initialize();
+          this.modalRef = this.modalService.show(this.template, {});
         });
     });
+  }
+
+  ngOnDestroy() {
+    this.modalRef.hide();
+    this.modalRef = null;
   }
 
   getData(id:string) {

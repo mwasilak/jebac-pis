@@ -2,7 +2,9 @@
   <div [class]="middleBar ? 'route-box' : 'route-box middle'">
     <div></div>
   </div>
-    <div [class]="match?'match match-box':'match-box'">
+        <div [class]="match?'match match-box':'match-box'"
+             [routerLink]="['', { outlets: { modal: ['matches', 'details', match.id] } }]"
+             style="cursor:pointer">
         <div>{{match?.player1 != null ? match.player1?.firstName+' '+match.player1?.lastName : '&nbsp;'}}</div>
         <div>{{match?.player2 != null ? match.player2?.firstName+' '+match.player2?.lastName : '&nbsp;'}}</div>
     </div>
@@ -10,4 +12,3 @@
     <div></div>
   </div>
 </li>
-

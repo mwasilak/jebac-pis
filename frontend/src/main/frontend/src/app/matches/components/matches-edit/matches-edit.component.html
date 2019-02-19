@@ -1,19 +1,21 @@
+<ng-template #template>
 <div class="container content-padding">
   <h3>Record match results</h3>
   <form [formGroup]='form'>
-    <table class="table">
+    <div class="table-responsive">
+    <table class="table" style="max-width: none">
       <thead>
       <tr>
         <td>Game</td>
         <td class="text-right">
           <ng-container *ngIf="match?.player1?.id !== null">
-            <a [routerLink]="['/players/details', match.player1.id]">{{match?.player1?.firstName + ' ' + match?.player1?.lastName}}</a>
+            <a [routerLink]="['', { outlets: { primary: ['/players/details', match.player1.id], modal: null} }]">{{match?.player1?.firstName + ' ' + match?.player1?.lastName}}</a>
           </ng-container>
         </td>
         <td class="text-center">:</td>
-        <td>
+        <td class="text-left">
           <ng-container *ngIf="match?.player2?.id !== null">
-            <a [routerLink]="['/players/details', match.player2.id]">{{match?.player2?.firstName + ' ' + match?.player2?.lastName}}</a>
+            <a [routerLink]="['', { outlets: { primary: ['/players/details', match.player2.id], modal: null} }]">{{match?.player2?.firstName + ' ' + match?.player2?.lastName}}</a>
           </ng-container>
         </td>
       <td>Action</td>
@@ -24,18 +26,20 @@
         <ng-container [formGroupName]="i">
         <td>{{i+1}}</td>
         <td class="text-right" >
-          <input type="text" formControlName="scorePlayer1">
+          <input type="text" formControlName="scorePlayer1" class="form-control">
         </td>
         <td class="text-center">:</td>
         <td>
-          <input type="text" formControlName="scorePlayer2">
+          <input type="text" formControlName="scorePlayer2" class="form-control">
         </td>
           <td><button class="btn btn-outline-primary" (click)="removeGame(i)">Remove</button></td>
         </ng-container>
       </tr>
       </tbody>
     </table>
+    </div>
     <button class="btn btn-primary" (click)="sendForm(form)">Register results</button>&nbsp;
     <button class="btn btn-outline-primary" (click)="addGame()">Add game</button>
   </form>
 </div>
+</ng-template>

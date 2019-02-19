@@ -6,14 +6,23 @@ import { MatchesDetailsComponent } from './components/matches-details/matches-de
 import { MatchesListComponent } from './components/matches-list/matches-list.component';
 import { MatchesEditComponent } from './components/matches-edit/matches-edit.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ModalModule } from "ngx-bootstrap";
 
 @NgModule({
   imports: [
     CommonModule,
     MatchesRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ModalModule.forRoot()
   ],
-  declarations: [MatchesDetailsComponent, MatchesListComponent, MatchesEditComponent]
+  declarations: [
+    MatchesDetailsComponent,
+    MatchesListComponent,
+    MatchesEditComponent
+  ],
+  entryComponents: [
+    MatchesDetailsComponent
+  ]
 })
 export class MatchesModule { }

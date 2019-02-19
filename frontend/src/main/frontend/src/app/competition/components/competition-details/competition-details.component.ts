@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { forkJoin } from "rxjs";
 
 import { CompetitionsService } from "../../services/competitions.service";
@@ -21,8 +21,8 @@ export class CompetitionDetailsComponent implements OnInit {
   constructor(private competitionService:CompetitionsService,
               private matchesService:MatchesService,
               private playersService:PlayersService,
-              private route: ActivatedRoute) {
-  }
+              private router: Router,
+              private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {

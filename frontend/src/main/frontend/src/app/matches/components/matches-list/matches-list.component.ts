@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {MatchesService} from "../../services/matches.service";
+
+import { MatchesService } from "../../services/matches.service";
 
 @Component({
   selector: 'app-matches-list',
