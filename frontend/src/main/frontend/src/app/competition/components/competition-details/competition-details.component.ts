@@ -61,8 +61,10 @@ export class CompetitionDetailsComponent implements OnInit {
   getMatchByPosition(round: number, position: number): any {
 
     let match = this.matches['['+round+'/'+position+']'];
-    match.player1 = this.players[match.player1Id];
-    match.player2 = this.players[match.player2Id];
+    if(match != undefined) {
+      match.player1 = this.players[match.player1Id];
+      match.player2 = this.players[match.player2Id];
+    }
     return match;
   }
 
