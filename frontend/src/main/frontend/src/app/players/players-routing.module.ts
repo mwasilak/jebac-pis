@@ -6,9 +6,9 @@ import { PlayersAddComponent } from "./components/players-add/players-add.compon
 
 
 const routes: Routes = [
-  { path: '', component: PlayersListComponent },
-  { path: 'details/:id', component: PlayersDetailsComponent},
-  { path: 'add', component: PlayersAddComponent}
+  { path: 'players', component: PlayersListComponent },
+  { path: 'players/details/:id', component: PlayersDetailsComponent},
+  { path: 'players/add', component: PlayersAddComponent}
 ];
 
 @NgModule({

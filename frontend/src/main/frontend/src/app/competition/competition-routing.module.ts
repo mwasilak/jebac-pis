@@ -5,9 +5,9 @@ import {CompetitionDetailsComponent} from "./components/competition-details/comp
 import {CompetitionAddComponent} from "./components/competition-add/competition-add.component";
 
 const routes: Routes = [
-  { path: '', component: CompetitionListComponent },
-  { path: 'details/:id', component: CompetitionDetailsComponent},
-  { path: 'add', component: CompetitionAddComponent}
+  { path: 'competitions', component: CompetitionListComponent },
+  { path: 'competitions/details/:id', component: CompetitionDetailsComponent},
+  { path: 'competitions/add', component: CompetitionAddComponent}
 ];
 
 @NgModule({

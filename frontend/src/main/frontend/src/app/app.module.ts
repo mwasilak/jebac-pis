@@ -5,7 +5,9 @@ import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
+import { PlayersModule } from "./players/players.module";
 import { MatchesModule } from "./matches/matches.module";
+import { CompetitionModule } from "./competition/competition.module";
 
 
 
@@ -18,7 +20,9 @@ import { MatchesModule } from "./matches/matches.module";
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    MatchesModule
+    PlayersModule,
+    MatchesModule,
+    CompetitionModule
   ],
   bootstrap: [AppComponent]
 })
