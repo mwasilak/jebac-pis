@@ -6,6 +6,7 @@ import { CompetitionsService } from "../../services/competitions.service";
 import { MatchesService } from "../../../matches/services/matches.service";
 import { PlayersService } from "../../../players/services/players.service";
 import { Competition } from "../../competition";
+import { Player } from "../../../players/player";
 
 @Component({
   selector: 'app-competition-details',
@@ -16,7 +17,7 @@ export class CompetitionDetailsComponent implements OnInit {
 
   competition: Competition = new Competition();
   matches: any[];
-  players: any[];
+  players: { [key:string]:Player; };
 
   constructor(private competitionService:CompetitionsService,
               private matchesService:MatchesService,

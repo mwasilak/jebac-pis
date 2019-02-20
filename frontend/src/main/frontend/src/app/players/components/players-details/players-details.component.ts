@@ -10,17 +10,15 @@ import { Player } from "../../player";
 })
 export class PlayersDetailsComponent implements OnInit {
 
-  player: Player = new Player();
+  player: Player;
 
   constructor(private playersService:PlayersService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.playersService.fetchDetails(params.get("id"))
-        .subscribe((resp:any)=>{
-          this.player.id = resp['id'];
-          this.player.firstName = resp['firstName'];
-          this.player.lastName = resp['lastName'];
+        .subscribe((resp:Player)=>{
+          this.player = resp;
         });
     });
   }

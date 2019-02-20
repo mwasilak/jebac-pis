@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {PlayersService} from "../../services/players.service";
+import { PlayersService } from "../../services/players.service";
+import { Player } from "../../player";
 
 @Component({
   selector: 'app-players-list',
@@ -8,7 +9,7 @@ import {PlayersService} from "../../services/players.service";
 })
 export class PlayersListComponent implements OnInit {
 
-  players: any[];
+  players: Player[];
 
   constructor(private playersService:PlayersService) { }
 
