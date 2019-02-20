@@ -4,7 +4,7 @@
   </div>
         <div [class]="match?'match match-box':'match-box'"
              [routerLink]="match?['', { outlets: { modal: ['matches', 'details', match.id] } }]:[]"
-             [ngStyle]="match?{'cursor':'pointer'}:''" [class.disabled]="!match ? true : null">
+             [ngStyle]="match?{'cursor':'pointer'}:{'outline': 0}">
         <div>{{match?.player1 != null ? match.player1?.firstName+' '+match.player1?.lastName : '&nbsp;'}}</div>
         <div>{{match?.player2 != null ? match.player2?.firstName+' '+match.player2?.lastName : '&nbsp;'}}</div>
     </div>
