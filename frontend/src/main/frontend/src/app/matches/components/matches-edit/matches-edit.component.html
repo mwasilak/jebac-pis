@@ -6,7 +6,7 @@
     <table class="table" style="max-width: none">
       <thead>
       <tr>
-        <td>Game</td>
+        <td>&nbsp;</td>
         <td class="text-right">
           <ng-container *ngIf="match?.player1?.id !== null">
             <a [routerLink]="['', { outlets: { primary: ['/players/details', match.player1.id], modal: null} }]">{{match?.player1?.firstName + ' ' + match?.player1?.lastName}}</a>
@@ -18,7 +18,7 @@
             <a [routerLink]="['', { outlets: { primary: ['/players/details', match.player2.id], modal: null} }]">{{match?.player2?.firstName + ' ' + match?.player2?.lastName}}</a>
           </ng-container>
         </td>
-      <td>Action</td>
+      <td>&nbsp;</td>
       </tr>
       </thead>
       <tbody>
@@ -26,13 +26,13 @@
         <ng-container [formGroupName]="i">
         <td>{{i+1}}</td>
         <td class="text-right" >
-          <input type="text" formControlName="scorePlayer1" class="form-control">
+          <input type="text" formControlName="scorePlayer1" class="form-control form-control-sm">
         </td>
         <td class="text-center">:</td>
         <td>
-          <input type="text" formControlName="scorePlayer2" class="form-control">
+          <input type="text" formControlName="scorePlayer2" class="form-control form-control-sm">
         </td>
-          <td><button class="btn btn-outline-primary" (click)="removeGame(i)">Remove</button></td>
+          <td><button class="btn btn-outline-danger btn-sm" (click)="removeGame(i)">x</button></td>
         </ng-container>
       </tr>
       </tbody>
