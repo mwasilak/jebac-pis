@@ -15,7 +15,7 @@ import { PlayersService } from "../../../players/services/players.service";
 })
 export class MatchesEditComponent implements OnInit {
 
-  @ViewChild('template') template
+  @ViewChild('template', { static: true }) template
 
   modalRef: BsModalRef;
   match: Match = new Match();
