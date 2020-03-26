@@ -7,6 +7,7 @@ import { MatchesService } from "../../../matches/services/matches.service";
 import { PlayersService } from "../../../players/services/players.service";
 import { Competition } from "../../competition";
 import { Player } from "../../../players/player";
+import { Match } from "../../../matches/match";
 
 @Component({
   selector: 'app-competition-details',
@@ -16,7 +17,7 @@ import { Player } from "../../../players/player";
 export class CompetitionDetailsComponent implements OnInit {
 
   competition: Competition = new Competition();
-  matches: any[];
+  matches: { [key:string]:Match; };
   players: { [key:string]:Player; };
 
   constructor(private competitionService:CompetitionsService,
@@ -59,7 +60,7 @@ export class CompetitionDetailsComponent implements OnInit {
     return Array.from({length: n}, (value, key) => key + 1);
   }
 
-  getMatchByPosition(round: number, position: number): any {
+  getMatchByPosition(round: number, position: number): Match {
 
     let match = this.matches['['+round+'/'+position+']'];
     if(match != undefined) {

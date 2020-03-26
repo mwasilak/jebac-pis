@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Match} from "../../../matches/match";
 
 @Component({
   selector: 'app-bracket-match',
@@ -7,7 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class BracketMatchComponent implements OnInit {
 
-  @Input() match: any[];
+  @Input() match: Match;
   @Input() middleBar: boolean;
 
   constructor() { }

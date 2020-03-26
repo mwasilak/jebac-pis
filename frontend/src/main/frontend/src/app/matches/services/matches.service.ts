@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import { Observable } from "rxjs";
+import { HttpClient } from "@angular/common/http";
+import { Match } from "../match";
 
 @Injectable({
   providedIn: 'root'
@@ -9,16 +10,16 @@ export class MatchesService {
 
   constructor(private http: HttpClient) { }
 
-  fetchList(): Observable<any> {
-    return this.http.get('api/matches');
+  fetchList(): Observable<Match[]> {
+    return this.http.get<Match[]>('api/matches');
   }
 
-  fetchListByCompetitionId(id: string): Observable<any> {
-    return this.http.get('api/matches/competition/' + id);
+  fetchListByCompetitionId(id: string): Observable<{[key:string]:Match;}> {
+    return this.http.get<{[key:string]:Match;}>('api/matches/competition/' + id);
   }
 
-  fetchDetails(id: string): Observable<any> {
-    return this.http.get('api/matches/' + id);
+  fetchDetails(id: string): Observable<Match> {
+    return this.http.get<Match>('api/matches/' + id);
   }
 
   edit(id: string, matchForm) {
