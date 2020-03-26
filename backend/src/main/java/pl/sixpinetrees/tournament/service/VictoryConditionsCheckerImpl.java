@@ -62,9 +62,11 @@ class MatchScore {
         Integer index = 0;
         for(GameRow game : games) {
             index += 1;
-            if ((game.getScorePlayer1() > (game.getScorePlayer2() + 1)) && (game.getScorePlayer1() >= numberOfPointsToWin)) {
+            if (((game.getScorePlayer1() > (game.getScorePlayer2() + 1)) && (game.getScorePlayer1() == numberOfPointsToWin)) ||
+               ((game.getScorePlayer1() == (game.getScorePlayer2() + 2)) && (game.getScorePlayer1() >= numberOfPointsToWin))) {
                 player1Wins += 1;
-            } else if ((game.getScorePlayer2() > (game.getScorePlayer1() + 1)) && (game.getScorePlayer2() >= numberOfPointsToWin)) {
+            } else if (((game.getScorePlayer2() > (game.getScorePlayer1() + 1)) && (game.getScorePlayer2() == numberOfPointsToWin)) ||
+                ((game.getScorePlayer2() == (game.getScorePlayer1() + 2)) && (game.getScorePlayer2() >= numberOfPointsToWin))) {
                 player2Wins += 1;
             } else {
                 errorList.add("Game no. " + index + " has incorrect score.");

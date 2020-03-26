@@ -79,6 +79,26 @@ public class VictoryConditionsCheckerTest {
     }
 
     @Test(expected = ServiceValidationException.class)
+    public void shouldFailWhenMatchFormWithWrongGameResultsProvided2() throws Exception {
+        //given
+        List<GameRow> gameList = new ArrayList<>();
+        gameList.add(new GameRow(12, 8));
+        gameList.add(new GameRow(12, 8));
+        gameList.add(new GameRow(12, 8));
+
+        ResultRegistrationForm resultRegistrationForm = new ResultRegistrationForm();
+        resultRegistrationForm.setGames(gameList);
+
+        VictoryConditions victoryConditions = new VictoryConditions(3, 11);
+
+        //when
+        victoryConditionsChecker.determineWinner(resultRegistrationForm, victoryConditions);
+
+        //then
+    }
+
+
+    @Test(expected = ServiceValidationException.class)
     public void shouldFailWhenMatchFormWithWrongGameNumberProvided() throws Exception {
         //given
         List<GameRow> gameList = new ArrayList<>();
