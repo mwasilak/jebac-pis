@@ -102,6 +102,16 @@ public class Match {
         }
     }
 
+    public MatchStatus getStatus() {
+        if(resultRegistrationTime != null) {
+            return MatchStatus.CONCLUDED;
+        } else if (player1Id != null && player2Id != null) {
+            return MatchStatus.READY;
+        } else {
+            return MatchStatus.NOT_READY;
+        }
+    }
+
     public void registerResults(ResultRegistrationForm resultRegistrationForm, MatchWinner matchWinner) {
 
         validateMatchPlayers();

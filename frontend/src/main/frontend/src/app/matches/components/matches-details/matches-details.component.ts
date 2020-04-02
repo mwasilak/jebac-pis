@@ -38,7 +38,6 @@ export class MatchesDetailsComponent implements OnInit {
           this.match.games = matchResponse['games'];
           this.match.bracketPosition = matchResponse['bracketPosition'];
           this.match.resultRegistrationTime = matchResponse['resultRegistrationTime'];
-          this.match.initialize();
           this.modalRef = this.modalService.show(this.template, {});
         });
     });

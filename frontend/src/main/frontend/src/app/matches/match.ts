@@ -14,16 +14,4 @@ export class Match {
 
   player1: Player;
   player2: Player;
-
-  initialize() {
-    if(this.resultRegistrationTime !== null) {
-      this.status = "concluded";
-    } else if (this.player1 !== undefined && this.player2 !== undefined) {
-      this.status = "pending";
-    } else {
-      this.status = "scheduled";
-    }
-
-  }
-
 }

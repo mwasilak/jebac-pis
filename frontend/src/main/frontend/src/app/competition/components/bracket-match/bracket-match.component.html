@@ -3,7 +3,7 @@
     <div></div>
   </div>
         <div [class]="match?'match match-box':'match-box'"
-             [routerLink]="match?['', { outlets: { modal: ['matches', 'details', match.id] } }]:[]"
+             [routerLink]="match.status==='READY'?['', { outlets: { modal: ['matches', 'edit', match.id] } }]:[]"
              [ngStyle]="match?{'cursor':'pointer'}:{'outline': 0}">
           <div class="name-box">
             <div>
