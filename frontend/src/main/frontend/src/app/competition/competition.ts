@@ -1,9 +1,12 @@
+import {VictoryConditions} from "./victory-conditions";
+
 export class Competition {
   id: number;
   name: string;
   numberOfPlayers: number;
   numberOfRounds: number;
   numberOfMatchesInFirstRound: number;
+  victoryConditions: VictoryConditions;
 
 
   calculateMatchesInRound(round: number): number {
