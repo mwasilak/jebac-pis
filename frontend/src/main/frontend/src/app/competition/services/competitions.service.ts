@@ -19,6 +19,10 @@ export class CompetitionsService {
     return this.http.get<Competition>('api/competitions/' + id);
   }
 
+  fetchDetailsByMatchId(id: string): Observable<Competition> {
+    return this.http.get<Competition>('api/competitions/match/' + id);
+  }
+
   add(competitionForm) {
     return this.http.post('api/competitions/add', competitionForm);
   }

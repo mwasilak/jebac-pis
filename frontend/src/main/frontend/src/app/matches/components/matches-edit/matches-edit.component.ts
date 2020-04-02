@@ -7,6 +7,7 @@ import { forkJoin } from "rxjs";
 import { Match } from "../../match";
 import { MatchesService } from "../../services/matches.service";
 import { PlayersService } from "../../../players/services/players.service";
+import { CompetitionsService } from "../../../competition/services/competitions.service";
 
 @Component({
   selector: 'app-matches-edit',
@@ -24,6 +25,7 @@ export class MatchesEditComponent implements OnInit {
 
   constructor(private matchesService:MatchesService,
               private playersService:PlayersService,
+              private competitionsService:CompetitionsService,
               private route: ActivatedRoute,
               private formBuilder: FormBuilder,
               private router: Router,
@@ -39,6 +41,7 @@ export class MatchesEditComponent implements OnInit {
       this.getData(params.get("id")).subscribe(responseList => {
         let matchResponse = responseList[0];
         let playersResponse = responseList[1];
+        let competition = responseList[2];
 
         this.match.id = matchResponse['id'];
         this.match.name = matchResponse['name'];
@@ -47,9 +50,12 @@ export class MatchesEditComponent implements OnInit {
         this.match.games = matchResponse['games'];
         this.match.bracketPosition = matchResponse['bracketPosition'];
         this.match.resultRegistrationTime = matchResponse['resultRegistrationTime'];
+        this.games = this.form.get('games') as FormArray;
         for(let game of this.match.games) {
-          this.games = this.form.get('games') as FormArray;
           this.games.push(this.createGame(game.scorePlayer1, game.scorePlayer2));
+        }
+        for (let i = 0; i < competition.victoryConditions.numberOfWinsRequired - this.match.games.length; i++) {
+          this.games.push(this.createGame("",""));
         }
         this.modalRef = this.modalService.show(this.template, {});
       });
@@ -65,7 +71,8 @@ export class MatchesEditComponent implements OnInit {
 
     let matchRequest = this.matchesService.fetchDetails(id);
     let playersRequest = this.playersService.fetchListByMatchId(id);
-    return forkJoin([matchRequest, playersRequest]);
+    let competitionRequest = this.competitionsService.fetchDetailsByMatchId(id);
+    return forkJoin([matchRequest, playersRequest, competitionRequest]);
   }
 
   createGame(scorePlayer1, scorePlayer2) : FormGroup {
