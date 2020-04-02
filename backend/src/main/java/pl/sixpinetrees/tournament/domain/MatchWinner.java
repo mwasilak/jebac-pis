@@ -1,6 +1,6 @@
 package pl.sixpinetrees.tournament.domain;
 
-public enum Winner {
+public enum MatchWinner {
     UNKNOWN,
     PLAYER1,
     PLAYER2

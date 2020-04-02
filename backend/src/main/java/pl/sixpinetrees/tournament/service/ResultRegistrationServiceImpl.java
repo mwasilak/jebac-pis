@@ -36,8 +36,8 @@ public class ResultRegistrationServiceImpl implements ResultRegistrationService 
         Competition competition = competitionRepository.findById(match.getCompetitionId())
                 .orElseThrow(InternalError::new);
 
-        Winner winner = victoryConditionsChecker.determineWinner(resultRegistrationForm, competition.getVictoryConditions());
-        match.registerResults(resultRegistrationForm, winner);
+        MatchWinner matchWinner = victoryConditionsChecker.determineWinner(resultRegistrationForm, competition.getVictoryConditions());
+        match.registerResults(resultRegistrationForm, matchWinner);
 
         advanceWinnerToNextRound(match, competition);
 

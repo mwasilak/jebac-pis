@@ -9,9 +9,9 @@ export class Match {
   games: Game[];
   bracketPosition: any;
   resultRegistrationTime: any;
-  winner: string;
-
+  matchWinner: string;
   status: string;
+
   player1: Player;
   player2: Player;
 

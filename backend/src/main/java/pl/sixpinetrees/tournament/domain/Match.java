@@ -35,17 +35,17 @@ public class Match {
 
     private LocalDateTime resultRegistrationTime;
 
-    private Winner winner;
+    private MatchWinner matchWinner;
 
     public Match() {
-        this.winner = Winner.UNKNOWN;
+        this.matchWinner = MatchWinner.UNKNOWN;
     }
 
     public Match(String name, Long competitionId, Integer round, Integer position) {
         this.name = name;
         this.competitionId = competitionId;
         this.bracketPosition = new BracketPosition(round, position);
-        this.winner = Winner.UNKNOWN;
+        this.matchWinner = MatchWinner.UNKNOWN;
     }
 
     public Long getId() {
@@ -88,21 +88,21 @@ public class Match {
         return resultRegistrationTime;
     }
 
-    public Winner getWinner() {
-        return winner;
+    public MatchWinner getMatchWinner() {
+        return matchWinner;
     }
 
     public Optional<Long> getWinningPlayerId() {
-        if(winner == Winner.PLAYER1) {
+        if(matchWinner == MatchWinner.PLAYER1) {
             return Optional.ofNullable(player1Id);
-        } else if (winner == Winner.PLAYER2) {
+        } else if (matchWinner == MatchWinner.PLAYER2) {
             return Optional.ofNullable(player2Id);
         } else {
             return Optional.empty();
         }
     }
 
-    public void registerResults(ResultRegistrationForm resultRegistrationForm, Winner winner) {
+    public void registerResults(ResultRegistrationForm resultRegistrationForm, MatchWinner matchWinner) {
 
         validateMatchPlayers();
         validateMatchRegistrationStatus();
@@ -115,7 +115,7 @@ public class Match {
             i++;
         }
         resultRegistrationTime = LocalDateTime.now();
-        this.winner = winner;
+        this.matchWinner = matchWinner;
     }
 
     private void validateMatchPlayers() {

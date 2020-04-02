@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import pl.sixpinetrees.tournament.domain.VictoryConditions;
-import pl.sixpinetrees.tournament.domain.Winner;
+import pl.sixpinetrees.tournament.domain.MatchWinner;
 import pl.sixpinetrees.tournament.domain.dto.GameRow;
 import pl.sixpinetrees.tournament.domain.dto.ResultRegistrationForm;
 
@@ -38,10 +38,10 @@ public class VictoryConditionsCheckerTest {
         VictoryConditions victoryConditions = new VictoryConditions(3, 11);
 
         //when
-        Winner winner = victoryConditionsChecker.determineWinner(resultRegistrationForm, victoryConditions);
+        MatchWinner matchWinner = victoryConditionsChecker.determineWinner(resultRegistrationForm, victoryConditions);
 
         //then
-        assertThat(winner).isEqualTo(Winner.PLAYER1);
+        assertThat(matchWinner).isEqualTo(MatchWinner.PLAYER1);
     }
 
     @Test(expected = ServiceValidationException.class)

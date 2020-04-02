@@ -1,8 +1,8 @@
 package pl.sixpinetrees.tournament.service;
 
 import org.springframework.stereotype.Component;
+import pl.sixpinetrees.tournament.domain.MatchWinner;
 import pl.sixpinetrees.tournament.domain.VictoryConditions;
-import pl.sixpinetrees.tournament.domain.Winner;
 import pl.sixpinetrees.tournament.domain.dto.GameRow;
 import pl.sixpinetrees.tournament.domain.dto.ResultRegistrationForm;
 
@@ -17,7 +17,7 @@ public class VictoryConditionsCheckerImpl implements VictoryConditionsChecker {
     }
 
     @Override
-    public Winner determineWinner(ResultRegistrationForm resultRegistrationForm, VictoryConditions victoryConditions) {
+    public MatchWinner determineWinner(ResultRegistrationForm resultRegistrationForm, VictoryConditions victoryConditions) {
 
         checkForm(resultRegistrationForm);
 
@@ -26,9 +26,9 @@ public class VictoryConditionsCheckerImpl implements VictoryConditionsChecker {
         checkNumberOfWins(matchScore.player1Wins, matchScore.player2Wins,victoryConditions.getNumberOfWinsRequired() );
 
         if(matchScore.player1Wins > matchScore.player2Wins) {
-            return Winner.PLAYER1;
+            return MatchWinner.PLAYER1;
         }
-        return Winner.PLAYER2;
+        return MatchWinner.PLAYER2;
 
     }
 
