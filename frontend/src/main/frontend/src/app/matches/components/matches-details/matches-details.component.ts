@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from "@angular/router";
 import { BsModalRef, BsModalService } from "ngx-bootstrap";
 import { forkJoin } from "rxjs";
 
@@ -13,7 +13,7 @@ import { Player } from "../../../players/player";
   templateUrl: './matches-details.component.html',
   styleUrls: ['./matches-details.component.css']
 })
-export class MatchesDetailsComponent implements OnInit {
+export class MatchesDetailsComponent implements OnInit, OnDestroy {
 
   @ViewChild('template', { static: true }) template
 
@@ -38,9 +38,9 @@ export class MatchesDetailsComponent implements OnInit {
 
           this.modalRef = this.modalService.show(this.template, {});
           this.modalService.onHide.subscribe((reason: string) => {
-            const _reason = reason ? `, dismissed by ${reason}` : '';
-            console.log(`onHide event has been fired${_reason}`);
-            this.router.navigate(['', { outlets: { modal: null} }]);
+            if(reason === "backdrop-click") {
+              this.router.navigate(['', {outlets: {modal: null}}]);
+            }
           })
         });
     });
