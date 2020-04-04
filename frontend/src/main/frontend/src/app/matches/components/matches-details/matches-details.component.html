@@ -6,14 +6,14 @@
     <tr>
       <td>{{match?.games?.length > 0 ? 'Game' : ''}}</td>
       <td class="text-right">
-        <ng-container *ngIf="match?.player1?.id !== null">
-          <a [routerLink]="['', { outlets: { primary: ['players', 'details', match.player1.id], modal: null} }]">{{match?.player1?.firstName + ' ' + match?.player1?.lastName}}</a>
+        <ng-container *ngIf="player1?.id !== null">
+          <a [routerLink]="['', { outlets: { primary: ['players', 'details', player1.id], modal: null} }]">{{player1?.firstName + ' ' + player1?.lastName}}</a>
         </ng-container>
       </td>
       <td class="text-center">:</td>
       <td>
-        <ng-container *ngIf="match?.player2?.id !== null">
-          <a [routerLink]="['', { outlets: { primary: ['players', 'details', match.player2.id], modal: null} }]">{{match?.player2?.firstName + ' ' + match?.player2?.lastName}}</a>
+        <ng-container *ngIf="player2?.id !== null">
+          <a [routerLink]="['', { outlets: { primary: ['players', 'details', player2.id], modal: null} }]">{{player2?.firstName + ' ' + player2?.lastName}}</a>
         </ng-container>
       </td>
     </tr>
@@ -27,7 +27,7 @@
     </tr>
     </tbody>
   </table>
-  <a *ngIf="match.status === 'pending'" class="btn btn-primary"
+  <a *ngIf="match.status === 'READY'" class="btn btn-primary"
      [routerLink]="['', { outlets: { modal: ['matches', 'edit', match.id] } }]">Record match results</a>
   <a class="btn btn-outline-primary" [routerLink]="['', { outlets: { modal: null} }]">Back to list</a>
 </div>

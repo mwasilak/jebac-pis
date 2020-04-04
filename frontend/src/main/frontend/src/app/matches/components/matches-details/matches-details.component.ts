@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import { BsModalRef, BsModalService } from "ngx-bootstrap";
 import { forkJoin } from "rxjs";
 
 import { Match } from "../../match";
 import { MatchesService } from "../../services/matches.service";
 import { PlayersService } from "../../../players/services/players.service";
+import { Player } from "../../../players/player";
 
 @Component({
   selector: 'app-matches-details',
@@ -18,27 +19,29 @@ export class MatchesDetailsComponent implements OnInit {
 
   modalRef: BsModalRef;
   match: Match = new Match();
+  player1: Player;
+  player2: Player;
 
   constructor(private route: ActivatedRoute,
               private matchesService:MatchesService,
               private playersService:PlayersService,
+              private router: Router,
               private modalService:BsModalService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.getData(params.get("id"))
         .subscribe(responseList => {
-          let matchResponse = responseList[0];
-          let playersResponse = responseList[1];
+          this.match = responseList[0];
+          this.player1 = responseList[1][this.match.player1Id];
+          this.player2 = responseList[1][this.match.player2Id];
 
-          this.match.id = matchResponse['id'];
-          this.match.name = matchResponse['name'];
-          this.match.player1 = playersResponse[matchResponse['player1Id']];
-          this.match.player2 = playersResponse[matchResponse['player2Id']];
-          this.match.games = matchResponse['games'];
-          this.match.bracketPosition = matchResponse['bracketPosition'];
-          this.match.resultRegistrationTime = matchResponse['resultRegistrationTime'];
           this.modalRef = this.modalService.show(this.template, {});
+          this.modalService.onHide.subscribe((reason: string) => {
+            const _reason = reason ? `, dismissed by ${reason}` : '';
+            console.log(`onHide event has been fired${_reason}`);
+            this.router.navigate(['', { outlets: { modal: null} }]);
+          })
         });
     });
   }
