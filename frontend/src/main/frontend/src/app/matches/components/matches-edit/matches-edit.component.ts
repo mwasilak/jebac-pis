@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from "@angular/router";
 import { FormArray, FormBuilder, FormGroup } from "@angular/forms";
 import { BsModalRef, BsModalService } from "ngx-bootstrap";
 import { forkJoin } from "rxjs";
 
 import { Match } from "../../match";
+import { Player } from "../../../players/player";
 import { MatchesService } from "../../services/matches.service";
 import { PlayersService } from "../../../players/services/players.service";
 import { CompetitionsService } from "../../../competition/services/competitions.service";
@@ -14,14 +15,17 @@ import { CompetitionsService } from "../../../competition/services/competitions.
   templateUrl: './matches-edit.component.html',
   styleUrls: ['./matches-edit.component.css']
 })
-export class MatchesEditComponent implements OnInit {
+export class MatchesEditComponent implements OnInit, OnDestroy {
 
   @ViewChild('template', { static: true }) template
 
   modalRef: BsModalRef;
-  match: Match = new Match();
   form: FormGroup;
   games: FormArray;
+
+  match: Match;
+  player1: Player;
+  player2: Player;
 
   constructor(private matchesService:MatchesService,
               private playersService:PlayersService,
@@ -39,17 +43,11 @@ export class MatchesEditComponent implements OnInit {
       });
 
       this.getData(params.get("id")).subscribe(responseList => {
-        let matchResponse = responseList[0];
-        let playersResponse = responseList[1];
+        this.match = responseList[0];
+        this.player1 = responseList[1][this.match.player1Id];
+        this.player2 = responseList[1][this.match.player2Id];
         let competition = responseList[2];
 
-        this.match.id = matchResponse['id'];
-        this.match.name = matchResponse['name'];
-        this.match.player1 = playersResponse[matchResponse['player1Id']];
-        this.match.player2 = playersResponse[matchResponse['player2Id']];
-        this.match.games = matchResponse['games'];
-        this.match.bracketPosition = matchResponse['bracketPosition'];
-        this.match.resultRegistrationTime = matchResponse['resultRegistrationTime'];
         this.games = this.form.get('games') as FormArray;
         for(let game of this.match.games) {
           this.games.push(this.createGame(game.scorePlayer1, game.scorePlayer2));
@@ -58,6 +56,11 @@ export class MatchesEditComponent implements OnInit {
           this.games.push(this.createGame("",""));
         }
         this.modalRef = this.modalService.show(this.template, {});
+        this.modalService.onHide.subscribe((reason: string) => {
+          if(reason === "backdrop-click") {
+            this.router.navigate(['', {outlets: {modal: null}}]);
+          }
+        })
       });
     });
   }
