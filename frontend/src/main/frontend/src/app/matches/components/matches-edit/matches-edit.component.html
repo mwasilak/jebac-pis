@@ -22,24 +22,28 @@
       </tr>
       </thead>
       <tbody>
-      <tr formArrayName="games" *ngFor="let game of form.controls.games.controls; let i = index">
+      <tr formArrayName="games" *ngFor="let game of games.controls; let i = index">
         <ng-container [formGroupName]="i">
-        <td>{{i+1}}</td>
-        <td class="text-right" >
-          <input type="text" formControlName="scorePlayer1" class="form-control form-control-sm">
-        </td>
-        <td class="text-center">:</td>
-        <td>
-          <input type="text" formControlName="scorePlayer2" class="form-control form-control-sm">
-        </td>
-          <td><button class="btn btn-outline-danger btn-sm" (click)="removeGame(i)">x</button></td>
+          <td>{{i+1}}</td>
+          <td class="text-right" >
+            <input type="text" formControlName="scorePlayer1" class="form-control form-control-sm">
+          </td>
+          <td class="text-center">:</td>
+          <td>
+            <input type="text" formControlName="scorePlayer2" class="form-control form-control-sm">
+          </td>
+          <td class="delete-game">
+            <button *ngIf="i+1>competition.victoryConditions.numberOfWinsRequired" class="btn btn-outline-danger btn-sm" (click)="removeGame(i)">
+              x
+            </button>
+          </td>
         </ng-container>
       </tr>
       </tbody>
     </table>
     </div>
     <button class="btn btn-primary" (click)="sendForm(form)">Register results</button>&nbsp;
-    <button class="btn btn-outline-primary" (click)="addGame()">Add game</button>
+    <button *ngIf="games.controls.length<2*competition.victoryConditions.numberOfWinsRequired-1" class="btn btn-outline-primary" (click)="addGame()">Add game</button>
   </form>
 </div>
 </ng-template>

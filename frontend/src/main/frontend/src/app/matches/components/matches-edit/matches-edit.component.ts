@@ -6,6 +6,7 @@ import { forkJoin } from "rxjs";
 
 import { Match } from "../../match";
 import { Player } from "../../../players/player";
+import { Competition } from "../../../competition/competition";
 import { MatchesService } from "../../services/matches.service";
 import { PlayersService } from "../../../players/services/players.service";
 import { CompetitionsService } from "../../../competition/services/competitions.service";
@@ -26,6 +27,7 @@ export class MatchesEditComponent implements OnInit, OnDestroy {
   match: Match;
   player1: Player;
   player2: Player;
+  competition: Competition;
 
   constructor(private matchesService:MatchesService,
               private playersService:PlayersService,
@@ -46,13 +48,13 @@ export class MatchesEditComponent implements OnInit, OnDestroy {
         this.match = responseList[0];
         this.player1 = responseList[1][this.match.player1Id];
         this.player2 = responseList[1][this.match.player2Id];
-        let competition = responseList[2];
+        this.competition = responseList[2];
 
         this.games = this.form.get('games') as FormArray;
         for(let game of this.match.games) {
           this.games.push(this.createGame(game.scorePlayer1, game.scorePlayer2));
         }
-        for (let i = 0; i < competition.victoryConditions.numberOfWinsRequired - this.match.games.length; i++) {
+        for (let i = 0; i < this.competition.victoryConditions.numberOfWinsRequired - this.match.games.length; i++) {
           this.games.push(this.createGame("",""));
         }
         this.modalRef = this.modalService.show(this.template, {});
@@ -105,7 +107,7 @@ export class MatchesEditComponent implements OnInit, OnDestroy {
           this.router.routeReuseStrategy.shouldReuseRoute = (future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean => {
             return false;
           };
-          this.router.navigate(['', { outlets: { modal: ['matches', 'details', resp] } }]);
+          this.router.navigate(['', {outlets: {modal: null}}]);
         });
     } else {
       console.error('form invalid');
