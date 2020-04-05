@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Match} from "../../../matches/match";
+import { Component, Input, OnInit } from '@angular/core';
+import { Match } from "../../../matches/match";
 
 @Component({
   selector: 'app-bracket-match',
