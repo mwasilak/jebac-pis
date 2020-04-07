@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from "@angular/router";
-import { FormArray, FormBuilder, FormGroup } from "@angular/forms";
+import { AbstractControl, FormArray, FormBuilder, FormGroup, ValidatorFn } from "@angular/forms";
 import { BsModalRef, BsModalService } from "ngx-bootstrap";
 import { forkJoin } from "rxjs";
 
@@ -40,15 +40,17 @@ export class MatchesEditComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
 
-      this.form = this.formBuilder.group({
-        games: this.formBuilder.array([])
-      });
-
       this.getData(params.get("id")).subscribe(responseList => {
         this.match = responseList[0];
         this.player1 = responseList[1][this.match.player1Id];
         this.player2 = responseList[1][this.match.player2Id];
         this.competition = responseList[2];
+
+        this.form = this.formBuilder.group({
+          games: this.formBuilder.array([])
+        }, {
+          validator: this.gameValidator(this.competition.victoryConditions.numberOfPointsToWin,this.competition.victoryConditions.numberOfWinsRequired)
+        });
 
         this.games = this.form.get('games') as FormArray;
         for(let game of this.match.games) {
@@ -113,5 +115,44 @@ export class MatchesEditComponent implements OnInit, OnDestroy {
       console.error('form invalid');
     }
   }
+
+  gameValidator(numberOfPointsToWin : number, numberOfWinsRequired: number):ValidatorFn {
+    return (form: AbstractControl):
+      { [key: string]: any } | null =>
+    {
+      let gamesArray = form.get('games') as FormArray;
+      let index = 0;
+      let player1Wins = 0;
+      let player2Wins = 0;
+      let errorList = {};
+      for (let game of gamesArray.controls) {
+        index += 1;
+        let scorePlayer1 = game.get('scorePlayer1').value;
+        let scorePlayer2 = game.get('scorePlayer2').value;
+        if (typeof scorePlayer1 !== 'number' || typeof scorePlayer2 !== 'number'
+          || scorePlayer1 === null || scorePlayer2 === null
+          || scorePlayer1 % 1 !== 0 || scorePlayer2 % 1 !== 0) {
+          errorList["game" + (index) + "invalidInput"] = true;
+          continue;
+        }
+        if (((scorePlayer1 > scorePlayer2 + 1) && (scorePlayer1 == numberOfPointsToWin))
+          || ((scorePlayer1 === scorePlayer2 + 2) && (scorePlayer1 >= numberOfPointsToWin))) {
+          player1Wins += 1;
+        } else if (((scorePlayer2 > scorePlayer1 + 1) && (scorePlayer2 == numberOfPointsToWin))
+          || (scorePlayer2 === scorePlayer1 + 2 && (scorePlayer2 >= numberOfPointsToWin))) {
+          player2Wins += 1;
+        } else {
+          errorList["game" + (index) + "ScoreIncorrect"] = true;
+        }
+      }
+      if (((player1Wins > player2Wins && player1Wins != numberOfWinsRequired) ||
+        (player2Wins > player1Wins && player2Wins != numberOfWinsRequired)) ||
+        (player1Wins == player2Wins)) {
+        errorList["incorrectNoOfWins"] = true;
+      }
+      return errorList;
+    }
+  }
+
 
 }

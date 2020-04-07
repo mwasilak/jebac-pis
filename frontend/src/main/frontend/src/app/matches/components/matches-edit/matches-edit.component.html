@@ -26,11 +26,11 @@
         <ng-container [formGroupName]="i">
           <td>{{i+1}}</td>
           <td class="text-right" >
-            <input type="text" formControlName="scorePlayer1" class="form-control form-control-sm">
+            <input type="number" formControlName="scorePlayer1" class="form-control form-control-sm">
           </td>
           <td class="text-center">:</td>
           <td>
-            <input type="text" formControlName="scorePlayer2" class="form-control form-control-sm">
+            <input type="number" formControlName="scorePlayer2" class="form-control form-control-sm">
           </td>
           <td class="delete-game">
             <button *ngIf="i+1>competition.victoryConditions.numberOfWinsRequired" class="btn btn-outline-danger btn-sm" (click)="removeGame(i)">
@@ -42,7 +42,7 @@
       </tbody>
     </table>
     </div>
-    <button class="btn btn-primary" (click)="sendForm(form)">Register results</button>&nbsp;
+    <button class="btn btn-primary" (click)="sendForm(form)" [disabled]="!form.valid">Register results</button>&nbsp;
     <button *ngIf="games.controls.length<2*competition.victoryConditions.numberOfWinsRequired-1" class="btn btn-outline-primary" (click)="addGame()">Add game</button>
   </form>
 </div>
