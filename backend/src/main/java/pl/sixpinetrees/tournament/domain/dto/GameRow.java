@@ -1,9 +1,16 @@
 package pl.sixpinetrees.tournament.domain.dto;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 public class GameRow {
 
+    @NotNull
+    @Min(value = 0)
     private Integer scorePlayer1;
 
+    @NotNull
+    @Min(value = 0)
     private Integer scorePlayer2;
 
     public GameRow(Integer scorePlayer1, Integer scorePlayer2) {
