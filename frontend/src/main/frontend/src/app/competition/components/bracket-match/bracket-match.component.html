@@ -2,14 +2,14 @@
   <div [class]="middleBar ? 'route-box' : 'route-box middle'">
     <div></div>
   </div>
-        <div [class]="match?'match match-box':'match-box'"
+        <div [ngClass]="[match?'match match-box':'match-box', final ? 'final' : '']"
              [routerLink]="match.status==='READY'?['', { outlets: { modal: ['matches', 'edit', match.id] } }]:[]"
              [ngStyle]="match?{'cursor':'pointer'}:{'outline': 0}">
           <div class="name-box">
-            <div [ngClass]="[match.matchWinner==='PLAYER1'? 'winner' : '', match.matchWinner==='PLAYER2'? 'looser' : '']">
+            <div [ngClass]="[match.matchWinner==='PLAYER1'? 'winner' : '', match.matchWinner==='PLAYER2'? 'looser' : '', 'name']">
               {{match?.player1 != null ? match.player1?.firstName+' '+match.player1?.lastName : '&nbsp;'}}
             </div>
-            <div [ngClass]="[match.matchWinner==='PLAYER2'? 'winner' : '', match.matchWinner==='PLAYER1'? 'looser' : '']">
+            <div [ngClass]="[match.matchWinner==='PLAYER2'? 'winner' : '', match.matchWinner==='PLAYER1'? 'looser' : '', 'name']">
               {{match?.player2 != null ? match.player2?.firstName+' '+match.player2?.lastName : '&nbsp;'}}
             </div>
           </div>

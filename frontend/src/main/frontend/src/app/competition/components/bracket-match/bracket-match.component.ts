@@ -10,6 +10,7 @@ export class BracketMatchComponent implements OnInit {
 
   @Input() match: Match;
   @Input() middleBar: boolean;
+  @Input() final: boolean;
 
   constructor() { }
 
