@@ -4,17 +4,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
 import pl.sixpinetrees.tournament.domain.Player;
 import pl.sixpinetrees.tournament.domain.dto.CompetitionForm;
 import pl.sixpinetrees.tournament.repository.PlayerRepository;
 import pl.sixpinetrees.tournament.service.CompetitionService;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
 public class TournamentApplication {
+
+    @Configuration
+    protected static class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+        @Override
+        protected void configure(HttpSecurity http) throws Exception {
+            http
+                    .httpBasic()
+                    .and()
+                    .authorizeRequests()
+                    .antMatchers("/index.html", "/", "/login").permitAll()
+                    .anyRequest().authenticated()
+                    .and().csrf()
+                    .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());;
+        }
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(TournamentApplication.class, args);
@@ -64,5 +87,10 @@ class DummyDataCLR implements CommandLineRunner {
 
     @Autowired
     private CompetitionService competitionService;
+
+    @RequestMapping("/user")
+    public Principal user(Principal user) {
+        return user;
+    }
 }
 
