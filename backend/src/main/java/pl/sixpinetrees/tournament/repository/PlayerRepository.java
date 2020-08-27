@@ -12,6 +12,8 @@ public interface PlayerRepository extends JpaRepository<Player, Long> {
 
     Optional<Player> findByFirstNameAndLastName(@Param("fn") String firstName, @Param("ln") String lastName);
 
+    Optional<Player> findByUsername(@Param("un") String username);
+
     List<Player> findByIdIn(List<Long> ids);
 
     @Query("select distinct p from Player p join Match m on p.id = m.player1Id or p.id = m.player2Id where m.id = :matchId")

@@ -1,0 +1,17 @@
+<div class="container content-padding">
+  <!--div class="alert alert-danger" [hidden]="!error">
+    There was a problem logging in. Please try again.
+  </div-->
+  <h3>Login</h3>
+  <form [formGroup]='form'>
+    <div class="form-group">
+      <input class="form-control" type="text" formControlName="username" placeholder="username" />
+      <!--<div class="invalid-feedback" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Incorrect first name</div>-->
+    </div>
+    <div class="form-group">
+      <input type="password" class="form-control" type="password" formControlName="password" placeholder="password" />
+      <!--<div class="invalid-feedback" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Incorrect last name</div>-->
+    </div>
+    <button class="btn btn-primary" (click)="sendForm(form)">Login</button>
+  </form>
+</div>

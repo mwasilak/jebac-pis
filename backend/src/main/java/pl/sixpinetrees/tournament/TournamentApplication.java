@@ -4,20 +4,64 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import pl.sixpinetrees.tournament.domain.Player;
 import pl.sixpinetrees.tournament.domain.dto.CompetitionForm;
 import pl.sixpinetrees.tournament.repository.PlayerRepository;
 import pl.sixpinetrees.tournament.service.CompetitionService;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
+@Controller
 public class TournamentApplication {
+
+    @Configuration
+    protected static class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+        @Override
+        public void configure(WebSecurity web) throws Exception {
+            web.ignoring().antMatchers("/static/*", "/favicon.ico");
+        }
+
+        @Override
+        protected void configure(HttpSecurity http) throws Exception {
+            // @formatter:off
+            http
+                    .httpBasic().and()
+                    .authorizeRequests()
+                    .antMatchers("/index.html", "/", "/home", "/login").permitAll()
+                    .anyRequest().authenticated()
+                    .and()
+                    .csrf()
+                    .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+            // @formatter:on
+        }
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(TournamentApplication.class, args);
+    }
+
+    @GetMapping("/user")
+    @ResponseBody
+    public Principal user(Principal user) {
+        return user;
+    }
+
+    @GetMapping(value = "/{path:[^\\.]*}")
+    public String redirect() {
+        return "forward:/";
     }
 }
 
