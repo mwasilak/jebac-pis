@@ -1,1 +1,2 @@
-# Java Enhanced Bracket Assistant and Coordinator - Ping-pong Score
+### JEBAC-PiS 
+Java Enhanced Bracket Assistant and Coordinator - Ping-Pong Score
