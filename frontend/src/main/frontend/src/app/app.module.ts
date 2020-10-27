@@ -11,7 +11,7 @@ import { MatchesModule } from "./matches/matches.module";
 import { CompetitionModule } from "./competition/competition.module";
 import { LoginComponent } from './components/login/login.component';
 import { AuthService } from "./services/auth.service";
-import { XhrInterceptor } from "./interceptors/xhr-interceptor.service";
+import { AuthInterceptor } from "./interceptors/auth-interceptor";
 
 @NgModule({
   declarations: [
@@ -31,7 +31,7 @@ import { XhrInterceptor } from "./interceptors/xhr-interceptor.service";
   ],
   bootstrap: [AppComponent],
   providers: [
-    AuthService, { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true }
+    AuthService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ]
 })
 export class AppModule { }

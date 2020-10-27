@@ -1,17 +1,11 @@
 package pl.sixpinetrees.tournament.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.ArrayList;
-import java.util.Collection;
 
 @Entity
-public class Player implements UserDetails {
+public class Player{
 
     @Id
     @GeneratedValue
@@ -20,10 +14,6 @@ public class Player implements UserDetails {
     private String firstName;
 
     private String lastName;
-
-    private String username;
-
-    private String password;
 
     public Player() {
     }
@@ -53,56 +43,12 @@ public class Player implements UserDetails {
         this.lastName = lastName;
     }
 
-    @JsonIgnore
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @JsonIgnore
-    @Override
-    public String getUsername() {
-        return username;
-    }
-
-    @JsonIgnore
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return new ArrayList<>();
-    }
-
-    @JsonIgnore
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @JsonIgnore
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @JsonIgnore
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @JsonIgnore
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
-
     @Override
     public String toString() {
         return "Player{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
                 '}';
     }
 }
