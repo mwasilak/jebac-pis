@@ -22,8 +22,8 @@
 				<version>1.6</version>
 
 				<configuration>
-					<nodeVersion>v10.7.0</nodeVersion>
-					<npmVersion>6.2.0</npmVersion>
+					<nodeVersion>v14.8.0</nodeVersion>
+					<npmVersion>6.14.7</npmVersion>
 					<workingDirectory>src/main/frontend</workingDirectory>
 				</configuration>
 

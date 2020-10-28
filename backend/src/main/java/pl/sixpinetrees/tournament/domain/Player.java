@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Player {
+public class Player{
 
     @Id
     @GeneratedValue
@@ -47,8 +47,8 @@ public class Player {
     public String toString() {
         return "Player{" +
                 "id=" + id +
-                ", firstName='" + firstName +
-                "', lastName='" + lastName + "'" +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 '}';
     }
 }

@@ -5,19 +5,29 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import pl.sixpinetrees.tournament.domain.Player;
 import pl.sixpinetrees.tournament.domain.dto.CompetitionForm;
 import pl.sixpinetrees.tournament.repository.PlayerRepository;
+import pl.sixpinetrees.tournament.auth.UserRegistrationRequest;
+import pl.sixpinetrees.tournament.auth.UserService;
 import pl.sixpinetrees.tournament.service.CompetitionService;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
+@Controller
 public class TournamentApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(TournamentApplication.class, args);
+    }
+
+    @GetMapping(value = "/{path:[^\\.]*}")
+    public String redirect() {
+        return "forward:/";
     }
 }
 
@@ -57,6 +67,8 @@ class DummyDataCLR implements CommandLineRunner {
         competitionForm.setNumberOfPointsToWin(11);
 
         competitionService.createCompetition(competitionForm);
+
+        userService.addUser(new UserRegistrationRequest("user", "password"));
     }
 
     @Autowired
@@ -64,5 +76,8 @@ class DummyDataCLR implements CommandLineRunner {
 
     @Autowired
     private CompetitionService competitionService;
+
+    @Autowired
+    private UserService userService;
 }
 
