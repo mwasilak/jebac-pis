@@ -6,7 +6,7 @@ import { MatchesDetailsComponent } from './components/matches-details/matches-de
 import { MatchesListComponent } from './components/matches-list/matches-list.component';
 import { MatchesEditComponent } from './components/matches-edit/matches-edit.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { ModalModule } from "ngx-bootstrap";
+import { ModalModule } from "ngx-bootstrap/modal";
 
 @NgModule({
   imports: [

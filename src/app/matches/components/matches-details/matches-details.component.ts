@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
-import { BsModalRef, BsModalService } from "ngx-bootstrap";
+import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 import { forkJoin } from "rxjs";
 
 import { Match } from "../../match";

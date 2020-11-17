@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from "@angular/router";
 import { AbstractControl, FormArray, FormBuilder, FormGroup, ValidatorFn } from "@angular/forms";
-import { BsModalRef, BsModalService } from "ngx-bootstrap";
+import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 import { forkJoin } from "rxjs";
 
 import { Match } from "../../match";
