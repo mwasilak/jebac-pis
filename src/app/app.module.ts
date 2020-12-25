@@ -12,12 +12,14 @@ import { CompetitionModule } from "./competition/competition.module";
 import { LoginComponent } from './components/login/login.component';
 import { AuthService } from "./services/auth.service";
 import { AuthInterceptor } from "./interceptors/auth-interceptor";
+import { RegisterUserComponent } from './components/register/register-user/register-user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterUserComponent
   ],
   imports: [
     BrowserModule,

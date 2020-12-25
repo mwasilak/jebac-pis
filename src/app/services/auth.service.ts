@@ -18,11 +18,14 @@ export class AuthService {
       .pipe(
         map(userData => {
           this.tokenService.storeUsername(credentials.username);
-          let tokenStr = "Bearer " + userData.authToken;
           this.tokenService.storeToken(userData.authToken);
           return userData;
         })
       );
+  }
+
+  register(user) : Observable<any> {
+    return this.http.post<any>('register', user);
   }
 
   isUserLoggedIn() {
