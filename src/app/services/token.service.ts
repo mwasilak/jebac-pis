@@ -24,4 +24,12 @@ export class TokenService {
   public retrieveUsername(): string {
     return sessionStorage.getItem("username");
   }
+
+  public removeUsername() {
+    sessionStorage.removeItem("username");
+  }
+
+  public removeToken() {
+    sessionStorage.removeItem("token");
+  }
 }
