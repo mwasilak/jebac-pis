@@ -8,18 +8,18 @@ import java.util.List;
 
 public class CompetitionForm {
 
-    @Size(min = 1, max = 32, message = "Competition name length must be between {min} and {max}.")
+    @Size(min = 6, max = 32, message = "Competition name must be between {min} and {max} characters long")
     private String name;
 
-    @Size(min = 2, message = "Competition must be joined by at least 2 players.")
+    @Size(min = 4, max = 32, message = "Competition must have between {min} and {max} participants")
     private List<Long> playerIds = new ArrayList<>();
 
-    @Min(1)
-    @Max(5)
+    @Min(value = 1, message = "Number of games to win match must be {value} or greater")
+    @Max(value = 5, message = "Number of games to win match must be {value} or less")
     private Integer numberOfWinsRequired;
 
-    @Min(11)
-    @Max(25)
+    @Min(value = 11, message = "Number of points to win game must be {value} or greater")
+    @Max(value = 25, message = "Number of points to win game must be {value} or less")
     private Integer numberOfPointsToWin;
 
     public CompetitionForm() {

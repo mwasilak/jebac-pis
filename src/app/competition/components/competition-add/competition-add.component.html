@@ -2,21 +2,47 @@
   <h3>Add new competition</h3>
   <form [formGroup]='form'>
     <div class="form-group">
-      <input class="form-control" type="text" placeholder="Competition name" formControlName="name"/>
-      <!--<div class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect name</div>-->
+      <input class="form-control" type="text" placeholder="Competition name" formControlName="name"
+             [ngClass]="{'is-invalid' : form.get('name').invalid && form.get('name').touched,
+                         'is-valid' : form.get('name').valid && form.get('name').touched}"/>
+      <div class="invalid-feedback" *ngIf="form.get('name').invalid">
+        <div *ngIf="form.get('name').errors.required ||
+                    form.get('name').errors.minlength ||
+                    form.get('name').errors.maxlength">Competition name must be between 6 and 32 characters long</div>
+      </div>
     </div>
     <div class="form-group">
       <label>Players</label>:
-      <select multiple class="form-control" formControlName="playerIds" [size]="players?.length">
+      <select multiple class="form-control" formControlName="playerIds" [size]="players?.length"
+              [ngClass]="{'is-invalid' : form.get('playerIds').invalid && form.get('playerIds').touched,
+                          'is-valid' : form.get('playerIds').valid && form.get('playerIds').touched}">
         <option *ngFor="let player of players" [value]="player.id">{{player.firstName + ' ' + player.lastName}}</option>
       </select>
-      <!--<div class="invalid-feedback" th:if="${#fields.hasErrors('playerIds')}" th:errors="*{playerIds}">Incorrect players</div>-->
+      <div class="invalid-feedback" *ngIf="form.get('playerIds').invalid">
+        <div *ngIf="form.get('playerIds').errors.required ||
+                    form.get('playerIds').errors.minlength ||
+                    form.get('playerIds').errors.maxlength">Competition must have between 4 and 32 participants</div>
+      </div>
     </div>
     <div class="form-group">
-      <input type="text" class="form-control" placeholder="Number of games to win match" formControlName="numberOfWinsRequired">
+      <input type="text" class="form-control" placeholder="Number of games to win match" formControlName="numberOfWinsRequired"
+             [ngClass]="{'is-invalid' : form.get('numberOfWinsRequired').invalid && form.get('numberOfWinsRequired').touched,
+                         'is-valid' : form.get('numberOfWinsRequired').valid && form.get('numberOfWinsRequired').touched}"/>
+      <div class="invalid-feedback" *ngIf="form.get('numberOfWinsRequired').invalid">
+        <div *ngIf="form.get('numberOfWinsRequired').errors.required ||
+                    form.get('numberOfWinsRequired').errors.min ||
+                    form.get('numberOfWinsRequired').errors.max">Number of games to win match must be between 1 and 5</div>
+      </div>
     </div>
     <div class="form-group">
-      <input type="text" class="form-control" placeholder="Number of points to win game" formControlName="numberOfPointsToWin">
+      <input type="text" class="form-control" placeholder="Number of points to win game" formControlName="numberOfPointsToWin"
+             [ngClass]="{'is-invalid' : form.get('numberOfPointsToWin').invalid && form.get('numberOfPointsToWin').touched,
+                         'is-valid' : form.get('numberOfPointsToWin').valid && form.get('numberOfPointsToWin').touched}"/>
+      <div class="invalid-feedback" *ngIf="form.get('numberOfPointsToWin').invalid">
+        <div *ngIf="form.get('numberOfPointsToWin').errors.required ||
+                    form.get('numberOfPointsToWin').errors.min ||
+                    form.get('numberOfPointsToWin').errors.max">Number of points to win game must be between 11 and 25</div>
+      </div>
     </div>
     <button class="btn btn-primary" (click)="sendForm(form)">Add</button>
   </form>

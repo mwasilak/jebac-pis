@@ -3,6 +3,7 @@ import { PlayersService } from "../../../players/services/players.service";
 import { CompetitionsService } from "../../services/competitions.service";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { Player } from "../../../players/player";
 
 @Component({
   selector: 'app-competition-add',
@@ -11,19 +12,25 @@ import { Router } from "@angular/router";
 })
 export class CompetitionAddComponent implements OnInit {
 
-  players: any[];
-  form: FormGroup= new FormGroup({
+  players: Player[];
+  form: FormGroup = new FormGroup({
     name: new FormControl('', [
-      Validators.required
+      Validators.required,
+      Validators.minLength(6),
+      Validators.maxLength(32)
     ]),
-    playerIds: new FormControl('', [
-      Validators.minLength(2)
+    playerIds: new FormControl([], [
+      Validators.required,
+      Validators.minLength(4),
+      Validators.maxLength(32)
     ]),
     numberOfWinsRequired: new FormControl(3, [
+      Validators.required,
       Validators.min(1),
       Validators.max(5)
     ]),
     numberOfPointsToWin: new FormControl(11, [
+      Validators.required,
       Validators.min(11),
       Validators.max(25)
     ])
@@ -31,13 +38,14 @@ export class CompetitionAddComponent implements OnInit {
 
   constructor(private playersService: PlayersService,
               private competitionsService: CompetitionsService,
-              private router: Router) {}
+              private router: Router) {
+  }
 
   ngOnInit() {
     this.playersService.fetchList()
-      .subscribe((resp:any)=>{
+      .subscribe((resp: Array<Player>) => {
         this.players = resp;
-    });
+      });
   }
 
   sendForm(form) {
@@ -47,11 +55,10 @@ export class CompetitionAddComponent implements OnInit {
           ...form.value
         })
         .subscribe((resp) => {
-          this.router.navigate(['/competitions/details', resp]);
+          this.router.navigate(['/competitions/details', resp]).then();
         });
     } else {
-      console.error('form invalid');
-      console.log(form.value);
+      this.form.markAllAsTouched();
     }
   }
 
