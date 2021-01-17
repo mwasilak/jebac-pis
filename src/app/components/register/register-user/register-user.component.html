@@ -2,10 +2,23 @@
     <h3>Register user</h3>
     <form [formGroup]='form'>
         <div class="form-group">
-            <input class="form-control" type="text" formControlName="username" placeholder="username" />
+            <input class="form-control" type="text" formControlName="username" placeholder="username"
+                   [ngClass]="{'is-invalid' : form.get('username').invalid && form.get('username').touched,
+                               'is-valid' : form.get('username').valid && form.get('username').touched}"/>
+            <div class="invalid-feedback" *ngIf="form.get('username').invalid">
+                <div *ngIf="form.get('username').errors.required">Username is required</div>
+                <div *ngIf="form.get('username').errors.minLength">Username must be at least 8 characters long</div>
+            </div>
         </div>
         <div class="form-group">
-            <input type="password" class="form-control" type="password" formControlName="password" placeholder="password" />
+            <input type="password" class="form-control" type="password" formControlName="password"
+                   placeholder="password"
+                   [ngClass]="{'is-invalid' : form.get('password').invalid && form.get('password').touched,
+                               'is-valid' : form.get('password').valid && form.get('password').touched}"/>
+            <div class="invalid-feedback" *ngIf="form.get('password').invalid">
+                <div *ngIf="form.get('password').errors.required">Password is required</div>
+                <div *ngIf="form.get('password').errors.minLength">Password must be at least 8 characters long</div>
+            </div>
         </div>
         <button class="btn btn-primary" (click)="sendForm(form)">Register</button>
     </form>

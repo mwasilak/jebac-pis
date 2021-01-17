@@ -4,18 +4,20 @@ import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector : 'app-register-user',
-  templateUrl : './register-user.component.html',
-  styleUrls : ['./register-user.component.css']
+  selector: 'app-register-user',
+  templateUrl: './register-user.component.html',
+  styleUrls: ['./register-user.component.css']
 })
 export class RegisterUserComponent implements OnInit {
 
-  form : FormGroup = new FormGroup({
-    username : new FormControl('', [
-      Validators.minLength(2)
+  form: FormGroup = new FormGroup({
+    username: new FormControl('', [
+      Validators.minLength(8),
+      Validators.required
     ]),
-    password : new FormControl('', [
-      Validators.minLength(2)
+    password: new FormControl('', [
+      Validators.minLength(8),
+      Validators.required
     ])
   });
 
@@ -23,7 +25,7 @@ export class RegisterUserComponent implements OnInit {
               private router: Router) {
   }
 
-  ngOnInit() : void {
+  ngOnInit(): void {
   }
 
   sendForm(form) {
