@@ -12,7 +12,8 @@ export class BracketMatchComponent implements OnInit {
   @Input() middleBar: boolean;
   @Input() final: boolean;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

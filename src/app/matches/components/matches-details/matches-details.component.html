@@ -1,34 +1,34 @@
 <ng-template #template>
-<div class="container content-padding">
-  <h3>{{match.name}}</h3>
-  <table class="table">
-    <thead>
-    <tr>
-      <td>{{match?.games?.length > 0 ? 'Game' : ''}}</td>
-      <td class="text-right">
-        <ng-container *ngIf="player1?.id !== null">
-          <a [routerLink]="['', { outlets: { primary: ['players', 'details', player1.id], modal: null} }]">{{player1?.firstName + ' ' + player1?.lastName}}</a>
-        </ng-container>
-      </td>
-      <td class="text-center">:</td>
-      <td>
-        <ng-container *ngIf="player2?.id !== null">
-          <a [routerLink]="['', { outlets: { primary: ['players', 'details', player2.id], modal: null} }]">{{player2?.firstName + ' ' + player2?.lastName}}</a>
-        </ng-container>
-      </td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let game of match.games">
-      <td>{{game.gameNumber}}</td>
-      <td class="text-right">{{game.scorePlayer1}}</td>
-      <td class="text-center"> :</td>
-      <td>{{game.scorePlayer2}}</td>
-    </tr>
-    </tbody>
-  </table>
-  <a *ngIf="match.status === 'READY'" class="btn btn-primary"
-     [routerLink]="['', { outlets: { modal: ['matches', 'edit', match.id] } }]">Record match results</a>
-  <a class="btn btn-outline-primary" [routerLink]="['', { outlets: { modal: null} }]">Back to list</a>
-</div>
+    <div class="container content-padding">
+        <h3>{{match.name}}</h3>
+        <table class="table">
+            <thead>
+            <tr>
+                <td>{{match?.games?.length > 0 ? 'Game' : ''}}</td>
+                <td class="text-right">
+                    <ng-container *ngIf="player1?.id !== null">
+                        <a [routerLink]="['', { outlets: { primary: ['players', 'details', player1.id], modal: null} }]">{{player1?.firstName + ' ' + player1?.lastName}}</a>
+                    </ng-container>
+                </td>
+                <td class="text-center">:</td>
+                <td>
+                    <ng-container *ngIf="player2?.id !== null">
+                        <a [routerLink]="['', { outlets: { primary: ['players', 'details', player2.id], modal: null} }]">{{player2?.firstName + ' ' + player2?.lastName}}</a>
+                    </ng-container>
+                </td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let game of match.games">
+                <td>{{game.gameNumber}}</td>
+                <td class="text-right">{{game.scorePlayer1}}</td>
+                <td class="text-center"> :</td>
+                <td>{{game.scorePlayer2}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <a *ngIf="match.status === 'READY'" class="btn btn-primary"
+           [routerLink]="['', { outlets: { modal: ['matches', 'edit', match.id] } }]">Record match results</a>
+        <a class="btn btn-outline-primary" [routerLink]="['', { outlets: { modal: null} }]">Back to list</a>
+    </div>
 </ng-template>

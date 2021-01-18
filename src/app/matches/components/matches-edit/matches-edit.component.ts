@@ -18,7 +18,7 @@ import { CompetitionsService } from "../../../competition/services/competitions.
 })
 export class MatchesEditComponent implements OnInit, OnDestroy {
 
-  @ViewChild('template', { static: true }) template
+  @ViewChild('template', {static: true}) template
 
   modalRef: BsModalRef;
   form: FormGroup;
@@ -29,13 +29,14 @@ export class MatchesEditComponent implements OnInit, OnDestroy {
   player2: Player;
   competition: Competition;
 
-  constructor(private matchesService:MatchesService,
-              private playersService:PlayersService,
-              private competitionsService:CompetitionsService,
+  constructor(private matchesService: MatchesService,
+              private playersService: PlayersService,
+              private competitionsService: CompetitionsService,
               private route: ActivatedRoute,
               private formBuilder: FormBuilder,
               private router: Router,
-              private modalService:BsModalService) { }
+              private modalService: BsModalService) {
+  }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -49,20 +50,20 @@ export class MatchesEditComponent implements OnInit, OnDestroy {
         this.form = this.formBuilder.group({
           games: this.formBuilder.array([])
         }, {
-          validator: this.gameValidator(this.competition.victoryConditions.numberOfPointsToWin,this.competition.victoryConditions.numberOfWinsRequired)
+          validator: this.gameValidator(this.competition.victoryConditions.numberOfPointsToWin, this.competition.victoryConditions.numberOfWinsRequired)
         });
 
         this.games = this.form.get('games') as FormArray;
-        for(let game of this.match.games) {
+        for (let game of this.match.games) {
           this.games.push(this.createGame(game.scorePlayer1, game.scorePlayer2));
         }
         for (let i = 0; i < this.competition.victoryConditions.numberOfWinsRequired - this.match.games.length; i++) {
-          this.games.push(this.createGame("",""));
+          this.games.push(this.createGame("", ""));
         }
         this.modalRef = this.modalService.show(this.template, {});
         this.modalService.onHide.subscribe((reason: string) => {
-          if(reason === "backdrop-click") {
-            this.router.navigate(['', {outlets: {modal: null}}]);
+          if (reason === "backdrop-click") {
+            this.router.navigate(['', {outlets: {modal: null}}]).then();
           }
         })
       });
@@ -74,7 +75,7 @@ export class MatchesEditComponent implements OnInit, OnDestroy {
     this.modalRef = null;
   }
 
-  getData(id:string) {
+  getData(id: string) {
 
     let matchRequest = this.matchesService.fetchDetails(id);
     let playersRequest = this.playersService.fetchListByMatchId(id);
@@ -82,7 +83,7 @@ export class MatchesEditComponent implements OnInit, OnDestroy {
     return forkJoin([matchRequest, playersRequest, competitionRequest]);
   }
 
-  createGame(scorePlayer1, scorePlayer2) : FormGroup {
+  createGame(scorePlayer1, scorePlayer2): FormGroup {
     return this.formBuilder.group({
       scorePlayer1: [scorePlayer1],
       scorePlayer2: [scorePlayer2]
@@ -102,24 +103,23 @@ export class MatchesEditComponent implements OnInit, OnDestroy {
   sendForm(form) {
     if (form.valid) {
       this.matchesService
-        .edit(this.match.id.toString(),{
+        .edit(this.match.id.toString(), {
           ...form.value
         })
         .subscribe((resp) => {
           this.router.routeReuseStrategy.shouldReuseRoute = (future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean => {
             return false;
           };
-          this.router.navigate(['', {outlets: {modal: null}}]);
+          this.router.navigate(['', {outlets: {modal: null}}]).then();
         });
     } else {
       console.error('form invalid');
     }
   }
 
-  gameValidator(numberOfPointsToWin : number, numberOfWinsRequired: number):ValidatorFn {
+  gameValidator(numberOfPointsToWin: number, numberOfWinsRequired: number): ValidatorFn {
     return (form: AbstractControl):
-      { [key: string]: any } | null =>
-    {
+      { [key: string]: any } | null => {
       let gamesArray = form.get('games') as FormArray;
       let index = 0;
       let player1Wins = 0;

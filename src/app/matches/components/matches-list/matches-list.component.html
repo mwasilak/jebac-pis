@@ -1,17 +1,17 @@
 <div class="container content-padding">
-  <h3>Matches</h3>
-  <table class="table">
-    <thead>
-    <tr>
-      <td>#</td>
-      <td>Name</td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let match of matches; let i = index">
-      <td>{{i+1}}</td>
-      <td><a [routerLink]="['', { outlets: { modal: ['matches', 'details', match.id] } }]">{{match.name}}</a></td>
-    </tr>
-    </tbody>
-  </table>
+    <h3>Matches</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <td>#</td>
+            <td>Name</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let match of matches; let i = index">
+            <td>{{i + 1}}</td>
+            <td><a [routerLink]="['', { outlets: { modal: ['matches', 'details', match.id] } }]">{{match.name}}</a></td>
+        </tr>
+        </tbody>
+    </table>
 </div>

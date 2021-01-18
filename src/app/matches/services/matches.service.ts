@@ -8,14 +8,15 @@ import { Match } from "../match";
 })
 export class MatchesService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   fetchList(): Observable<Match[]> {
     return this.http.get<Match[]>('api/matches');
   }
 
-  fetchListByCompetitionId(id: string): Observable<{[key:string]:Match;}> {
-    return this.http.get<{[key:string]:Match;}>('api/matches/competition/' + id);
+  fetchListByCompetitionId(id: string): Observable<{ [key: string]: Match; }> {
+    return this.http.get<{ [key: string]: Match; }>('api/matches/competition/' + id);
   }
 
   fetchDetails(id: string): Observable<Match> {

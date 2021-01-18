@@ -25,4 +25,5 @@ import { ModalModule } from "ngx-bootstrap/modal";
     MatchesDetailsComponent
   ]
 })
-export class MatchesModule { }
+export class MatchesModule {
+}

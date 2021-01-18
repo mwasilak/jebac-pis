@@ -1,4 +1,4 @@
-import {VictoryConditions} from "./victory-conditions";
+import { VictoryConditions } from "./victory-conditions";
 
 export class Competition {
   id: number;
@@ -13,11 +13,11 @@ export class Competition {
     if (round == 1) {
       return this.numberOfMatchesInFirstRound;
     }
-    return Math.pow(2,this.numberOfRounds - round);
+    return Math.pow(2, this.numberOfRounds - round);
   }
 
   calculateMaxMatchesInRound(round: number): number {
-    return Math.pow(2,this.numberOfRounds - round);
+    return Math.pow(2, this.numberOfRounds - round);
   }
 
   isDoubleMatch(round: number, position: number): boolean {
@@ -29,7 +29,7 @@ export class Competition {
   }
 
   isWithoutMiddleBar(round: number, position: number): boolean {
-    return (round == 1) || (round == 2 && position > (this.numberOfMatchesInFirstRound+1)/2);
+    return (round == 1) || (round == 2 && position > (this.numberOfMatchesInFirstRound + 1) / 2);
   }
 
 }

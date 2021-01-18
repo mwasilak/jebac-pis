@@ -1,5 +1,5 @@
-import {Game} from "./game";
-import {Player} from "../players/player";
+import { Game } from "./game";
+import { Player } from "../players/player";
 
 export class Match {
   id: number;

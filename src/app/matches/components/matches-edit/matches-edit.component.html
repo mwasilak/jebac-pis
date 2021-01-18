@@ -1,49 +1,54 @@
 <ng-template #template>
-<div class="container content-padding">
-  <h3>Record match results</h3>
-  <form [formGroup]='form'>
-    <div class="table-responsive">
-    <table class="table" style="max-width: none">
-      <thead>
-      <tr>
-        <td>&nbsp;</td>
-        <td class="text-right">
-          <ng-container *ngIf="player1?.id !== null">
-            <a [routerLink]="['', { outlets: { primary: ['/players/details', player1.id], modal: null} }]">{{player1?.firstName + ' ' + player1?.lastName}}</a>
-          </ng-container>
-        </td>
-        <td class="text-center">:</td>
-        <td class="text-left">
-          <ng-container *ngIf="player2?.id !== null">
-            <a [routerLink]="['', { outlets: { primary: ['/players/details', player2.id], modal: null} }]">{{player2?.firstName + ' ' + player2?.lastName}}</a>
-          </ng-container>
-        </td>
-      <td>&nbsp;</td>
-      </tr>
-      </thead>
-      <tbody>
-      <tr formArrayName="games" *ngFor="let game of games.controls; let i = index">
-        <ng-container [formGroupName]="i">
-          <td>{{i+1}}</td>
-          <td class="text-right" >
-            <input type="number" formControlName="scorePlayer1" class="form-control form-control-sm">
-          </td>
-          <td class="text-center">:</td>
-          <td>
-            <input type="number" formControlName="scorePlayer2" class="form-control form-control-sm">
-          </td>
-          <td class="delete-game">
-            <button *ngIf="i+1>competition.victoryConditions.numberOfWinsRequired" class="btn btn-outline-danger btn-sm" (click)="removeGame(i)">
-              x
+    <div class="container content-padding">
+        <h3>Record match results</h3>
+        <form [formGroup]='form'>
+            <div class="table-responsive">
+                <table class="table" style="max-width: none">
+                    <thead>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td class="text-right">
+                            <ng-container *ngIf="player1?.id !== null">
+                                <a [routerLink]="['', { outlets: { primary: ['/players/details', player1.id], modal: null} }]">{{player1?.firstName + ' ' + player1?.lastName}}</a>
+                            </ng-container>
+                        </td>
+                        <td class="text-center">:</td>
+                        <td class="text-left">
+                            <ng-container *ngIf="player2?.id !== null">
+                                <a [routerLink]="['', { outlets: { primary: ['/players/details', player2.id], modal: null} }]">{{player2?.firstName + ' ' + player2?.lastName}}</a>
+                            </ng-container>
+                        </td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr formArrayName="games" *ngFor="let game of games.controls; let i = index">
+                        <ng-container [formGroupName]="i">
+                            <td>{{i + 1}}</td>
+                            <td class="text-right">
+                                <input type="number" formControlName="scorePlayer1"
+                                       class="form-control form-control-sm">
+                            </td>
+                            <td class="text-center">:</td>
+                            <td>
+                                <input type="number" formControlName="scorePlayer2"
+                                       class="form-control form-control-sm">
+                            </td>
+                            <td class="delete-game">
+                                <button *ngIf="i+1>competition.victoryConditions.numberOfWinsRequired"
+                                        class="btn btn-outline-danger btn-sm" (click)="removeGame(i)">
+                                    x
+                                </button>
+                            </td>
+                        </ng-container>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button class="btn btn-primary" (click)="sendForm(form)" [disabled]="!form.valid">Register results</button>&nbsp;
+            <button *ngIf="games.controls.length<2*competition.victoryConditions.numberOfWinsRequired-1"
+                    class="btn btn-outline-primary" (click)="addGame()">Add game
             </button>
-          </td>
-        </ng-container>
-      </tr>
-      </tbody>
-    </table>
+        </form>
     </div>
-    <button class="btn btn-primary" (click)="sendForm(form)" [disabled]="!form.valid">Register results</button>&nbsp;
-    <button *ngIf="games.controls.length<2*competition.victoryConditions.numberOfWinsRequired-1" class="btn btn-outline-primary" (click)="addGame()">Add game</button>
-  </form>
-</div>
 </ng-template>

@@ -12,7 +12,8 @@ import { Player } from "../../../players/player";
 })
 export class CompetitionAddComponent implements OnInit {
 
-  players: Player[];
+  players: Array<Player>;
+
   form: FormGroup = new FormGroup({
     name: new FormControl('', [
       Validators.required,

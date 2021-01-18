@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {CompetitionsService} from "../../services/competitions.service";
+import { CompetitionsService } from "../../services/competitions.service";
+import { Competition } from "../../competition";
 
 @Component({
   selector: 'app-competition-list',
@@ -8,14 +9,14 @@ import {CompetitionsService} from "../../services/competitions.service";
 })
 export class CompetitionListComponent implements OnInit {
 
-  competitions: any[];
+  competitions: Array<Competition>;
 
-  constructor(private competitionService:CompetitionsService) {
+  constructor(private competitionService: CompetitionsService) {
   }
 
   ngOnInit() {
     this.competitionService.fetchList()
-      .subscribe((resp:any)=>{
+      .subscribe((resp: Array<Competition>) => {
         this.competitions = resp;
       });
   }

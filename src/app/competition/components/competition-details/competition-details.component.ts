@@ -17,14 +17,15 @@ import { Match } from "../../../matches/match";
 export class CompetitionDetailsComponent implements OnInit {
 
   competition: Competition = new Competition();
-  matches: { [key:string]:Match; };
-  players: { [key:string]:Player; };
+  matches: { [key: string]: Match; };
+  players: { [key: string]: Player; };
 
-  constructor(private competitionService:CompetitionsService,
-              private matchesService:MatchesService,
-              private playersService:PlayersService,
+  constructor(private competitionService: CompetitionsService,
+              private matchesService: MatchesService,
+              private playersService: PlayersService,
               private router: Router,
-              private route: ActivatedRoute) {}
+              private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -39,7 +40,7 @@ export class CompetitionDetailsComponent implements OnInit {
           this.competition.name = competitionResponse['name'];
           this.competition.numberOfMatchesInFirstRound = competitionResponse['numberOfMatchesInFirstRound'];
           this.competition.numberOfPlayers = competitionResponse['numberOfPlayers'];
-          this.competition.numberOfRounds =  competitionResponse['numberOfRounds'];
+          this.competition.numberOfRounds = competitionResponse['numberOfRounds'];
 
           this.matches = matchesResponse;
 
@@ -48,7 +49,7 @@ export class CompetitionDetailsComponent implements OnInit {
     });
   }
 
-  getData(id:string) {
+  getData(id: string) {
 
     let competitionRequest = this.competitionService.fetchDetails(id);
     let matchesRequest = this.matchesService.fetchListByCompetitionId(id);
@@ -62,8 +63,8 @@ export class CompetitionDetailsComponent implements OnInit {
 
   getMatchByPosition(round: number, position: number): Match {
 
-    let match = this.matches['['+round+'/'+position+']'];
-    if(match != undefined) {
+    let match = this.matches['[' + round + '/' + position + ']'];
+    if (match != undefined) {
       match.player1 = this.players[match.player1Id];
       match.player2 = this.players[match.player2Id];
     }
