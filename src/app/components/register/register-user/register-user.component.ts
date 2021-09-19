@@ -32,7 +32,7 @@ export class RegisterUserComponent implements OnInit {
     if (form.valid) {
       this.authService.register(form.value).subscribe(
         data => {
-          this.router.navigateByUrl('/login');
+          this.router.navigateByUrl('/login').then();
         }
       );
     }

@@ -1,12 +1,12 @@
 <div class="container content-padding">
-<div *ngIf="!authenticated">
-  <h3>Welcome to the Tournament</h3><br>
-  <p>Tournament is an online application for organizing table tennis tournaments.
-    The app allows you to easily plan a bracket and record results of each individual match.
-    Competition progress is visible online to all players. Please login to access your account,
-    or please register a new account</p>
-</div>
-<div *ngIf="authenticated">
-  <p>You have no new matches.</p>
-</div>
+    <div *ngIf="!authenticated">
+        <h3>Welcome to the Tournament</h3><br>
+        <p>Tournament is an online application for organizing table tennis tournaments.
+            The app allows you to easily plan a bracket and record results of each individual match.
+            Competition progress is visible online to all players. Please login to access your account,
+            or please register a new account</p>
+    </div>
+    <div *ngIf="authenticated">
+        <p>You have no new matches.</p>
+    </div>
 </div>

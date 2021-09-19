@@ -16,7 +16,6 @@ export class LoginComponent implements OnInit {
       Validators.required
     ]),
     password: new FormControl('', [
-
       Validators.required
     ])
   });
@@ -32,7 +31,7 @@ export class LoginComponent implements OnInit {
     if (form.valid) {
       this.authService.authenticate(form.value).subscribe(
         data => {
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl('/').then();
         }
       );
     }
