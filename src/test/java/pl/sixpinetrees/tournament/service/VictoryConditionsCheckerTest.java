@@ -1,10 +1,11 @@
 package pl.sixpinetrees.tournament.service;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import pl.sixpinetrees.tournament.domain.VictoryConditions;
 import pl.sixpinetrees.tournament.domain.MatchWinner;
 import pl.sixpinetrees.tournament.domain.dto.GameRow;
@@ -15,7 +16,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class VictoryConditionsCheckerTest {
 
@@ -44,20 +45,19 @@ public class VictoryConditionsCheckerTest {
         assertThat(matchWinner).isEqualTo(MatchWinner.PLAYER1);
     }
 
-    @Test(expected = ServiceValidationException.class)
+    @Test()
     public void shouldFailWhenNoMatchFormProvided() throws Exception {
         //given
-        ResultRegistrationForm resultRegistrationForm = null;
-
         VictoryConditions victoryConditions = new VictoryConditions(3, 11);
 
         //when
-        victoryConditionsChecker.determineWinner(resultRegistrationForm, victoryConditions);
+        Assertions.assertThrows(ServiceValidationException.class,
+                () -> victoryConditionsChecker.determineWinner(null, victoryConditions));
 
         //then
     }
 
-    @Test(expected = ServiceValidationException.class)
+    @Test()
     public void shouldFailWhenMatchFormWithWrongGameResultsProvided() throws Exception {
         //given
         List<GameRow> gameList = new ArrayList<>();
@@ -73,12 +73,13 @@ public class VictoryConditionsCheckerTest {
         VictoryConditions victoryConditions = new VictoryConditions(3, 11);
 
         //when
-        victoryConditionsChecker.determineWinner(resultRegistrationForm, victoryConditions);
+        Assertions.assertThrows(ServiceValidationException.class,
+                () -> victoryConditionsChecker.determineWinner(resultRegistrationForm, victoryConditions));
 
         //then
     }
 
-    @Test(expected = ServiceValidationException.class)
+    @Test()
     public void shouldFailWhenMatchFormWithWrongGameResultsProvided2() throws Exception {
         //given
         List<GameRow> gameList = new ArrayList<>();
@@ -92,13 +93,14 @@ public class VictoryConditionsCheckerTest {
         VictoryConditions victoryConditions = new VictoryConditions(3, 11);
 
         //when
-        victoryConditionsChecker.determineWinner(resultRegistrationForm, victoryConditions);
+        Assertions.assertThrows(ServiceValidationException.class,
+                () -> victoryConditionsChecker.determineWinner(resultRegistrationForm, victoryConditions));
 
         //then
     }
 
 
-    @Test(expected = ServiceValidationException.class)
+    @Test()
     public void shouldFailWhenMatchFormWithWrongGameNumberProvided() throws Exception {
         //given
         List<GameRow> gameList = new ArrayList<>();
@@ -113,12 +115,13 @@ public class VictoryConditionsCheckerTest {
         VictoryConditions victoryConditions = new VictoryConditions(3, 11);
 
         //when
-        victoryConditionsChecker.determineWinner(resultRegistrationForm, victoryConditions);
+        Assertions.assertThrows(ServiceValidationException.class,
+                () -> victoryConditionsChecker.determineWinner(resultRegistrationForm, victoryConditions));
 
         //then
     }
 
-    @Test(expected = ServiceValidationException.class)
+    @Test()
     public void shouldFailWhenMatchFormWithSameNumberOfWinsProvided() throws Exception {
         //given
         List<GameRow> gameList = new ArrayList<>();
@@ -135,7 +138,8 @@ public class VictoryConditionsCheckerTest {
         VictoryConditions victoryConditions = new VictoryConditions(3, 11);
 
         //when
-        victoryConditionsChecker.determineWinner(resultRegistrationForm, victoryConditions);
+        Assertions.assertThrows(ServiceValidationException.class,
+                () -> victoryConditionsChecker.determineWinner(resultRegistrationForm, victoryConditions));
 
         //then
     }

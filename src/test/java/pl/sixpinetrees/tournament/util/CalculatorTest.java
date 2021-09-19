@@ -1,6 +1,7 @@
 package pl.sixpinetrees.tournament.util;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;

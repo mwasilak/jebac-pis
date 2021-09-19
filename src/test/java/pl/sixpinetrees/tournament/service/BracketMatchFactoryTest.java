@@ -1,14 +1,13 @@
 package pl.sixpinetrees.tournament.service;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import pl.sixpinetrees.tournament.domain.BracketPosition;
 import pl.sixpinetrees.tournament.domain.Competition;
 import pl.sixpinetrees.tournament.domain.Match;
-import pl.sixpinetrees.tournament.domain.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class BracketMatchFactoryTest {
 

@@ -1,13 +1,13 @@
 package pl.sixpinetrees.tournament.web;
 
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import pl.sixpinetrees.tournament.domain.Player;
 import pl.sixpinetrees.tournament.repository.PlayerRepository;
@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Project: tournament
  * Created by maciej on 26.01.17.
  */
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @WebMvcTest(PlayerController.class)
 public class PlayerControllerTest {
 
@@ -38,7 +38,7 @@ public class PlayerControllerTest {
     private ResultRegistrationService resultRegistrationService;
 
     @Test
-    @Ignore
+    @Disabled
     public void players() throws Exception {
 
         ArrayList<Player> a = new ArrayList<Player>();
