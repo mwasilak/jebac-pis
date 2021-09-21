@@ -108,7 +108,7 @@
         <version>1.6</version>
 
         <configuration>
-          <nodeVersion>v14.8.0</nodeVersion>
+          <nodeVersion>v14.17.6</nodeVersion>
         </configuration>
 
         <executions>
