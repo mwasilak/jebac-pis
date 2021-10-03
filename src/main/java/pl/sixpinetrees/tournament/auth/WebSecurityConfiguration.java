@@ -48,7 +48,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/js/*", "/favicon.ico");
+        web.ignoring().antMatchers("/js/*");
     }
 
     @Override
@@ -56,7 +56,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         // @formatter:off
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/index.html", "/", "/home", "/authenticate", "/register").permitAll()
+                .antMatchers("/index.html", "/", "/home", "/authenticate", "/register", "/favicon.ico").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .anyRequest().authenticated()
                 .and().exceptionHandling().authenticationEntryPoint(authExceptionHandler)
