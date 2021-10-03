@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { PlayersModule } from "./players/players.module";
 import { MatchesModule } from "./matches/matches.module";
-import { CompetitionModule } from "./competition/competition.module";
+import { CompetitionsModule } from "./competition/competitions.module";
 import { LoginComponent } from './components/login/login.component';
 import { AuthService } from "./services/auth.service";
 import { AuthInterceptor } from "./interceptors/auth-interceptor";
@@ -27,7 +27,7 @@ import { RegisterUserComponent } from './components/register/register-user/regis
     AppRoutingModule,
     PlayersModule,
     MatchesModule,
-    CompetitionModule,
+    CompetitionsModule,
     FormsModule,
     ReactiveFormsModule
   ],

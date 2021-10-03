@@ -6,11 +6,11 @@ import { Router } from "@angular/router";
 import { Player } from "../../../players/player";
 
 @Component({
-  selector: 'app-competition-add',
-  templateUrl: './competition-add.component.html',
-  styleUrls: ['./competition-add.component.css']
+  selector: 'app-competitions-add',
+  templateUrl: './competitions-add.component.html',
+  styleUrls: ['./competitions-add.component.css']
 })
-export class CompetitionAddComponent implements OnInit {
+export class CompetitionsAddComponent implements OnInit {
 
   players: Array<Player>;
 

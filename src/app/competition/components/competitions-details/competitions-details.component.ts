@@ -10,17 +10,17 @@ import { Player } from "../../../players/player";
 import { Match } from "../../../matches/match";
 
 @Component({
-  selector: 'app-competition-details',
-  templateUrl: './competition-details.component.html',
-  styleUrls: ['./competition-details.component.css']
+  selector: 'app-competitions-details',
+  templateUrl: './competitions-details.component.html',
+  styleUrls: ['./competitions-details.component.css']
 })
-export class CompetitionDetailsComponent implements OnInit {
+export class CompetitionsDetailsComponent implements OnInit {
 
   competition: Competition = new Competition();
   matches: { [key: string]: Match; };
   players: { [key: string]: Player; };
 
-  constructor(private competitionService: CompetitionsService,
+  constructor(private competitionsService: CompetitionsService,
               private matchesService: MatchesService,
               private playersService: PlayersService,
               private router: Router,
@@ -51,7 +51,7 @@ export class CompetitionDetailsComponent implements OnInit {
 
   getData(id: string) {
 
-    let competitionRequest = this.competitionService.fetchDetails(id);
+    let competitionRequest = this.competitionsService.fetchDetails(id);
     let matchesRequest = this.matchesService.fetchListByCompetitionId(id);
     let playersRequest = this.playersService.fetchListByCompetitionId(id);
     return forkJoin([competitionRequest, matchesRequest, playersRequest]);

@@ -1,10 +1,10 @@
-import { CompetitionModule } from './competition.module';
+import { CompetitionsModule } from './competitions.module';
 
 describe('CompetitionModule', () => {
-  let competitionModule: CompetitionModule;
+  let competitionModule: CompetitionsModule;
 
   beforeEach(() => {
-    competitionModule = new CompetitionModule();
+    competitionModule = new CompetitionsModule();
   });
 
   it('should create an instance', () => {
