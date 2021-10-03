@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MatchesListComponent } from "./components/matches-list/matches-list.component";
 import { MatchesEditComponent } from "./components/matches-edit/matches-edit.component";
 import { MatchesDetailsComponent } from "./components/matches-details/matches-details.component";
-import { AuthGuard } from "../guards/auth.guard";
+import { AuthGuard } from "../auth/guards/auth.guard";
 
 const routes: Routes = [
   {path: 'matches', component: MatchesListComponent, canActivate: [AuthGuard]},

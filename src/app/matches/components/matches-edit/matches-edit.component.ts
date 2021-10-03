@@ -6,10 +6,10 @@ import { forkJoin } from "rxjs";
 
 import { Match } from "../../match";
 import { Player } from "../../../players/player";
-import { Competition } from "../../../competition/competition";
+import { Competition } from "../../../competitions/competition";
 import { MatchesService } from "../../services/matches.service";
 import { PlayersService } from "../../../players/services/players.service";
-import { CompetitionsService } from "../../../competition/services/competitions.service";
+import { CompetitionsService } from "../../../competitions/services/competitions.service";
 
 @Component({
   selector: 'app-matches-edit',

@@ -1,6 +1,6 @@
 import { CompetitionsModule } from './competitions.module';
 
-describe('CompetitionModule', () => {
+describe('CompetitionsModule', () => {
   let competitionModule: CompetitionsModule;
 
   beforeEach(() => {

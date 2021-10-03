@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { CompetitionsListComponent } from "./components/competitions-list/competitions-list.component";
 import { CompetitionsDetailsComponent } from "./components/competitions-details/competitions-details.component";
 import { CompetitionsAddComponent } from "./components/competitions-add/competitions-add.component";
-import { AuthGuard } from "../guards/auth.guard";
+import { AuthGuard } from "../auth/guards/auth.guard";
 
 const routes: Routes = [
   {path: 'competitions', component: CompetitionsListComponent, canActivate: [AuthGuard]},
