@@ -8,7 +8,6 @@ import javax.persistence.Id;
 public class Player{
 
     @Id
-    @GeneratedValue
     private Long id;
 
     private String firstName;
@@ -18,7 +17,8 @@ public class Player{
     public Player() {
     }
 
-    public Player(String firstName, String lastName) {
+    public Player(Long id, String firstName, String lastName) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
     }

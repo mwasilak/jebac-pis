@@ -6,6 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.sixpinetrees.tournament.domain.Player;
+import pl.sixpinetrees.tournament.repository.PlayerRepository;
 
 import java.util.Collections;
 
@@ -14,6 +16,9 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PlayerRepository playerRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -26,8 +31,11 @@ public class UserService implements UserDetailsService {
     }
 
     public User addUser(UserRegistrationRequest userRegistrationRequest) {
-        User user = new User(userRegistrationRequest.getUsername(),
-                passwordEncoder.encode(userRegistrationRequest.getPassword()));
-        return userRepository.save(user);
+        User user = userRepository.save(new User(userRegistrationRequest.getUsername(),
+                passwordEncoder.encode(userRegistrationRequest.getPassword())));
+        playerRepository.save(new Player(user.getId(),
+                userRegistrationRequest.getFirstName(),
+                userRegistrationRequest.getLastName()));
+        return user;
     }
 }

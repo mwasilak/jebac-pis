@@ -37,22 +37,22 @@ class DummyDataCLR implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
 
-        playerRepository.save(new Player("Johnny", "Bravo"));
-        playerRepository.save(new Player("Marty", "McFly"));
-        playerRepository.save(new Player("Barney", "Mead"));
-        playerRepository.save(new Player("Sonny", "Crockett"));
-        playerRepository.save(new Player("Laura", "Philips"));
-        playerRepository.save(new Player("Monica", "King"));
-        playerRepository.save(new Player("Kate", "Austen"));
-        playerRepository.save(new Player("Sally", "Blue"));
-        playerRepository.save(new Player("John", "Wick"));
-        playerRepository.save(new Player("Jason", "Long"));
-        playerRepository.save(new Player("Anna", "Grimm"));
-        playerRepository.save(new Player("Lucy", "Prince"));
-        playerRepository.save(new Player("Peter", "West"));
-        playerRepository.save(new Player("Joseph", "North"));
-        playerRepository.save(new Player("Matt", "East"));
-        playerRepository.save(new Player("Jack", "South"));
+        userService.addUser(new UserRegistrationRequest("jbravo", "password", "Johnny", "Bravo"));
+        userService.addUser(new UserRegistrationRequest("mmcfly", "password", "Marty", "McFly"));
+        userService.addUser(new UserRegistrationRequest("bmead", "password", "Barney", "Mead"));
+        userService.addUser(new UserRegistrationRequest("scrockett", "password", "Sonny", "Crockett"));
+        userService.addUser(new UserRegistrationRequest("lphilips", "password", "Laura", "Philips"));
+        userService.addUser(new UserRegistrationRequest("mking", "password", "Monica", "King"));
+        userService.addUser(new UserRegistrationRequest("kausten", "password", "Kate", "Austen"));
+        userService.addUser(new UserRegistrationRequest("sblue", "password", "Sally", "Blue"));
+        userService.addUser(new UserRegistrationRequest("jwick", "password", "John", "Wick"));
+        userService.addUser(new UserRegistrationRequest("jlong", "password", "Jason", "Long"));
+        userService.addUser(new UserRegistrationRequest("agrimm", "password", "Anna", "Grimm"));
+        userService.addUser(new UserRegistrationRequest("lprince", "password", "Lucy", "Prince"));
+        userService.addUser(new UserRegistrationRequest("pwest", "password", "Peter", "West"));
+        userService.addUser(new UserRegistrationRequest("jnorth", "password", "Joseph", "North"));
+        userService.addUser(new UserRegistrationRequest("meast", "password", "Matt", "East"));
+        userService.addUser(new UserRegistrationRequest("jsouth", "password", "Jack", "South"));
 
         List<Long> playerIdList = new ArrayList<>();
         playerIdList.add(playerRepository.findByFirstNameAndLastName("Johnny", "Bravo").orElseThrow(InternalError::new).getId());
@@ -68,7 +68,7 @@ class DummyDataCLR implements CommandLineRunner {
 
         competitionService.createCompetition(competitionForm);
 
-        userService.addUser(new UserRegistrationRequest("user", "password"));
+
     }
 
     @Autowired

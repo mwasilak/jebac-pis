@@ -3,6 +3,7 @@ package pl.sixpinetrees.tournament.auth;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,6 +16,7 @@ public class User implements UserDetails {
     @GeneratedValue
     private Long id;
 
+    @Column(unique = true)
     private String username;
 
     private String password;
@@ -25,6 +27,10 @@ public class User implements UserDetails {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getUsername() {

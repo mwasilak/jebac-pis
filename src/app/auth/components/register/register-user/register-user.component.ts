@@ -12,11 +12,19 @@ export class RegisterUserComponent implements OnInit {
 
   form: FormGroup = new FormGroup({
     username: new FormControl('', [
-      Validators.minLength(8),
+      Validators.minLength(5),
       Validators.required
     ]),
     password: new FormControl('', [
       Validators.minLength(8),
+      Validators.required
+    ]),
+    firstName: new FormControl('', [
+      Validators.minLength(2),
+      Validators.required
+    ]),
+    lastName: new FormControl('', [
+      Validators.minLength(2),
       Validators.required
     ])
   });
