@@ -9,13 +9,13 @@
                         <td>&nbsp;</td>
                         <td class="text-right">
                             <ng-container *ngIf="player1?.id !== null">
-                                <a [routerLink]="['', { outlets: { primary: ['/players/details', player1.id], modal: null} }]">{{player1?.firstName + ' ' + player1?.lastName}}</a>
+                                <a [routerLink]="['', { outlets: { primary: ['players', 'details', player1.id], modal: null} }]">{{player1?.firstName + ' ' + player1?.lastName}}</a>
                             </ng-container>
                         </td>
                         <td class="text-center">:</td>
                         <td class="text-left">
                             <ng-container *ngIf="player2?.id !== null">
-                                <a [routerLink]="['', { outlets: { primary: ['/players/details', player2.id], modal: null} }]">{{player2?.firstName + ' ' + player2?.lastName}}</a>
+                                <a [routerLink]="['', { outlets: { primary: ['players', 'details', player2.id], modal: null} }]">{{player2?.firstName + ' ' + player2?.lastName}}</a>
                             </ng-container>
                         </td>
                         <td>&nbsp;</td>

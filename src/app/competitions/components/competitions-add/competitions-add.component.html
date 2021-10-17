@@ -1,7 +1,7 @@
 <div class="container content-padding">
     <h3>Add new competition</h3>
     <form [formGroup]='form'>
-        <div class="form-group">
+        <div class="mb-3">
             <input class="form-control" type="text" placeholder="Competition name" formControlName="name"
                    [ngClass]="{'is-invalid' : form.get('name').invalid && form.get('name').touched,
                          'is-valid' : form.get('name').valid && form.get('name').touched}"/>
@@ -12,7 +12,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label>Players</label>:
             <select multiple class="form-control" formControlName="playerIds" [size]="players?.length"
                     [ngClass]="{'is-invalid' : form.get('playerIds').invalid && form.get('playerIds').touched,
@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <input type="text" class="form-control" placeholder="Number of games to win match"
                    formControlName="numberOfWinsRequired"
                    [ngClass]="{'is-invalid' : form.get('numberOfWinsRequired').invalid && form.get('numberOfWinsRequired').touched,
@@ -39,7 +39,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <input type="text" class="form-control" placeholder="Number of points to win game"
                    formControlName="numberOfPointsToWin"
                    [ngClass]="{'is-invalid' : form.get('numberOfPointsToWin').invalid && form.get('numberOfPointsToWin').touched,
