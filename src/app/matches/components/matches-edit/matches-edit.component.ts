@@ -127,10 +127,12 @@ export class MatchesEditComponent implements OnInit, OnDestroy {
       let errorList = {};
       for (let game of gamesArray.controls) {
         index += 1;
+        if (player1Wins >= numberOfWinsRequired || player2Wins >= numberOfWinsRequired) {
+          errorList["game" + (index) + "afterVictoryConditionsFulfilled"] = true;
+        }
         let scorePlayer1 = game.get('scorePlayer1').value;
         let scorePlayer2 = game.get('scorePlayer2').value;
         if (typeof scorePlayer1 !== 'number' || typeof scorePlayer2 !== 'number'
-          || scorePlayer1 === null || scorePlayer2 === null
           || scorePlayer1 % 1 !== 0 || scorePlayer2 % 1 !== 0) {
           errorList["game" + (index) + "invalidInput"] = true;
           continue;

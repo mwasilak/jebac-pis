@@ -143,4 +143,46 @@ public class VictoryConditionsCheckerTest {
 
         //then
     }
+
+    @Test()
+    public void shouldFailWhenMatchFormWithGamesAfterVictoryConditionsFulfilledProvided() throws Exception {
+        //given
+        List<GameRow> gameList = new ArrayList<>();
+        gameList.add(new GameRow(11, 1));
+        gameList.add(new GameRow(11, 1));
+        gameList.add(new GameRow(11, 1));
+        gameList.add(new GameRow(2, 11));
+
+        ResultRegistrationForm resultRegistrationForm = new ResultRegistrationForm();
+        resultRegistrationForm.setGames(gameList);
+
+        VictoryConditions victoryConditions = new VictoryConditions(3, 11);
+
+        //when
+        Assertions.assertThrows(ServiceValidationException.class,
+                () -> victoryConditionsChecker.determineWinner(resultRegistrationForm, victoryConditions));
+
+        //then
+    }
+
+    @Test()
+    public void shouldFailWhenMatchFormWithMoreWinsThanRequiredProvided() throws Exception {
+        //given
+        List<GameRow> gameList = new ArrayList<>();
+        gameList.add(new GameRow(11, 1));
+        gameList.add(new GameRow(11, 1));
+        gameList.add(new GameRow(11, 1));
+        gameList.add(new GameRow(11, 1));
+
+        ResultRegistrationForm resultRegistrationForm = new ResultRegistrationForm();
+        resultRegistrationForm.setGames(gameList);
+
+        VictoryConditions victoryConditions = new VictoryConditions(3, 11);
+
+        //when
+        Assertions.assertThrows(ServiceValidationException.class,
+                () -> victoryConditionsChecker.determineWinner(resultRegistrationForm, victoryConditions));
+
+        //then
+    }
 }

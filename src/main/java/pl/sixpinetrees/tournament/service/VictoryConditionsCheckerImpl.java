@@ -21,9 +21,10 @@ public class VictoryConditionsCheckerImpl implements VictoryConditionsChecker {
 
         checkForm(resultRegistrationForm);
 
-        MatchScore matchScore = new MatchScore(resultRegistrationForm.getGames(), victoryConditions.getNumberOfPointsToWin());
+        MatchScore matchScore = new MatchScore(resultRegistrationForm.getGames(),
+                victoryConditions.getNumberOfPointsToWin(), victoryConditions.getNumberOfWinsRequired());
 
-        checkNumberOfWins(matchScore.player1Wins, matchScore.player2Wins,victoryConditions.getNumberOfWinsRequired() );
+        validateNumberOfWins(matchScore.player1Wins, matchScore.player2Wins,victoryConditions.getNumberOfWinsRequired() );
 
         if(matchScore.player1Wins > matchScore.player2Wins) {
             return MatchWinner.PLAYER1;
@@ -41,11 +42,11 @@ public class VictoryConditionsCheckerImpl implements VictoryConditionsChecker {
         }
     }
 
-    private void checkNumberOfWins(Integer player1Wins, Integer player2Wins, Integer numberOfWinsRequired) {
+    private void validateNumberOfWins(Integer player1Wins, Integer player2Wins, Integer numberOfWinsRequired) {
         List<String> errorList = new ArrayList<>();
-        if(((player1Wins > player2Wins && player1Wins != numberOfWinsRequired) ||
-                (player2Wins > player1Wins  && player2Wins != numberOfWinsRequired)) ||
-                (player1Wins == player2Wins) ) {
+        if(((player1Wins > player2Wins && !player1Wins.equals(numberOfWinsRequired)) ||
+                (player2Wins > player1Wins && !player2Wins.equals(numberOfWinsRequired))) ||
+                (player1Wins.equals(player2Wins)) ) {
             errorList.add("Incorrect number of games won.");
             throw new ServiceValidationException(errorList);
         }
@@ -57,15 +58,19 @@ class MatchScore {
     Integer player1Wins = 0;
     Integer player2Wins = 0;
 
-    public MatchScore(List<GameRow> games, Integer numberOfPointsToWin) {
+    public MatchScore(List<GameRow> games, Integer numberOfPointsToWin, Integer numberOfWinsRequired) {
         List<String> errorList = new ArrayList<>();
         Integer index = 0;
         for(GameRow game : games) {
             index += 1;
-            if (((game.getScorePlayer1() > (game.getScorePlayer2() + 1)) && (game.getScorePlayer1() == numberOfPointsToWin)) ||
+            if(player1Wins >= numberOfWinsRequired || player2Wins >= numberOfWinsRequired) {
+                    errorList.add("Game no. " + index + " occurs after victory conditions already satisfied.");
+                    break;
+            }
+            if (((game.getScorePlayer1() > (game.getScorePlayer2() + 1)) && (game.getScorePlayer1().equals(numberOfPointsToWin))) ||
                ((game.getScorePlayer1() == (game.getScorePlayer2() + 2)) && (game.getScorePlayer1() >= numberOfPointsToWin))) {
                 player1Wins += 1;
-            } else if (((game.getScorePlayer2() > (game.getScorePlayer1() + 1)) && (game.getScorePlayer2() == numberOfPointsToWin)) ||
+            } else if (((game.getScorePlayer2() > (game.getScorePlayer1() + 1)) && (game.getScorePlayer2().equals(numberOfPointsToWin))) ||
                 ((game.getScorePlayer2() == (game.getScorePlayer1() + 2)) && (game.getScorePlayer2() >= numberOfPointsToWin))) {
                 player2Wins += 1;
             } else {
